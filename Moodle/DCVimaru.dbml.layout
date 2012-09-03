@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 8.5" name="DCVimaru">
+  <DataContextMoniker Name="/DCVimaruDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d1cae761-3347-4fe3-8cb6-b6b11fabf2d9" absoluteBounds="9, 3, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/DCVimaruDataContext/DangKy" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1dc45c2f-f386-4e6f-9531-d9542ff05559" absoluteBounds="9.015, 3.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5f54955b-505b-47be-aec4-befb9ff1a315" absoluteBounds="6.25, 0.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DCVimaruDataContext/SinhVien" />
+      <nestedChildShapes>
+        <elementListCompartment Id="348e569b-e6ce-4052-9263-18ef668e165e" absoluteBounds="6.2650000000000006, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 1.63544840494792); (10 : 1.63544840494792); (10 : 3)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DCVimaruDataContext/SinhVien/SinhVien_DangKy" />
+      <nodes>
+        <classShapeMoniker Id="5f54955b-505b-47be-aec4-befb9ff1a315" />
+        <classShapeMoniker Id="d1cae761-3347-4fe3-8cb6-b6b11fabf2d9" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="04a18532-ed06-4320-abfe-25d99b9ecc0c" absoluteBounds="3.5, 3.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DCVimaruDataContext/BoMon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d70db6a7-595e-4d34-ab45-c4be3ad6397a" absoluteBounds="3.515, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="29ce4733-f6eb-4bb8-b2a7-eeae68496dfe" absoluteBounds="0.75, 3.875, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/DCVimaruDataContext/Khoa" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f98bc3eb-ddda-4564-adbc-138cb897c447" absoluteBounds="0.76499999999999968, 4.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.66429768880208); (3.5 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DCVimaruDataContext/Khoa/Khoa_BoMon" />
+      <nodes>
+        <classShapeMoniker Id="29ce4733-f6eb-4bb8-b2a7-eeae68496dfe" />
+        <classShapeMoniker Id="04a18532-ed06-4320-abfe-25d99b9ecc0c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1d7ffbdb-48ea-4377-8b76-7e9b62d8824d" absoluteBounds="9, 5.625, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/DCVimaruDataContext/ThoiKhoaBieu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="600f32ea-1e85-484f-a465-7f7c2dd20d51" absoluteBounds="9.015, 6.085, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="016dd1f9-9cf8-4c0b-b292-ee93d95841c7" absoluteBounds="6.25, 3.75, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/DCVimaruDataContext/HocPhan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10f6a7ed-b9ad-47e0-83e2-8956e37d616e" absoluteBounds="6.265, 4.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 4.06814697265625); (9 : 4.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DCVimaruDataContext/HocPhan/HocPhan_DangKy" />
+      <nodes>
+        <classShapeMoniker Id="016dd1f9-9cf8-4c0b-b292-ee93d95841c7" />
+        <classShapeMoniker Id="d1cae761-3347-4fe3-8cb6-b6b11fabf2d9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.25 : 5.52089680989583); (7.25 : 6.79890055338542); (9 : 6.79890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DCVimaruDataContext/HocPhan/HocPhan_ThoiKhoaBieu" />
+      <nodes>
+        <classShapeMoniker Id="016dd1f9-9cf8-4c0b-b292-ee93d95841c7" />
+        <classShapeMoniker Id="1d7ffbdb-48ea-4377-8b76-7e9b62d8824d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.66429768880208); (6.25 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DCVimaruDataContext/BoMon/BoMon_HocPhan" />
+      <nodes>
+        <classShapeMoniker Id="04a18532-ed06-4320-abfe-25d99b9ecc0c" />
+        <classShapeMoniker Id="016dd1f9-9cf8-4c0b-b292-ee93d95841c7" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

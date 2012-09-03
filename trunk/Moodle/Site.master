@@ -1,0 +1,53 @@
+﻿<%@ Master Language="C#" CodeBehind="Site.master.cs" Inherits="Moodle.Site" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Moodle Site</title>
+    <link href="~/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="body">
+    <form id="form1" runat="server">
+    <div class="header">
+    <div class="logo">Moodle Site</div>
+    <asp:Panel runat="server" ID="palUser" CssClass="loginBoxDiv" Height="30px">
+        <asp:LinkButton ID="btnUserProfile" runat="server"
+             ToolTip="Chào mừng" CssClass="linkButton">Welcome!</asp:LinkButton>
+        <asp:LinkButton ID="btnLogout" runat="server"
+             onclick="btnLogout_Click" ToolTip="Đăng xuất" CssClass="linkButton">Logout</asp:LinkButton>
+    </asp:Panel>
+    <asp:Panel runat="server" ID="palLogin" CssClass="loginBoxDiv" Height="30px">
+        <asp:TextBox ID="txtUsername" runat="server" 
+            CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
+        <ajaxToolkit:TextBoxWatermarkExtender ID="txtUsername_TextBoxWatermarkExtender" 
+            runat="server" Enabled="True" TargetControlID="txtUsername" 
+            WatermarkText="Username">
+        </ajaxToolkit:TextBoxWatermarkExtender>
+        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" 
+            CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>
+        <asp:DropDownList ID="ddlService" runat="server" CssClass="dropDownList" 
+            ToolTip="Loại dịch vụ">
+            <asp:ListItem Selected="True" Value="all_service">All Service</asp:ListItem>
+            <asp:ListItem Value="course">Course Manager</asp:ListItem>
+            <asp:ListItem Value="enrol">Enrol Manager</asp:ListItem>
+            <asp:ListItem Value="group">Group Manager</asp:ListItem>
+            <asp:ListItem Value="role">Role Manager</asp:ListItem>
+            <asp:ListItem Value="user">User Manager</asp:ListItem>
+        </asp:DropDownList>
+        <asp:LinkButton ID="btnLogin" runat="server" CssClass="linkButton" 
+            onclick="btnLogin_Click">Login</asp:LinkButton>
+    </asp:Panel>
+    </div>
+    <div style="clear: both; display: block;" class="main">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
+

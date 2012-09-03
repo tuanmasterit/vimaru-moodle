@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Moodle">
+</Property><Property Name="Solution File" Value="E:\My project\Moodle\Moodle.sln">
+</Property><Property Name="Date" Value="Sunday, July 15, 2012">
+</Property><Property Name="Time" Value="20:01:31 PM">
+</Property></Properties><Event ErrorLevel="1" Project="Moodle WebService" Source="..\..\Tai lieu\Thuc tap tot nghiep\Moodle\Moodle Integration\Moodle WebService\Moodle WebService.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="Moodle WebService" Source="..\..\Tai lieu\Thuc tap tot nghiep\Moodle\Moodle Integration\Moodle WebService\Moodle WebService.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Moodle WebService" Source="..\..\Tai lieu\Thuc tap tot nghiep\Moodle\Moodle Integration\Moodle WebService\Moodle WebService.csproj" Description="Converted">
+</Event><Event ErrorLevel="2" Project="" Source="..\..\Tai lieu\Thuc tap tot nghiep\Moodle\Moodle Integration\Moodle WebService\Moodle WebService.csproj" Description="Unable to read the project file 'Moodle WebService.csproj'. &#xA;E:\Tai lieu\Thuc tap tot nghiep\Moodle\Moodle Integration\Moodle WebService\Moodle WebService.csproj(75,3): The imported project &quot;C:\Program Files (x86)\MSBuild\MSBee\MSBuildExtras.Fx1_1.CSharp.targets&quot; was not found. Confirm that the path in the &lt;Import&gt; declaration is correct, and that the file exists on disk.">
+</Event></UpgradeLog>

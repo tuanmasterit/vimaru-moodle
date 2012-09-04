@@ -41,9 +41,9 @@ namespace Moodle
 
         protected void btnLogout_Click(object sender, System.EventArgs e)
         {
-            Session["token"] = "";
             palLogin.Visible = true;
             palUser.Visible = false;
+            Session["token"] = "";
         }
     }
 }

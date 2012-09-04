@@ -173,7 +173,8 @@ table.DDGridView, table.DDListView
 	width: 100%;
 	color: #444;
 	border:solid 1px #dbddff;
-	font: 0.85em Tahoma, Arial, Sans-Serif;
+	font: Tahoma, Arial, Sans-Serif;
+	font-size: 14px;
 }
 
 table.DDGridView .th, table.DDGridView .td, table.DDListView .th, table.DDListView .td
@@ -253,13 +254,13 @@ div.DDBottomHyperLink img
 }
 .main
 {
-    font-family: Tahoma, Calibri, Verdana, Geneva, sans-serif;
+    font-family: Tahoma, Arial, Sans-Serif;
     font-size: 14px;
     background-color: #FFF9F9;
 }
 .body
 {
-    border: 5px solid #E6E6FA;
+    border: 5px solid #DBDDFF;
     margin: 0 auto;
     width: 980px;
     background-image: url('App_Images/tcatBG.gif');
@@ -289,20 +290,20 @@ div.DDBottomHyperLink img
 {
     background-image: url('App_Images/form_bg.jpg');
     background-repeat: repeat-x;
-    border: 1px solid #d1c7ac;
+    border: 1px solid #D1C7AC;
     width: 80px;
     height: 16px;
     margin-top: 4px;
     padding: 2px 2px 2px 4px;
     color: #111111;
-    font-family: Tahoma, Calibri, Verdana, Geneva, sans-serif;
+    font-family: Tahoma, Arial, Sans-Serif;
     font-size: 14px;
 }
 .dropDownList
 {
     background-image: url('App_Images/form_bg.jpg');
     background-repeat: repeat-x;
-    border: 1px solid #d1c7ac;
+    border: 1px solid #D1C7AC;
     margin: 0px;
     height: 22px;
     color: #222222;
@@ -311,7 +312,7 @@ div.DDBottomHyperLink img
 {
     padding-top: 4px;
     padding-right: 4px;
-    font-family: Tahoma, Calibri, Verdana, Geneva, sans-serif;
+    font-family: Tahoma, Arial, Sans-Serif;
     font-size: 14px;
     font-weight: bold;
     color: #FFF9F9;
@@ -329,18 +330,55 @@ div.DDBottomHyperLink img
     padding: 4px 4px 4px 10px;
     text-align: left;
     border-width: 3px 3px 5px 3px;
-    border-color: #E6E6FA;
+    border-color: #DBDDFF;
     border-top-style: solid;
     border-bottom-style: solid;
 }
 
 .table
 {
-    border: 1px solid #d1c7ac;
     width: 100%;
 }
 
 .list
 {
-    border: 1px solid #d1c7ac;
+    border: 1px solid #D1C7AC;
 }
+.tableCell
+{
+    padding: 4px 4px 4px 10px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-color: #DBDDFF;
+    border-bottom-color: #DBDDFF;
+}
+.tableRow
+{
+    padding: 4px 4px 4px 4px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-top-color: #DBDDFF;
+    border-bottom-color: #DBDDFF;
+}
+.centerDiv
+{
+    background-color: #FFF9F9; 
+    text-align: center;
+}
+.cellHeaderRight
+{
+    font-weight: bold;
+    text-align: right;
+    padding-right: 4px;
+}
+.cellHeaderLeft
+{
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10px;
+}
+  

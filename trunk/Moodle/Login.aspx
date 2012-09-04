@@ -1,11 +1,10 @@
 ﻿<%@ Page EnableEventValidation="False" Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Moodle.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-
-    .style3
-    {
-        width: 112px;
-    }
+        .style3
+        {
+            width: 105px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -25,9 +24,8 @@
                         colspan="2">Login Moodle Server</td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3" style="font-weight: bold">
-                        &nbsp;
-                        Username</td>
+                    <td class="cellHeaderRight">
+                        Username:</td>
                     <td>
                         <asp:TextBox ID="txtUsername" runat="server" Width="200px" 
                             ValidationGroup="token" CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
@@ -37,9 +35,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3" style="font-weight: bold">
-                        &nbsp;
-                        Password</td>
+                    <td align="left" class="cellHeaderRight" style="font-weight: bold">
+                        Password:</td>
                     <td>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="200px" 
                             ValidationGroup="token" CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>
@@ -49,8 +46,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3">
-                        <strong>Service Name </strong></td>
+                    <td align="left" class="cellHeaderRight" style="font-weight: bold">Service Name:</td>
                     <td align="left">
                         <asp:DropDownList ID="ddlService" runat="server" CssClass="dropDownList" 
                             ToolTip="Loại dịch vụ">
@@ -61,15 +57,15 @@
                             <asp:ListItem Value="role">Role Manager</asp:ListItem>
                             <asp:ListItem Value="user">User Manager</asp:ListItem>
                         </asp:DropDownList>
+                        <asp:Button ID="btnLogin" runat="server" onclick="btnLogin_Click" Text="Login" 
+                            ToolTip="Lấy chuỗi token" ValidationGroup="token" />
                     </td>
                 </tr>
                 <tr>
                     <td align="right" class="style3">
                         &nbsp;</td>
                     <td align="left">
-                        <asp:Button ID="btnLogin" runat="server" onclick="btnLogin_Click" 
-                            Text="Login" ValidationGroup="token" ToolTip="Lấy chuỗi token" />
-                    </td>
+                        &nbsp;</td>
                 </tr>
             </table>
         </ContentTemplate>

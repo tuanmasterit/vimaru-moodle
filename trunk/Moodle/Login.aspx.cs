@@ -11,7 +11,13 @@ namespace Moodle
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["token"] != null && (string)Session["token"] != "")
+            {
+                if (Session["refUrl"] != null)
+                    Response.Redirect((string)Session["refUrl"]);
+                else
+                    Response.Redirect("~/GetTokenAndServiceList.aspx");
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -20,8 +26,13 @@ namespace Moodle
             MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
             string s = u.GetToken(ddlService.SelectedItem.Value);
             Session["token"] = s;
-            if (s != "")
-                Response.Redirect("~/GetTokenAndServiceList.aspx");
+            if(s!="")
+            {
+                if (Session["refUrl"] != null)
+                    Response.Redirect((string)Session["refUrl"]);
+                else
+                    Response.Redirect("~/GetTokenAndServiceList.aspx");
+            }
         }
     }
 }

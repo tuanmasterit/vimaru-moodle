@@ -20,7 +20,7 @@
         <asp:LinkButton ID="btnLogout" runat="server"
              onclick="btnLogout_Click" ToolTip="Đăng xuất" CssClass="linkButton">Logout</asp:LinkButton>
     </asp:Panel>
-    <asp:Panel runat="server" ID="palLogin" CssClass="loginBoxDiv" Height="30px">
+    <asp:Panel runat="server" ID="palLogin" CssClass="loginBoxDiv" Height="30px" DefaultButton="btnLogin">
         <asp:TextBox ID="txtUsername" runat="server" 
             CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
         <ajaxToolkit:TextBoxWatermarkExtender ID="txtUsername_TextBoxWatermarkExtender" 

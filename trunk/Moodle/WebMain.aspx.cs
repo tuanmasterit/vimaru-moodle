@@ -21,7 +21,7 @@ namespace Moodle
                 Session["refUrl"] = "~/WebMain.aspx";
                 Response.Redirect("~/Login.aspx");
             }
-            else if (!IsPostBack)
+            if (!IsPostBack)
                 grvTaiKhoan.DataBind();
         }
 

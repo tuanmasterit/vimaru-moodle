@@ -1,43 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Category.aspx.cs" Inherits="Moodle.Category" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .style10
-        {
-        }
-        .style13
-        {
-            height: 21px;
-            width: 115px;
-            font-weight: 700;
-        }
         .style14
         {
             height: 21px;
-        }
-        .style16
-        {            font-weight: 700;
-        }
-        .style17
-        {
-            font-weight: 700;
-            width: 146px;
-        }
-        .style18
-        {
-            font-weight: 700;
-            width: 146px;
-            height: 35px;
         }
         .style19
         {
             height: 35px;
         }
-        .style20
+        .style23
         {
-            height: 25px;
-            width: 115px;
+            font-weight: 700;
+            width: 176px;
         }
-    </style>
+        .style24
+        {
+            font-weight: 700;
+            width: 179px;
+        }
+        </style>
     <script language="javascript" type="text/javascript">
         function CheckUncheckAll() {
             var i; CheckBoxs = document.getElementsByTagName("input");
@@ -65,64 +47,26 @@
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
         AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>
-            <div align="center" style="background-color: #FFFAFA">
+            <div class="centerDiv">
                 <img alt="" src="App_Images/loading_icon%20(2).gif" align="middle" />
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <table style="border: 2px solid lavender; width: 100%;" 
-        bgcolor="Snow" cellpadding="4" cellspacing="0">
+            <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
-                    <td align="center" class="style1" colspan="2" 
-                        style="border: 2px solid #dbddff;">
-                        <strong>ĐĂNG NHẬP<asp:Label ID="lblErrorMessage" runat="server" ForeColor="Red" 
-                            style="margin-left: 0px" Width="100%"></asp:Label>
-                        </strong></td>
-                </tr>
-                <tr>
-                    <td align="right" class="style20" style="font-weight: bold">
-                        &nbsp;Tên đăng nhập</td>
-                    <td class="style10">
-                        <asp:TextBox ID="txtUsername" runat="server" Width="250px" 
-                            ValidationGroup="token"></asp:TextBox>
-            &nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="right" class="style20" style="font-weight: bold">
-                        &nbsp; Mật khẩu</td>
-                    <td class="style10">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="250px" 
-                            ValidationGroup="token"></asp:TextBox>
-            &nbsp;</td>
-                </tr>
-                <tr>
-                    <td align="right" class="style20">
-                        &nbsp;</td>
-                    <td align="left" class="style10">
-                        <asp:Button ID="btnGetToken" runat="server" onclick="btnGetToken_Click" 
-                            Text="Đăng nhập" ValidationGroup="token" />
-                        &nbsp;<asp:TextBox ID="txtToken" runat="server" ReadOnly="True" 
-                            ValidationGroup="token" Visible="False" Width="250px"></asp:TextBox>
+                    <td colspan="2" class="tableHeader">
+                        Tạo, cập nhật và lấy thông tin mục<asp:Label ID="lblCategoryMessage" runat="server" 
+                            CssClass="statusLabel" style="margin-left: 0px"></asp:Label>
                     </td>
                 </tr>
-            </table>
-            <table bgcolor="Snow" cellpadding="4" 
-                style="border: 2px solid lavender; width: 100%;" cellspacing="0">
                 <tr>
-                    <td align="center" colspan="2" class="style1" 
-                        style="border: 2px solid #dbddff;">
-                        <strong>TẠO VÀ CẬP NHẬT LOẠI KHÓA HỌC<asp:Label ID="lblCategoryMessage" 
-                            runat="server" ForeColor="Red" style="margin-left: 0px" Width="100%"></asp:Label>
-                        </strong></td>
-                </tr>
-                <tr>
-                    <td style="font-weight: bold;" align="right" class="style16">
+                    <td class="cellHeaderRight">
                         Id</td>
                     <td>
                         <asp:TextBox ID="txtId" runat="server" ValidationGroup="updateuser" 
-                            Width="100px"></asp:TextBox>
+                            Width="100px" CssClass="textBox"></asp:TextBox>
                         <ajaxToolkit:MaskedEditExtender ID="txtId_MaskedEditExtender" runat="server" 
                             CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
                             CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
@@ -133,19 +77,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16">
+                    <td class="cellHeaderRight">
                         Tên mục</td>
                     <td align="left">
                         <asp:TextBox ID="txtName" runat="server" ValidationGroup="updateuser" 
-                            Width="300px"></asp:TextBox>
+                            Width="250px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         &nbsp; Id mục cấp trên</td>
                     <td>
                         <asp:TextBox ID="txtParent" runat="server" ValidationGroup="updateuser" 
-                            Width="100px"></asp:TextBox>
+                            Width="100px" CssClass="textBox"></asp:TextBox>
                         <ajaxToolkit:MaskedEditExtender ID="txtParent_MaskedEditExtender" 
                             runat="server" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
                             CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
@@ -156,28 +100,31 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         Idnumber</td>
                     <td>
                         <asp:TextBox ID="txtIdnumber" runat="server" ValidationGroup="updateuser" 
-                            Width="300px"></asp:TextBox>
+                            Width="100px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style13" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         Mô tả</td>
                     <td class="style14">
                         <asp:TextBox ID="txtDecscription" runat="server" Height="60px" 
-                            TextMode="MultiLine" ValidationGroup="updateuser" Width="100%"></asp:TextBox>
+                            TextMode="MultiLine" ValidationGroup="updateuser" Width="400px" 
+                            CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         Định dạng mô tả</td>
                     <td>
                         <asp:TextBox ID="txtDescriptionFormat" runat="server" 
                             ValidationGroup="updateuser" Width="50px" 
-                            ToolTip="Default to &quot;1&quot; //description format (1 = HTML, 0 = MOODLE, 2 = PLAIN or 4 = MARKDOWN"></asp:TextBox>
+                            
+                            ToolTip="Default to &quot;1&quot; //description format (1 = HTML, 0 = MOODLE, 2 = PLAIN or 4 = MARKDOWN" 
+                            CssClass="textBox"></asp:TextBox>
                         <ajaxToolkit:MaskedEditExtender ID="txtDescriptionFormat_MaskedEditExtender" 
                             runat="server" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
                             CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
@@ -188,25 +135,33 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         Theme</td>
                     <td>
                         <asp:TextBox ID="txtTheme" runat="server" ValidationGroup="updateuser" 
-                            Width="300px" 
-                            ToolTip="the new category theme. This option must be enabled on moodle"></asp:TextBox>
+                            Width="250px" 
+                            ToolTip="the new category theme. This option must be enabled on moodle" 
+                            CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16" style="font-weight: bold">
+                    <td align="right" class="style24" style="font-weight: bold">
                         &nbsp;</td>
                     <td valign="middle">
                         <asp:Button ID="btnCreate" runat="server" onclick="btnCreateCategory_Click" 
                             Text="Tạo" Width="65px" />
                         &nbsp;<asp:Button ID="btnUpdate" runat="server" onclick="btnUpdate_Click" 
                             Text="Cập nhật" Width="65px" />
-                        &nbsp;<asp:DropDownList ID="ddlCriteria" runat="server" Width="180px">
-                            <asp:ListItem Selected="True" Value="All">Tất cả</asp:ListItem>
-                            <asp:ListItem Value="id">Tìm theo Id</asp:ListItem>
+                        &nbsp;&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="cellHeaderRight">
+                        Điều kiện tìm kiếm</td>
+                    <td>
+                        <asp:DropDownList ID="ddlCriteria" runat="server" CssClass="dropDownList" 
+                            Width="180px">
+                            <asp:ListItem Value="All">Tất cả</asp:ListItem>
+                            <asp:ListItem Selected="True" Value="id">Tìm theo Id</asp:ListItem>
                             <asp:ListItem Value="name">Tìm theo tên</asp:ListItem>
                             <asp:ListItem Value="parent">Tìm theo id mục cấp trên</asp:ListItem>
                             <asp:ListItem Value="idnumber">Tìm theo idnumber</asp:ListItem>
@@ -214,14 +169,14 @@
                         <asp:CheckBox ID="chkSubCategory" runat="server" Checked="True" 
                             Text="Xem cả các mục con" 
                             ToolTip="Hiển thị thông tin đầy đủ các mục con bên trong mục cần xem thông tin" />
-                        &nbsp;<asp:Button ID="btnDetail" runat="server" onclick="btnDetail_Click" 
+                        <asp:Button ID="btnDetail" runat="server" onclick="btnDetail_Click" 
                             Text="Chi tiết" Width="65px" />
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style16" style="font-weight: bold">
+                    <td class="tableCell">
                         &nbsp;</td>
-                    <td>
+                    <td class="tableCell">
                         <asp:TreeView ID="treeCategoryDetail" runat="server" ShowLines="True" 
                             style="text-align: left" Width="100%">
                         </asp:TreeView>
@@ -229,21 +184,18 @@
                 </tr>
             </table>
 
-            <table bgcolor="Snow" cellpadding="4" 
-                style="border: 2px solid lavender; width: 100%;" cellspacing="0">
+            <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
-                    <td align="center" colspan="2" class="style1" 
-                        style="border: 2px solid #dbddff;">
-                        <strong>XÓA MỤC KHÓA HỌC<asp:Label ID="lblDeleteCategoryMessage" 
-                            runat="server" ForeColor="Red" style="margin-left: 0px" Width="100%"></asp:Label>
+                    <td colspan="2" class="tableHeader">Xóa mục<asp:Label ID="lblDeleteCategoryMessage" 
+                            runat="server" style="margin-left: 0px" CssClass="statusLabel"></asp:Label>
                         </strong></td>
                 </tr>
                 <tr>
-                    <td style="font-weight: bold;" align="right" class="style17">
+                    <td class="cellHeaderRight">
                         Id</td>
                     <td>
                         <asp:TextBox ID="txtDeleteId" runat="server" ValidationGroup="updateuser" 
-                            Width="100px"></asp:TextBox>
+                            Width="100px" CssClass="textBox"></asp:TextBox>
                         <ajaxToolkit:MaskedEditExtender ID="txtDeleteId_MaskedEditExtender" 
                             runat="server" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
                             CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
@@ -254,11 +206,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style17" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         &nbsp; Id mục cấp trên mới</td>
                     <td>
                         <asp:TextBox ID="txtNewParent" runat="server" ValidationGroup="updateuser" 
-                            Width="100px"></asp:TextBox>
+                            Width="100px" CssClass="textBox"></asp:TextBox>
                         <ajaxToolkit:MaskedEditExtender ID="txtNewParent_MaskedEditExtender" 
                             runat="server" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
                             CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
@@ -269,10 +221,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style18" style="font-weight: bold" valign="top">
+                    <td class="cellHeaderRight" valign="top">
                         Kiểu xóa</td>
                     <td class="style19">
-                        <asp:Panel ID="Panel1" runat="server" Height="50px">
+                        <asp:Panel ID="Panel1" runat="server" Height="40px">
                             <asp:RadioButton ID="rdbDeleteOnlyParent" runat="server" Checked="True" 
                                 style="font-weight: 700" 
                                 Text="Chỉ xóa mục này, đẩy toàn bộ mục con vào mục cấp trên mới" />
@@ -284,7 +236,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style17" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         &nbsp;</td>
                     <td>
                         <asp:Button ID="btnDelete" runat="server" onclick="btnDelete_Click" 
@@ -292,7 +244,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style17" style="font-weight: bold">
+                    <td align="right" class="style23" style="font-weight: bold">
                         &nbsp;</td>
                     <td>
                         &nbsp;</td>

@@ -12,28 +12,15 @@ namespace Moodle
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void btnGetToken_Click(object sender, EventArgs e)
-        {
-            MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
-            txtToken.Text = u.GetToken("all_service");
-            if (txtToken.Text != "")
-                lblErrorMessage.Text = "";
-            else
-                lblErrorMessage.Text = "Lỗi khi lấy chuỗi token!";
+            if (Session["token"] == null || (string)Session["token"] == "")
+            {
+                Session["refUrl"] = "~/Category.aspx";
+                Response.Redirect("~/Login.aspx");
+            }
         }
 
         protected void btnCreateCategory_Click(object sender, EventArgs e)
         {
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
-
             if(txtName.Text == "")
             {
                 lblCategoryMessage.Text = "Vui lòng nhập tên mục!";
@@ -83,7 +70,7 @@ namespace Moodle
 
             List<MoodleCategory> lst = new List<MoodleCategory>();
             lst.Add(category);
-            doc.LoadXml(MoodleCategory.CreateCategories(lst, txtToken.Text));
+            doc.LoadXml(MoodleCategory.CreateCategories(lst, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + txtIdnumber.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
@@ -127,13 +114,6 @@ namespace Moodle
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
-
             if (txtId.Text == "")
             {
                 lblCategoryMessage.Text = "Vui lòng nhập id mục cần cập nhật!";
@@ -187,7 +167,7 @@ namespace Moodle
 
             List<MoodleCategory> lst = new List<MoodleCategory>();
             lst.Add(category);
-            doc.LoadXml(MoodleCategory.UpdateCategories(lst, txtToken.Text));
+            doc.LoadXml(MoodleCategory.UpdateCategories(lst, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
@@ -200,13 +180,6 @@ namespace Moodle
 
         protected void btnDetail_Click(object sender, EventArgs e)
         {
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
-
             List<MoodleGetCategory> lst = new List<MoodleGetCategory>();
             int id = ddlCriteria.SelectedIndex;
             if (id == 0)
@@ -235,7 +208,7 @@ namespace Moodle
 
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml(MoodleGetCategory.GetCategories(lst, chkSubCategory.Checked, txtToken.Text));
+            doc.LoadXml(MoodleGetCategory.GetCategories(lst, chkSubCategory.Checked, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
@@ -248,12 +221,6 @@ namespace Moodle
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
             MoodleDeleteCategory category = new MoodleDeleteCategory
             {
                 Id = Convert.ToInt32(txtDeleteId.Text),
@@ -266,7 +233,7 @@ namespace Moodle
 
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml(MoodleDeleteCategory.DeleteCategories(lst, txtToken.Text));
+            doc.LoadXml(MoodleDeleteCategory.DeleteCategories(lst, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + category.Id + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();

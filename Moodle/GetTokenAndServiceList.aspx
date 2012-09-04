@@ -11,7 +11,7 @@
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
         AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>
-            <div style="background-color: #FFF9F9; text-align: center;">
+            <div class="centerDiv">
                 <img alt="" src="App_Images/loading_icon%20(2).gif" />
             </div>
         </ProgressTemplate>

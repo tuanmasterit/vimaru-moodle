@@ -1,20 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="WebMain.aspx.cs" Inherits="Moodle.WebMain" %> 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .style9
+        .style11
         {
-            height: 25px;
-            width: 102px;
+            width: 106px;
         }
-        .style10
+        .style12
         {
+            border-top: 2px solid #DBDDFF;
+            border-bottom: 2px solid #DBDDFF;
+            padding: 5px;
+            height: 28px;
         }
-    .style11
-    {
-        height: 25px;
-        width: 106px;
-        font-weight: 700;
-    }
     </style>
     <script language="javascript" type="text/javascript">
         function CheckUncheckAll() {
@@ -53,64 +50,19 @@
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
         AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>
-            <div align="center" style="background-color: #FFFAFA">
+            <div class="centerDiv">
                 <img alt="" src="App_Images/loading_icon%20(2).gif" align="middle" />
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
-            <table style="border: 2px solid lavender; width: 100%;" 
-        bgcolor="Snow" cellpadding="4" cellspacing="0">
+            <table cellpadding="4" class="table" cellspacing="0">
                 <tr>
-                    <td align="center" class="style1" colspan="2" 
-                        style="border: 2px solid #dbddff;">
-                        <strong>ĐĂNG NHẬP<asp:Label ID="lblErrorMessage" runat="server" ForeColor="Red" 
-                            style="margin-left: 0px" Width="100%"></asp:Label>
-                        </strong></td>
+                    <td class="tableHeader">Tạo tài khoản người dùng</td>
                 </tr>
                 <tr>
-                    <td align="right" class="style9" style="font-weight: bold">
-                        &nbsp;Tên đăng nhập</td>
-                    <td class="style10">
-                        <asp:TextBox ID="txtUsername" runat="server" Width="250px" 
-                            ValidationGroup="token"></asp:TextBox>
-            &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                            ControlToValidate="txtUsername" ErrorMessage="RequiredFieldValidator" 
-                            ForeColor="Red" ValidationGroup="token"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" class="style9" style="font-weight: bold">
-                        &nbsp; Mật khẩu</td>
-                    <td class="style10">
-                        <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="250px" 
-                            ValidationGroup="token"></asp:TextBox>
-            &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
-                            ControlToValidate="txtPassword" ErrorMessage="RequiredFieldValidator" 
-                            ForeColor="Red" ValidationGroup="token"></asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" class="style9">
-                        &nbsp;</td>
-                    <td align="left" class="style10">
-                        <asp:Button ID="btnGetToken" runat="server" onclick="btnGetToken_Click" 
-                            Text="Đăng nhập" ValidationGroup="token" />
-                        &nbsp;<asp:TextBox ID="txtToken" runat="server" ReadOnly="True" 
-                            ValidationGroup="token" Visible="False" Width="250px"></asp:TextBox>
-                    </td>
-                </tr>
-            </table>
-            <table align="center" bgcolor="Snow" border="1px" cellpadding="4" 
-                style="border: thin solid #dbddff; width: 100%;">
-                <tr>
-                    <td align="center" colspan="2">
-                        <strong>TẠO TÀI KHOẢN</strong></td>
-                </tr>
-                <tr>
-                    <td style="border: 2px solid #dbddff; font-size: 14px; " valign="middle" 
-                        colspan="2">
+                    <td class="tableCell">
                         Lớp học phần:&nbsp;
                         <asp:DropDownList ID="cboAcountFilter" runat="server" AutoPostBack="True" 
                             DataSourceID="LinqDataSourceHocPhan" DataTextField="TenHP" 
@@ -120,7 +72,7 @@
                         &nbsp;</td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="border: 2px solid #dbddff;">
+                    <td class="tableRow">
                         <asp:GridView ID="grvTaiKhoan" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="6" 
                             CssClass="DDGridView" DataKeyNames="MaSV" 
@@ -142,6 +94,7 @@
                                     <ItemStyle Width="20px" HorizontalAlign="Center" Wrap="False" />
                                 </asp:TemplateField>
                                 <asp:CommandField SelectText="Sửa" ShowSelectButton="True">
+                                <FooterStyle Wrap="False" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
                                 </asp:CommandField>
                                 <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" 
@@ -182,8 +135,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="border: 2px solid #dbddff; font-size: 14px; " 
-                        valign="middle">
+                    <td class="tableCell">
                         Phân trang:
                         <asp:DropDownList ID="cboPageSize" runat="server" AutoPostBack="True" 
                             Font-Size="13px" Height="20px" 
@@ -198,32 +150,25 @@
                             <asp:ListItem>80</asp:ListItem>
                             <asp:ListItem>100</asp:ListItem>
                         </asp:DropDownList>
-                        </td>
-                    <td style="border: 2px solid #dbddff; font-size: 14px; " 
-                        valign="middle">
-                        &nbsp;<asp:Button ID="btnCreateUser" runat="server" onclick="btnSubmit_Click" 
+                        <asp:Button ID="btnCreateUser" runat="server" onclick="btnSubmit_Click" 
                             Text="Tạo" />
-                        &nbsp;<asp:Button ID="btnDeleteUser" runat="server" onclick="btnDeleteUser_Click" 
+                        <asp:Button ID="btnDeleteUser" runat="server" onclick="btnDeleteUser_Click" 
                             Text="Xóa" />
-                    </td>
+                        &nbsp;&nbsp;</td>
                 </tr>
             </table>
-            <table style="border: 2px solid lavender; width: 100%;" 
-        bgcolor="Snow" cellpadding="4" cellspacing="0">
+            <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
-                    <td align="center" class="style1" 
+                    <td class="tableHeader" 
                         style="border: 2px solid #dbddff;" 
-                        colspan="2">
-                        <strong>CẬP NHẬT HỒ SƠ NGƯỜI DÙNG<asp:Label ID="lblUpdateUserMessage" 
-                            runat="server" ForeColor="Red" style="margin-left: 0px" Width="100%"></asp:Label>
-                        </strong></td>
+                        colspan="2">Cập nhật hồ sơ người dùng</td>
                 </tr>
                 <tr>
-                    <td align="right" class="style11" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         Id</td>
                     <td>
                         <asp:TextBox ID="txtId" runat="server" ValidationGroup="updateuser" 
-                            Width="250px"></asp:TextBox>
+                            Width="250px" CssClass="textBox"></asp:TextBox>
                         <ajaxToolkit:MaskedEditExtender ID="txtId_MaskedEditExtender" runat="server" 
                             CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
                             CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
@@ -231,43 +176,44 @@
                             InputDirection="RightToLeft" Mask="99999" MaskType="Number" 
                             TargetControlID="txtId">
                         </ajaxToolkit:MaskedEditExtender>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
-                            ControlToValidate="txtUsername" ErrorMessage="RequiredFieldValidator" 
-                            ForeColor="Red" ValidationGroup="updateuser"></asp:RequiredFieldValidator>
                         <asp:TextBox ID="txtNewUsername" runat="server" ValidationGroup="updateuser" 
                             Visible="False" Width="50px"></asp:TextBox>
+                        <strong>
+                        <asp:Label ID="lblUpdateUserMessage" runat="server" Font-Bold="False" 
+                            ForeColor="Red" style="margin-left: 0px"></asp:Label>
+                        </strong>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style11" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         &nbsp; Mật khẩu mới</td>
                     <td>
                         <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" Width="250px" 
-                            ValidationGroup="updateuser"></asp:TextBox>
+                            ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
             &nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="right" class="style11">
+                    <td class="cellHeaderRight">
                         &nbsp;Họ</td>
                     <td align="left">
                         <asp:TextBox ID="txtFirstName" runat="server" ValidationGroup="updateuser" 
-                            Width="250px"></asp:TextBox>
+                            Width="250px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style11" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         &nbsp; Tên</td>
                     <td>
                         <asp:TextBox ID="txtLastName" runat="server" Width="250px" 
-                            ValidationGroup="updateuser"></asp:TextBox>
+                            ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style11" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         Email</td>
                     <td>
                         <asp:TextBox ID="txtEmail" runat="server" ValidationGroup="updateuser" 
-                            Width="250px"></asp:TextBox>
+                            Width="250px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>

@@ -16,7 +16,12 @@ namespace Moodle
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["token"] == null || (string)Session["token"] == "")
+            {
+                Session["refUrl"] = "~/WebMain.aspx";
+                Response.Redirect("~/Login.aspx");
+            }
+            else if (!IsPostBack)
                 grvTaiKhoan.DataBind();
         }
 
@@ -53,7 +58,7 @@ namespace Moodle
             if (e.Row.RowType == DataControlRowType.Footer)
             {
                 e.Row.Cells[0].Text = grvTaiKhoan.Rows.Count.ToString();
-                e.Row.Cells[1].Text = "Trang " + (grvTaiKhoan.PageIndex + 1) + " của " + grvTaiKhoan.PageCount;
+                e.Row.Cells[1].Text = "Trang " + (grvTaiKhoan.PageIndex + 1) + "/" + grvTaiKhoan.PageCount;
             }
         }
 
@@ -163,16 +168,6 @@ namespace Moodle
             return arrIDs;
         }
 
-        protected void btnGetToken_Click(object sender, EventArgs e)
-        {
-            MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
-            txtToken.Text = u.GetToken("all_service");
-            if (txtToken.Text != "")
-                lblErrorMessage.Text = "";
-            else
-                lblErrorMessage.Text = "Lỗi khi lấy chuỗi token!";
-        }
-
         protected void grvTaiKhoan_SelectedIndexChanged(object sender, EventArgs e)
         {
             //lblErrorMessage.Text = txtUsername.Text;
@@ -188,12 +183,6 @@ namespace Moodle
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             SaveCheckedValues();
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
 
             grvTaiKhoan.AllowPaging = false;
             grvTaiKhoan.DataBind();
@@ -222,7 +211,7 @@ namespace Moodle
 
                     List<MoodleUser> lstUser = new List<MoodleUser>();
                     lstUser.Add(user);
-                    doc.LoadXml(MoodleUser.CreateUsers(lstUser, txtToken.Text));
+                    doc.LoadXml(MoodleUser.CreateUsers(lstUser, (string)Session["token"]));
                     doc.Save("E:\\Z-TMP\\" + user.Username + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -240,13 +229,6 @@ namespace Moodle
 
         protected void btnUpdateUser_Click(object sender, EventArgs e)
         {
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
-
             if(txtId.Text == "" || txtId.Text=="0")
             {
                 lblUpdateUserMessage.Text = "Vui lòng nhập một ID người dùng > 0";
@@ -269,20 +251,13 @@ namespace Moodle
 
             List<MoodleUser> lstUser = new List<MoodleUser>();
             lstUser.Add(user);
-            doc.LoadXml(MoodleUser.UpdateUsers(lstUser, txtToken.Text));
+            doc.LoadXml(MoodleUser.UpdateUsers(lstUser, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
         }
 
         protected void btnDeleteUser_Click(object sender, EventArgs e)
         {
             SaveCheckedValues();
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
-
             grvTaiKhoan.AllowPaging = false;
             grvTaiKhoan.DataBind();
 
@@ -307,7 +282,7 @@ namespace Moodle
 
                     List<MoodleUser> lstUser = new List<MoodleUser>();
                     lstUser.Add(user);
-                    doc.LoadXml(MoodleUser.DeleteUsers(lstUser, txtToken.Text));
+                    doc.LoadXml(MoodleUser.DeleteUsers(lstUser, (string)Session["token"]));
                     doc.Save("E:\\Z-TMP\\" + user.Id + ".xml");
                     if (userId > 0)
                     {
@@ -355,13 +330,6 @@ namespace Moodle
 
         protected void btnGetUser_Click(object sender, EventArgs e)
         {
-            if (txtToken.Text == "")
-            {
-                lblErrorMessage.Text = "Chưa đăng nhập để lấy chuỗi token";
-                txtUsername.Focus();
-                return;
-            }
-
             if (txtId.Text == "" || txtId.Text == "0")
             {
                 lblUpdateUserMessage.Text = "Vui lòng nhập một ID người dùng > 0";
@@ -384,7 +352,7 @@ namespace Moodle
 
             List<MoodleUser> lstUser = new List<MoodleUser>();
             lstUser.Add(user);
-            doc.LoadXml(MoodleUser.GetUsersById(lstUser, txtToken.Text));
+            doc.LoadXml(MoodleUser.GetUsersById(lstUser, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + user.Id + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeUserDetail.Nodes.Clear();

@@ -26,24 +26,20 @@ namespace Moodle
             if (txtUsername.Text == "" || txtPassword.Text == "") return;
             MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
             string s = u.GetToken(ddlService.SelectedItem.Value);
+            Session["token"] = s;
             if (s != "")
             {
-                palLogin.Visible = false;
-                palUser.Visible = true;
+                if (Session["refUrl"] != null)
+                    Response.Redirect((string)Session["refUrl"]);
+                else
+                    Response.Redirect("~/GetTokenAndServiceList.aspx");
             }
-            else
-            {
-                palLogin.Visible = true;
-                palUser.Visible = false;
-            }
-            Session["token"] = s;
         }
 
         protected void btnLogout_Click(object sender, System.EventArgs e)
         {
-            palLogin.Visible = true;
-            palUser.Visible = false;
-            Session["token"] = "";
+            Session["token"] = null;
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

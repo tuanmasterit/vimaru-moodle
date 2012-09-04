@@ -26,7 +26,7 @@ namespace Moodle
             MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
             string s = u.GetToken(ddlService.SelectedItem.Value);
             Session["token"] = s;
-            if(s!="")
+            if (s != "")
             {
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);

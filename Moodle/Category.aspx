@@ -1,25 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Category.aspx.cs" Inherits="Moodle.Category" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .style14
-        {
-            height: 21px;
-        }
-        .style19
-        {
-            height: 35px;
-        }
-        .style23
-        {
-            font-weight: 700;
-            width: 176px;
-        }
-        .style24
-        {
-            font-weight: 700;
-            width: 179px;
-        }
-        </style>
     <script language="javascript" type="text/javascript">
         function CheckUncheckAll() {
             var i; CheckBoxs = document.getElementsByTagName("input");

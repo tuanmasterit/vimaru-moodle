@@ -10,7 +10,7 @@
 namespace Moodle {
     
     
-    public partial class WebMain {
+    public partial class Department {
         
         /// <summary>
         /// ScriptManagerProxy1 control.
@@ -22,31 +22,31 @@ namespace Moodle {
         protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
         
         /// <summary>
-        /// LinqDataSourceTaiKhoan control.
+        /// LinqDataSourceFaculty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceTaiKhoan;
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceFaculty;
         
         /// <summary>
-        /// LinqDataSourceHocPhan control.
+        /// LinqDataSourceDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceHocPhan;
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceDepartment;
         
         /// <summary>
-        /// txtMaSV control.
+        /// txtListId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMaSV;
+        protected global::System.Web.UI.WebControls.TextBox txtListId;
         
         /// <summary>
         /// UpdateProgress1 control.
@@ -67,22 +67,22 @@ namespace Moodle {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// cboAcountFilter control.
+        /// cboFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cboAcountFilter;
+        protected global::System.Web.UI.WebControls.DropDownList cboFilter;
         
         /// <summary>
-        /// grvTaiKhoan control.
+        /// grvDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvTaiKhoan;
+        protected global::System.Web.UI.WebControls.GridView grvDepartment;
         
         /// <summary>
         /// cboPageSize control.
@@ -94,22 +94,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.DropDownList cboPageSize;
         
         /// <summary>
-        /// btnCreateUser control.
+        /// btnCreate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreateUser;
-        
-        /// <summary>
-        /// btnDeleteUser control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteUser;
+        protected global::System.Web.UI.WebControls.Button btnCreate;
         
         /// <summary>
         /// txtId control.
@@ -130,84 +121,75 @@ namespace Moodle {
         protected global::AjaxControlToolkit.MaskedEditExtender txtId_MaskedEditExtender;
         
         /// <summary>
-        /// txtNewUsername control.
+        /// lblUpdateMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewUsername;
+        protected global::System.Web.UI.WebControls.Label lblUpdateMessage;
         
         /// <summary>
-        /// lblUpdateUserMessage control.
+        /// txtIdnumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUpdateUserMessage;
+        protected global::System.Web.UI.WebControls.TextBox txtIdnumber;
         
         /// <summary>
-        /// txtNewPassword control.
+        /// txtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtName;
         
         /// <summary>
-        /// txtFirstName control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
         
         /// <summary>
-        /// txtLastName control.
+        /// ddlCriteria control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLastName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCriteria;
         
         /// <summary>
-        /// txtEmail control.
+        /// chkSubCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.CheckBox chkSubCategory;
         
         /// <summary>
-        /// btnUpdateUser control.
+        /// btnGetDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateUser;
+        protected global::System.Web.UI.WebControls.Button btnGetDetail;
         
         /// <summary>
-        /// btnGetUser control.
+        /// treeDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGetUser;
-        
-        /// <summary>
-        /// treeUserDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView treeUserDetail;
+        protected global::System.Web.UI.WebControls.TreeView treeDetail;
     }
 }

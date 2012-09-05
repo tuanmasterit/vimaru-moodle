@@ -1,11 +1,5 @@
-﻿<%@ Page EnableEventValidation="False" Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="GetTokenAndServiceList.aspx.cs" Inherits="Moodle.GetTokenAndServiceList" %>
+﻿<%@ Page EnableEventValidation="False" Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Token.aspx.cs" Inherits="Moodle.Token" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-    .style3
-    {
-        width: 112px;
-    }
-</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
@@ -24,9 +18,7 @@
                         colspan="2">Get Token &amp; Function List</td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3" style="font-weight: bold">
-                        &nbsp;
-                        Username</td>
+                    <td class="cellHeaderRight">Username</td>
                     <td>
                         <asp:TextBox ID="txtUsername" runat="server" Width="200px" 
                             ValidationGroup="token" CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
@@ -36,9 +28,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3" style="font-weight: bold">
-                        &nbsp;
-                        Password</td>
+                    <td class="cellHeaderRight">Password</td>
                     <td>
                         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="200px" 
                             ValidationGroup="token" CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>
@@ -48,8 +38,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3">
-                        <strong>Service Name </strong></td>
+                    <td class="cellHeaderRight">Service Name</td>
                     <td align="left">
                         <asp:TextBox ID="txtServiceShortName" runat="server" ValidationGroup="token" 
                             Width="200px" CssClass="textBox" ToolTip="Tên viết tắt của dịch vụ"></asp:TextBox>
@@ -59,7 +48,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3">
+                    <td class="cellHeaderRight">
                         &nbsp;</td>
                     <td align="left">
                         <asp:Button ID="btnGetToken" runat="server" onclick="btnGetToken_Click" 
@@ -70,14 +59,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3" style="font-weight: bold">Token</td>
+                    <td class="cellHeaderRight">Token</td>
                     <td>
                         <asp:TextBox ID="txtToken" runat="server" Width="283px" 
                             CssClass="textBox" ToolTip="Chuỗi token"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right" class="style3" style="font-weight: bold">
+                    <td class="cellHeaderRight">
                         &nbsp;</td>
                     <td>
                         <asp:TextBox ID="txtFunctions" runat="server" CssClass="textBox" Height="250px" 

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Moodle
 {
-    public partial class GetTokenAndServiceList : System.Web.UI.Page
+    public partial class Token : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

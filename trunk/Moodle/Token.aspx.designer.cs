@@ -10,7 +10,7 @@
 namespace Moodle {
     
     
-    public partial class GetTokenAndServiceList {
+    public partial class Token {
         
         /// <summary>
         /// UpdateProgress1 control.

@@ -75,6 +75,13 @@
     <Compile Include="Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Course.aspx.cs">
+      <DependentUpon>Course.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Course.aspx.designer.cs">
+      <DependentUpon>Course.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DCVimaru.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,12 +94,26 @@
     <Compile Include="App_Code\MoodleUtilites.cs" />
     <Compile Include="App_Code\MoodleEnrol.cs" />
     <Compile Include="App_Code\MoodleRole.cs" />
-    <Compile Include="GetTokenAndServiceList.aspx.cs">
-      <DependentUpon>GetTokenAndServiceList.aspx</DependentUpon>
+    <Compile Include="Department.aspx.cs">
+      <DependentUpon>Department.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GetTokenAndServiceList.aspx.designer.cs">
-      <DependentUpon>GetTokenAndServiceList.aspx</DependentUpon>
+    <Compile Include="Department.aspx.designer.cs">
+      <DependentUpon>Department.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Faculty.aspx.cs">
+      <DependentUpon>Faculty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Faculty.aspx.designer.cs">
+      <DependentUpon>Faculty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Token.aspx.cs">
+      <DependentUpon>Token.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Token.aspx.designer.cs">
+      <DependentUpon>Token.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -109,18 +130,19 @@
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\UserResult.cs" />
-    <Compile Include="WebMain.aspx.cs">
-      <DependentUpon>WebMain.aspx</DependentUpon>
+    <Compile Include="User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebMain.aspx.designer.cs">
-      <DependentUpon>WebMain.aspx</DependentUpon>
+    <Compile Include="User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
     </Compile>
     <Content Include="App_Images\form_bg.jpg" />
     <Content Include="App_Images\loading_icon %282%29.gif" />
     <Content Include="App_Images\login_bg.gif" />
     <Content Include="App_Images\tcatBG.gif" />
     <Content Include="Category.aspx" />
+    <Content Include="Course.aspx" />
     <Content Include="Default.aspx" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -129,7 +151,9 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Content Include="GetTokenAndServiceList.aspx" />
+    <Content Include="Department.aspx" />
+    <Content Include="Faculty.aspx" />
+    <Content Include="Token.aspx" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -402,7 +426,7 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Test.aspx" />
-    <Content Include="WebMain.aspx" />
+    <Content Include="User.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

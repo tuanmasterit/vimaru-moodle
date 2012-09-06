@@ -10,7 +10,7 @@ namespace Moodle
         int intId;
         string strFullName;
         string strShortName;
-        int intCategory;
+        int intCategoryId;
         string strIdNumber;
         string strSummary;
         int intSummaryFormat;
@@ -50,10 +50,10 @@ namespace Moodle
             set { strShortName = value; }
         }
 
-        public int Category
+        public int CategoryId
         {
-            get { return intCategory; }
-            set { intCategory = value; }
+            get { return intCategoryId; }
+            set { intCategoryId = value; }
         }
 
         public string IdNumber
@@ -178,11 +178,11 @@ namespace Moodle
 
         public MoodleCourse() { }
 
-        public MoodleCourse(string fullname, string shortname, int category, string idnumber, string summary, int summaryformat, string format, int showgrades, int newsitems, int startdate, int numsections, int maxbytes, int showreports, int visible, int hiddensections, int groupmode, int groupmodeforce, int defaultgroupingid, int enablecompletion, int completionstartonenrol, int completionnotify, string lang, string forcetheme)
+        public MoodleCourse(string fullname, string shortname, int categoryid, string idnumber, string summary, int startdate, string forcetheme="", int summaryformat = 1, string format = "weeks", int showgrades = 1, int newsitems = 0, int numsections = 1, int maxbytes = 20971520, int showreports=0, int visible=1, int hiddensections=1, int groupmode=0, int groupmodeforce=0, int defaultgroupingid=0, int enablecompletion=0, int completionstartonenrol=0, int completionnotify=0, string lang="vi")
         {
             strFullName = fullname;
             strShortName = shortname;
-            intCategory = category;
+            intCategoryId = categoryid;
             strIdNumber = idnumber;
             strSummary = summary;
             intSummaryFormat = summaryformat;
@@ -213,7 +213,7 @@ namespace Moodle
             {
                 postData += "&courses[" + i + "][fullname]=" + HttpUtility.UrlEncode(lst[i].FullName);
                 postData += "&courses[" + i + "][shortname]=" + HttpUtility.UrlEncode(lst[i].ShortName);
-                postData += "&courses[" + i + "][category]=" + lst[i].Category;
+                postData += "&courses[" + i + "][categoryid]=" + lst[i].CategoryId;
                 postData += "&courses[" + i + "][idnumber]=" + HttpUtility.UrlEncode(lst[i].IdNumber);
                 postData += "&courses[" + i + "][summary]=" + HttpUtility.UrlEncode(lst[i].Summary);
                 postData += "&courses[" + i + "][summaryformat]=" + lst[i].SummaryFormat;

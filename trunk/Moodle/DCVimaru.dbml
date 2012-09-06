@@ -38,19 +38,6 @@
       <Association Name="Khoa_BoMon" Member="BoMons" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="BoMon" />
     </Type>
   </Table>
-  <Table Name="dbo.ThoiKhoaBieu" Member="ThoiKhoaBieus">
-    <Type Name="ThoiKhoaBieu">
-      <Column Name="MaHP" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MaNH" Type="System.String" DbType="VarChar(6) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Thu" Type="System.String" DbType="VarChar(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TietBD" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="SoTiet" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NgayBD" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="NgayKT" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Association Name="HocPhan_ThoiKhoaBieu" Member="HocPhan" ThisKey="MaHP" OtherKey="MaHP" Type="HocPhan" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.HocPhan" Member="HocPhans">
     <Type Name="HocPhan">
       <Column Name="MaHP" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -61,6 +48,20 @@
       <Association Name="HocPhan_DangKy" Member="DangKies" ThisKey="MaHP" OtherKey="MaHP" Type="DangKy" />
       <Association Name="HocPhan_ThoiKhoaBieu" Member="ThoiKhoaBieus" ThisKey="MaHP" OtherKey="MaHP" Type="ThoiKhoaBieu" />
       <Association Name="BoMon_HocPhan" Member="BoMon" ThisKey="MaBoMon" OtherKey="MaBoMon" Type="BoMon" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ThoiKhoaBieu" Member="ThoiKhoaBieus">
+    <Type Name="ThoiKhoaBieu">
+      <Column Name="MaHP" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaNH" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Thu" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="TietBD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SoTiet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NgayBD" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="NgayKT" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="HocPhan_ThoiKhoaBieu" Member="HocPhan" ThisKey="MaHP" OtherKey="MaHP" Type="HocPhan" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

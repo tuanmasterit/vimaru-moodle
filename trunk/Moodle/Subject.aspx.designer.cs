@@ -10,7 +10,7 @@
 namespace Moodle {
     
     
-    public partial class Course {
+    public partial class Subject {
         
         /// <summary>
         /// ScriptManagerProxy1 control.
@@ -47,15 +47,6 @@ namespace Moodle {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceSubject;
-        
-        /// <summary>
-        /// LinqDataSourceCourse control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceCourse;
         
         /// <summary>
         /// txtListId control.
@@ -103,22 +94,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.DropDownList cboFilterDepartment;
         
         /// <summary>
-        /// cboFilterSubject control.
+        /// grvSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cboFilterSubject;
-        
-        /// <summary>
-        /// grvCourse control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvCourse;
+        protected global::System.Web.UI.WebControls.GridView grvSubject;
         
         /// <summary>
         /// cboPageSize control.

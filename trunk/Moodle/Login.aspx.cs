@@ -16,8 +16,9 @@ namespace Moodle
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);
                 else
-                    Response.Redirect("~/GetTokenAndServiceList.aspx");
+                    Response.Redirect("~/Token.aspx");
             }
+            txtUsername.Focus();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace Moodle
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);
                 else
-                    Response.Redirect("~/GetTokenAndServiceList.aspx");
+                    Response.Redirect("~/Token.aspx");
             }
         }
     }

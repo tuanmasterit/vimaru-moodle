@@ -33,7 +33,7 @@
     <asp:LinqDataSource ID="LinqDataSourceDepartment" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
         EnableUpdate="True" EntityTypeName="" TableName="BoMons" 
-        Where="MaKhoa == @MaKhoa">
+        Where="MaKhoa == @MaKhoa" onselecting="LinqDataSourceDepartment_Selecting">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilter" Name="MaKhoa" 
                 PropertyName="SelectedValue" Type="String" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Course.aspx.cs" Inherits="Moodle.Course" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Subject.aspx.cs" Inherits="Moodle.Subject" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 <script language="javascript" type="text/javascript">
     function CheckUncheckAll() {
@@ -22,19 +22,18 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
     <asp:LinqDataSource ID="LinqDataSourceFaculty" runat="server" 
-        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" 
-        TableName="Khoas" Where="Id != @Id" Select="new (MaKhoa, TenKhoa)">
+        ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
+        EnableUpdate="True" EntityTypeName="" TableName="Khoas" Where="Id != @Id">
         <WhereParameters>
             <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
         </WhereParameters>
     </asp:LinqDataSource>
     <asp:LinqDataSource ID="LinqDataSourceDepartment" runat="server" 
-        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="BoMons" 
-        Where="MaKhoa == @MaKhoa &amp;&amp; Id != @Id" 
-        Select="new (MaBoMon, TenBoMon)">
+        ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
+        EnableUpdate="True" EntityTypeName="" TableName="BoMons" 
+        Where="MaKhoa == @MaKhoa &amp;&amp; Id != @Id">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilter" Name="MaKhoa" 
                 PropertyName="SelectedValue" Type="String" />
@@ -42,21 +41,12 @@
         </WhereParameters>
     </asp:LinqDataSource>
     <asp:LinqDataSource ID="LinqDataSourceSubject" runat="server" 
-        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="HocPhans" 
-        Where="Id != @Id &amp;&amp; MaBoMon == @MaBoMon" 
-        Select="new (MaHP, TenHP)">
+        ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
+        EnableUpdate="True" EntityTypeName="" TableName="HocPhans" 
+        Where="MaBoMon == @MaBoMon" onselecting="LinqDataSourceSubject_Selecting">
         <WhereParameters>
-            <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
-            <asp:ControlParameter ControlID="cboFilterDepartment" DefaultValue="0" 
-                Name="MaBoMon" PropertyName="SelectedValue" Type="Int32" />
-        </WhereParameters>
-    </asp:LinqDataSource>
-    <asp:LinqDataSource ID="LinqDataSourceCourse" runat="server" 
-        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="ThoiKhoaBieus" 
-        Where="MaHP == @MaHP" onselecting="LinqDataSourceCourse_Selecting">
-        <WhereParameters>
-            <asp:ControlParameter ControlID="cboFilterSubject" Name="MaHP" 
-                PropertyName="SelectedValue" Type="String" />
+            <asp:ControlParameter ControlID="cboFilterDepartment" Name="MaBoMon" 
+                PropertyName="SelectedValue" Type="Int32" DefaultValue="0" />
         </WhereParameters>
     </asp:LinqDataSource>
     <asp:TextBox ID="txtListId" runat="server" Visible="False" Wrap="False"></asp:TextBox>
@@ -73,7 +63,7 @@
             <table cellpadding="4" class="table" cellspacing="0">
                 <tr>
                     <td class="tableHeader">
-                        Tạo danh mục khóa học</td>
+                        Tạo danh mục môn học</td>
                 </tr>
                 <tr>
                     <td class="tableCell">
@@ -85,24 +75,19 @@
                         &nbsp;Bộ môn:
                         <asp:DropDownList ID="cboFilterDepartment" runat="server" AutoPostBack="True" 
                             CssClass="dropDownList" DataSourceID="LinqDataSourceDepartment" 
-                            DataTextField="TenBoMon" DataValueField="MaBoMon" style="margin-left: 0px" 
-                            ondatabound="cboFilterDepartment_DataBound">
-                        </asp:DropDownList>
-                        &nbsp;Môn học:
-                        <asp:DropDownList ID="cboFilterSubject" runat="server" AutoPostBack="True" 
-                            CssClass="dropDownList" DataSourceID="LinqDataSourceSubject" 
-                            DataTextField="TenHP" DataValueField="MaHP" style="margin-left: 0px">
+                            DataTextField="TenBoMon" DataValueField="MaBoMon" style="margin-left: 0px">
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
                     <td class="tableRow">
-                        <asp:GridView ID="grvCourse" runat="server" AllowPaging="True" 
+                        <asp:GridView ID="grvSubject" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="6" 
-                            CssClass="DDGridView" DataKeyNames="STT" 
-                            DataSourceID="LinqDataSourceCourse" EnableModelValidation="False" 
-                            onpageindexchanging="grvCourse_PageIndexChanging" 
-                            onprerender="grvCourse_PreRender" onrowdatabound="grvCourse_RowDataBound" ShowFooter="True" 
+                            CssClass="DDGridView" DataKeyNames="MaHP" 
+                            DataSourceID="LinqDataSourceSubject" EnableModelValidation="False" 
+                            onpageindexchanging="grvSubject_PageIndexChanging" 
+                            onprerender="grvSubject_PreRender" onrowdatabound="grvSubject_RowDataBound" 
+                            onselectedindexchanged="grvSubject_SelectedIndexChanged" ShowFooter="True" 
                             ShowHeaderWhenEmpty="True" Width="100%">
                             <Columns>
                                 <asp:TemplateField>
@@ -126,29 +111,15 @@
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="60px" 
                                     Wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="STT" HeaderText="STT" ReadOnly="True" 
-                                    SortExpression="STT">
-                                <HeaderStyle Wrap="False" />
-                                <ItemStyle Width="50px" Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="TenHP" HeaderText="Tên học phần" ReadOnly="True" 
-                                    SortExpression="TenHP" >
-                                <FooterStyle Wrap="False" />
-                                <ItemStyle Wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="MaNH" HeaderText="Nhóm học" InsertVisible="False" 
-                                    ReadOnly="True" SortExpression="MaNH">
+                                <asp:BoundField DataField="MaHP" HeaderText="Mã học phần" InsertVisible="False" 
+                                    ReadOnly="True" SortExpression="MaHP">
                                 <FooterStyle Wrap="False" />
                                 <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Wrap="False" />
-                                <ItemStyle Width="60px" 
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" 
                                     Wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="NgayBD" DataFormatString="{0:dd-MM-yyyy}" 
-                                    HeaderText="Ngày bắt đầu" ReadOnly="True" SortExpression="NgayBD">
-                                <FooterStyle Wrap="False" />
-                                <HeaderStyle Wrap="True" />
-                                <ItemStyle Wrap="False" />
-                                </asp:BoundField>
+                                <asp:BoundField DataField="TenHP" HeaderText="Tên học phần" ReadOnly="True" 
+                                    SortExpression="TenHP" />
                             </Columns>
                             <FooterStyle CssClass="DDFooter" Wrap="True" />
                             <HeaderStyle CssClass="th" HorizontalAlign="Center" />
@@ -176,8 +147,8 @@
                             <asp:ListItem>80</asp:ListItem>
                             <asp:ListItem>100</asp:ListItem>
                         </asp:DropDownList>
-                        <asp:Button ID="btnCreate" runat="server" 
-                            Text="Tạo" Height="26px" onclick="btnCreate_Click" />
+                        <asp:Button ID="btnCreate" runat="server" onclick="btnCreate_Click" 
+                            Text="Tạo" Height="26px" />
                     </td>
                 </tr>
             </table>
@@ -186,7 +157,7 @@
                     <td class="tableHeader" 
                         style="border: 2px solid #dbddff;" 
                         colspan="2">
-                        Cập nhật và xem danh mục khóa học</td>
+                        Cập nhật và xem danh mục môn học</td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
@@ -227,7 +198,7 @@
                     <td class="cellHeaderRight">
                         &nbsp;</td>
                     <td>
-                        <asp:Button ID="btnUpdate" runat="server" 
+                        <asp:Button ID="btnUpdate" runat="server" onclick="btnUpdate_Click" 
                             Text="Cập nhật" />
                     </td>
                 </tr>
@@ -244,7 +215,7 @@
                         <asp:CheckBox ID="chkSubCategory" runat="server" Checked="True" 
                             Text="Xem cả các mục con" 
                             ToolTip="Hiển thị thông tin đầy đủ các mục con bên trong mục cần xem thông tin" />
-                        <asp:Button ID="btnGetDetail" runat="server" 
+                        <asp:Button ID="btnGetDetail" runat="server" onclick="btnGetDetail_Click" 
                             Text="Chi tiết" />
                     </td>
                 </tr>
@@ -260,5 +231,4 @@
             </table>
         </ContentTemplate>
     </asp:UpdatePanel>
-
 </asp:Content>

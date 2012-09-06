@@ -108,6 +108,14 @@
     <Compile Include="Faculty.aspx.designer.cs">
       <DependentUpon>Faculty.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Subject.aspx.cs">
+      <DependentUpon>Subject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Subject.aspx.designer.cs">
+      <DependentUpon>Subject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\ThoiKhoaBieuResult.cs" />
     <Compile Include="Token.aspx.cs">
       <DependentUpon>Token.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -153,6 +161,7 @@
     </Compile>
     <Content Include="Department.aspx" />
     <Content Include="Faculty.aspx" />
+    <Content Include="Subject.aspx" />
     <Content Include="Token.aspx" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">

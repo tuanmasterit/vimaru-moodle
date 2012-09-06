@@ -32,7 +32,7 @@ namespace Moodle
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);
                 else
-                    Response.Redirect("~/GetTokenAndServiceList.aspx");
+                    Response.Redirect("~/Token.aspx");
             }
         }
 

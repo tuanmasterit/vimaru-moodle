@@ -7,39 +7,39 @@ namespace Moodle
 {
     public class UserResult
     {
-        private long? id;
-        private string maSV;
-        private string ho;
-        private string ten;
-        private string email;
+        private long? lngId;
+        private string strMaSV;
+        private string strHo;
+        private string strTen;
+        private string strEmail;
 
         public long? Id
         {
-            get { return id; }
-            set { id = value; }
+            get { return lngId; }
+            set { lngId = value; }
         }
 
         public string MaSV
         {
-            get { return maSV; }
-            set { maSV = value; }
+            get { return strMaSV; }
+            set { strMaSV = value; }
         }
 
         public string Ho        {
-            get { return ho; }
-            set { ho = value; }
+            get { return strHo; }
+            set { strHo = value; }
         }
 
         public string Ten
         {
-            get { return ten; }
-            set { ten = value; }
+            get { return strTen; }
+            set { strTen = value; }
         }
 
         public string Email
         {
-            get { return email; }
-            set { email = value + "@vimaru.edu.vn"; }
+            get { return strEmail; }
+            set { strEmail = value + "@vimaru.edu.vn"; }
         }
     }
 }

@@ -9,34 +9,34 @@ using System.Xml;
 
 namespace Moodle
 {
-    public partial class Department : System.Web.UI.Page
+    public partial class Subject : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["token"] == null || (string)Session["token"] == "")
             {
-                Session["refUrl"] = "~/Department.aspx";
+                Session["refUrl"] = "~/Subject.aspx";
                 Response.Redirect("~/Login.aspx");
             }
         }
 
         protected void cboPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            grvDepartment.PageSize = Convert.ToInt16(cboPageSize.SelectedValue);
+            grvSubject.PageSize = Convert.ToInt16(cboPageSize.SelectedValue);
         }
 
-        protected void grvDepartment_PreRender(object sender, EventArgs e)
+        protected void grvSubject_PreRender(object sender, EventArgs e)
         {
-            grvDepartment.DataBind();
+            grvSubject.DataBind();
             PopulateCheckedValues();
         }
 
-        protected void grvDepartment_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void grvSubject_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Footer)
             {
-                e.Row.Cells[0].Text = grvDepartment.Rows.Count.ToString();
-                e.Row.Cells[1].Text = "Trang " + (grvDepartment.PageIndex + 1) + "/" + grvDepartment.PageCount;
+                e.Row.Cells[0].Text = grvSubject.Rows.Count.ToString();
+                e.Row.Cells[1].Text = "Trang " + (grvSubject.PageIndex + 1) + "/" + grvSubject.PageCount;
             }
         }
 
@@ -46,26 +46,26 @@ namespace Moodle
             {
                 ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
 
-                string MaBoMon = "0";
+                string MaHP = "0";
                 CheckBox chk;
 
-                foreach (GridViewRow rowItem in grvDepartment.Rows)
+                foreach (GridViewRow rowItem in grvSubject.Rows)
                 {
 
                     chk = (CheckBox)(rowItem.FindControl("chk"));
-                    MaBoMon = grvDepartment.DataKeys[rowItem.RowIndex]["MaBoMon"].ToString();
+                    MaHP = grvSubject.DataKeys[rowItem.RowIndex]["MaHP"].ToString();
                     if (chk.Checked)
                     {
-                        if (!arrIDs.Contains(MaBoMon))
+                        if (!arrIDs.Contains(MaHP))
                         {
-                            arrIDs.Add(MaBoMon);
+                            arrIDs.Add(MaHP);
                         }
                     }
                     else
                     {
-                        if (arrIDs.Contains(MaBoMon))
+                        if (arrIDs.Contains(MaHP))
                         {
-                            arrIDs.Remove(MaBoMon);
+                            arrIDs.Remove(MaHP);
                         }
                     }
                 }
@@ -83,16 +83,16 @@ namespace Moodle
         {
             try
             {
-                string MaBoMon = string.Empty;
+                string MaHP = string.Empty;
                 ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
 
                 CheckBox chk;
 
-                foreach (GridViewRow rowItem in grvDepartment.Rows)
+                foreach (GridViewRow rowItem in grvSubject.Rows)
                 {
                     chk = (CheckBox)(rowItem.Cells[0].FindControl("chk"));
-                    MaBoMon = grvDepartment.DataKeys[rowItem.RowIndex]["MaBoMon"].ToString();
-                    if (arrIDs.Contains(MaBoMon))
+                    MaHP = grvSubject.DataKeys[rowItem.RowIndex]["MaHP"].ToString();
+                    if (arrIDs.Contains(MaHP))
                     {
                         chk.Checked = true;
                         rowItem.Style.Add(HtmlTextWriterStyle.BackgroundColor, "#fdffb8");
@@ -128,25 +128,25 @@ namespace Moodle
             return arrIDs;
         }
 
-        protected void grvDepartment_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void grvSubject_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             SaveCheckedValues();
         }
 
-        protected void grvDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        protected void grvSubject_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int rowId = grvDepartment.SelectedIndex;
-            txtId.Text = grvDepartment.Rows[rowId].Cells[2].Text.ToString();
-            txtIdnumber.Text = grvDepartment.Rows[rowId].Cells[3].Text.ToString();
-            txtName.Text = HttpUtility.HtmlDecode(grvDepartment.Rows[rowId].Cells[4].Text.ToString());
+            int rowId = grvSubject.SelectedIndex;
+            txtId.Text = grvSubject.Rows[rowId].Cells[2].Text.ToString();
+            txtIdnumber.Text = grvSubject.Rows[rowId].Cells[3].Text.ToString();
+            txtName.Text = HttpUtility.HtmlDecode(grvSubject.Rows[rowId].Cells[4].Text.ToString());
         }
 
         protected void btnCreate_Click(object sender, EventArgs e)
         {
             SaveCheckedValues();
 
-            grvDepartment.AllowPaging = false;
-            grvDepartment.DataBind();
+            grvSubject.AllowPaging = false;
+            grvSubject.DataBind();
 
             MoodleCategory category;
             XmlDocument doc = new XmlDocument();
@@ -154,12 +154,12 @@ namespace Moodle
             string idnum = "0";
 
             DCVimaruDataContext dc = new DCVimaruDataContext();
-            Khoa khoa = dc.Khoas.Single(t => t.MaKhoa == cboFilter.SelectedValue);
-            int parent = Convert.ToInt32(khoa.Id);
+            BoMon bomon = dc.BoMons.Single(t => t.MaBoMon == Convert.ToInt32(cboFilterDepartment.SelectedValue));
+            int parent = Convert.ToInt32(bomon.Id);
 
-            foreach (GridViewRow row in grvDepartment.Rows)
+            foreach (GridViewRow row in grvSubject.Rows)
             {
-                idnum = grvDepartment.DataKeys[row.RowIndex]["MaBoMon"].ToString();
+                idnum = grvSubject.DataKeys[row.RowIndex]["MaHP"].ToString();
                 if (arrIDs.Contains(idnum))
                 {
                     category = new MoodleCategory
@@ -175,32 +175,32 @@ namespace Moodle
                     List<MoodleCategory> lst = new List<MoodleCategory>();
                     lst.Add(category);
                     doc.LoadXml(MoodleCategory.CreateCategories(lst, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\department_" + category.IdNumber + ".xml");
+                    doc.Save("E:\\Z-TMP\\subject_" + category.IdNumber + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
                         long id = (long)Convert.ToUInt32(doc.DocumentElement.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText);
-                        BoMon bomon = dc.BoMons.Single(t => t.MaBoMon == Convert.ToInt32(category.IdNumber));
-                        bomon.Id = id;
+                        HocPhan hocphan = dc.HocPhans.Single(t => t.MaHP == category.IdNumber);
+                        hocphan.Id = id;
                         dc.SubmitChanges();
                     }
                 }
             }
 
-            grvDepartment.AllowPaging = true;
+            grvSubject.AllowPaging = true;
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "" || txtId.Text == "0")
             {
-                lblUpdateMessage.Text = "Vui lòng nhập một ID bộ môn > 0";
+                lblUpdateMessage.Text = "Vui lòng nhập một ID môn học > 0";
                 txtId.Focus();
                 return;
             }
 
             DCVimaruDataContext dc = new DCVimaruDataContext();
-            Khoa khoa = dc.Khoas.Single(t => t.MaKhoa == cboFilter.SelectedValue);
-            int parent = Convert.ToInt32(khoa.Id);
+            BoMon bomon = dc.BoMons.Single(t => t.MaBoMon == Convert.ToInt32(cboFilterDepartment.SelectedValue));
+            int parent = Convert.ToInt32(bomon.Id);
 
             MoodleCategory category;
             XmlDocument doc = new XmlDocument();
@@ -219,7 +219,7 @@ namespace Moodle
             List<MoodleCategory> lst = new List<MoodleCategory>();
             lst.Add(category);
             doc.LoadXml(MoodleCategory.UpdateCategories(lst, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\department_" + txtId.Text + ".xml");
+            doc.Save("E:\\Z-TMP\\subject_" + txtId.Text + ".xml");
         }
 
         private void AddNode(XmlNode inXmlNode, TreeNode inTreeNode)
@@ -257,7 +257,7 @@ namespace Moodle
         {
             if (txtId.Text == "" || txtId.Text == "0")
             {
-                lblUpdateMessage.Text = "Vui lòng nhập một ID bộ môn > 0";
+                lblUpdateMessage.Text = "Vui lòng nhập một ID môn học > 0";
                 txtId.Focus();
                 return;
             }
@@ -281,7 +281,7 @@ namespace Moodle
             XmlDocument doc = new XmlDocument();
 
             doc.LoadXml(MoodleGetCategory.GetCategories(lst, chkSubCategory.Checked, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\department_" + txtId.Text + ".xml");
+            doc.Save("E:\\Z-TMP\\subject_" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
             treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
@@ -291,7 +291,7 @@ namespace Moodle
             treeDetail.ExpandAll();
         }
 
-        protected void LinqDataSourceDepartment_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        protected void LinqDataSourceSubject_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             cboPageSize_SelectedIndexChanged(sender, e);
         }

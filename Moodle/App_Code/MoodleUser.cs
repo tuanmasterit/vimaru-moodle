@@ -10,7 +10,7 @@ namespace Moodle
 {
     public class MoodleUser
     {
-        double dubId;
+        double dblId;
         string strUsername;
         string strPassword;
         string strFirstname;
@@ -22,8 +22,8 @@ namespace Moodle
 
         public double Id
         {
-            get { return dubId; }
-            set { dubId = value; }
+            get { return dblId; }
+            set { dblId = value; }
         }
 
         public string Username
@@ -88,7 +88,7 @@ namespace Moodle
         public MoodleUser(double id, string username, string password)
             : this(username, password)
         {
-            dubId = id;
+            dblId = id;
         }
 
         public MoodleUser(string username, string password, string firstname, string lastname, string email, string timezone, string city, string country)
@@ -105,7 +105,7 @@ namespace Moodle
         public MoodleUser(double id, string username, string password, string firstname, string lastname, string email, string timezone, string city, string country)
             : this(username, password, firstname, lastname, email, timezone, city, country)
         {
-            dubId = id;
+            dblId = id;
         }
 
         public string GetToken(string service)

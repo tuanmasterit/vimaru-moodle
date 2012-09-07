@@ -2,28 +2,19 @@
   <Connection Mode="WebSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=Vimaru;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="VimaruConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.DangKy" Member="DangKies">
     <Type Name="DangKy">
-      <Column Name="MaSV" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MaHP" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="MaNH" Type="System.String" DbType="VarChar(6) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaSV" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="MaTKB" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="STT" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GhiDanh" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ThoiKhoaBieu_DangKy" Member="ThoiKhoaBieu" ThisKey="MaTKB" OtherKey="STT" Type="ThoiKhoaBieu" IsForeignKey="true" />
       <Association Name="SinhVien_DangKy" Member="SinhVien" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien" IsForeignKey="true" />
-      <Association Name="HocPhan_DangKy" Member="HocPhan" ThisKey="MaHP" OtherKey="MaHP" Type="HocPhan" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.SinhVien" Member="SinhViens">
-    <Type Name="SinhVien">
-      <Column Name="MaSV" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Ho" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Ten" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Lop" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Association Name="SinhVien_DangKy" Member="DangKies" ThisKey="MaSV" OtherKey="MaSV" Type="DangKy" />
     </Type>
   </Table>
   <Table Name="dbo.BoMon" Member="BoMons">
     <Type Name="BoMon">
       <Column Name="MaBoMon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TenBoMon" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="MaKhoa" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
       <Association Name="BoMon_HocPhan" Member="HocPhans" ThisKey="MaBoMon" OtherKey="MaBoMon" Type="HocPhan" />
       <Association Name="Khoa_BoMon" Member="Khoa" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="Khoa" IsForeignKey="true" />
@@ -44,8 +35,7 @@
       <Column Name="TenHP" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="TCHT" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
       <Column Name="MaBoMon" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Association Name="HocPhan_DangKy" Member="DangKies" ThisKey="MaHP" OtherKey="MaHP" Type="DangKy" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Association Name="HocPhan_ThoiKhoaBieu" Member="ThoiKhoaBieus" ThisKey="MaHP" OtherKey="MaHP" Type="ThoiKhoaBieu" />
       <Association Name="BoMon_HocPhan" Member="BoMon" ThisKey="MaBoMon" OtherKey="MaBoMon" Type="BoMon" IsForeignKey="true" />
     </Type>
@@ -59,9 +49,28 @@
       <Column Name="SoTiet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NgayBD" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="NgayKT" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Id" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="STT" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="ThoiKhoaBieu_DangKy" Member="DangKies" ThisKey="STT" OtherKey="MaTKB" Type="DangKy" />
       <Association Name="HocPhan_ThoiKhoaBieu" Member="HocPhan" ThisKey="MaHP" OtherKey="MaHP" Type="HocPhan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SinhVien" Member="SinhViens">
+    <Type Name="SinhVien">
+      <Column Name="MaSV" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ho" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="MaLop" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SinhVien_DangKy" Member="DangKies" ThisKey="MaSV" OtherKey="MaSV" Type="DangKy" />
+      <Association Name="Lop_SinhVien" Member="Lop" ThisKey="MaLop" OtherKey="MaLop" Type="Lop" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lop" Member="Lops">
+    <Type Name="Lop">
+      <Column Name="MaLop" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLop" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Lop_SinhVien" Member="SinhViens" ThisKey="MaLop" OtherKey="MaLop" Type="SinhVien" />
     </Type>
   </Table>
 </Database>

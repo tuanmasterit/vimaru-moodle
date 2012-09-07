@@ -157,6 +157,7 @@ namespace Moodle
 
             foreach (GridViewRow row in grvFaculty.Rows)
             {
+                if (row.Cells[2].Text != "0") continue;
                 idnum = grvFaculty.DataKeys[row.RowIndex]["MaKhoa"].ToString();
                 if (arrIDs.Contains(idnum))
                 {

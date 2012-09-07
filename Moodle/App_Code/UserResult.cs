@@ -7,16 +7,31 @@ namespace Moodle
 {
     public class UserResult
     {
-        private long? lngId;
+        private long lngSTT;
+        private long lngId;
+        private bool blnGhiDanh;
         private string strMaSV;
         private string strHo;
         private string strTen;
         private string strEmail;
 
-        public long? Id
+
+        public long STT
+        {
+            get { return lngSTT; }
+            set { lngSTT = value; }
+        }
+
+        public long Id
         {
             get { return lngId; }
             set { lngId = value; }
+        }
+
+        public bool GhiDanh
+        {
+            get { return blnGhiDanh; }
+            set { blnGhiDanh = value; }
         }
 
         public string MaSV
@@ -39,7 +54,7 @@ namespace Moodle
         public string Email
         {
             get { return strEmail; }
-            set { strEmail = value + "@vimaru.edu.vn"; }
+            set { strEmail = "st" + value + "@st.vimaru.edu.vn"; }
         }
     }
 }

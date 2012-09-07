@@ -5,11 +5,10 @@ using System.Web;
 
 namespace Moodle
 {
-    public class HocPhanResult
+    public class ThoiKhoaBieuResult
     {
         long lngId;
         long lngSTT;
-        string strMaHP;
         string strTenHP;
         string strMaNH;
         DateTime dtmNgayBD;
@@ -24,12 +23,6 @@ namespace Moodle
         {
             get { return lngSTT; }
             set { lngSTT = value; }
-        }
-
-        public string MaHP
-        {
-            get { return strMaHP; }
-            set { strMaHP = value; }
         }
 
         public string TenHP

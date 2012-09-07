@@ -69,10 +69,10 @@
                                 <FooterStyle Wrap="False" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
                                 </asp:CommandField>
-                               <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" 
+                                <asp:BoundField DataField="Id" HeaderText="Moodle ID" ReadOnly="True" 
                                     SortExpression="Id">
-                                <HeaderStyle HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="60px" 
+                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" 
                                     Wrap="False" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="MaKhoa" HeaderText="Mã khoa" ReadOnly="True" 
@@ -120,7 +120,6 @@
             <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
                     <td class="tableHeader" 
-                        style="border: 2px solid #dbddff;" 
                         colspan="2">Cập nhật và xem danh mục khoa</td>
                 </tr>
                 <tr>

@@ -179,13 +179,14 @@ namespace Moodle
 
                 if (arrIDs.Contains(idnum))
                 {
+                    if (row.Cells[2].Text != "0") continue;
                     string fullname = HttpUtility.HtmlDecode(row.Cells[4].Text + " N" + row.Cells[5].Text + "-" + row.Cells[6].Text);
 
                     course = new MoodleCourse(
                         fullname,
                         fullname,
                         parent,
-                        MoodleUtilites.GetShortName(fullname),
+                        MoodleUtilites.GetIdNumber(fullname),
                         fullname,
                         MoodleUtilites.ConvertToTimestamp(row.Cells[6].Text)
                         );
@@ -193,7 +194,7 @@ namespace Moodle
                     List<MoodleCourse> lst = new List<MoodleCourse>();
                     lst.Add(course);
                     doc.LoadXml(MoodleCourse.CreateCourses(lst, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\course_" + row.Cells[3].Text + ".xml");
+                    doc.Save("E:\\Z-TMP\\course_create_" + row.Cells[3].Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -206,6 +207,72 @@ namespace Moodle
             }
 
             grvCourse.AllowPaging = true;
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            SaveCheckedValues();
+            grvCourse.AllowPaging = false;
+            grvCourse.DataBind();
+
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
+            string idnum = "0";
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+
+            foreach (GridViewRow row in grvCourse.Rows)
+            {
+                idnum = grvCourse.DataKeys[row.RowIndex]["STT"].ToString();
+
+                if (arrIDs.Contains(idnum))
+                {
+                    int id = Convert.ToInt32(row.Cells[2].Text);
+                    List<int> lst = new List<int>();
+                    if(id!=0)
+                        lst.Add(id);
+                    else continue;
+                    doc.LoadXml(MoodleCourse.DeleteCourses(lst, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\course_delete_" + row.Cells[3].Text + ".xml");
+
+                    if (doc.DocumentElement.Name == "RESPONSE")
+                    {
+                        ThoiKhoaBieu tkb = dc.ThoiKhoaBieus.Single(t => t.STT == Convert.ToInt32(row.Cells[3].Text));
+                        tkb.Id = 0;
+                        dc.SubmitChanges();
+                    }
+                }
+            }
+
+            grvCourse.AllowPaging = true;
+        }
+
+        protected void grvCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int rowId = grvCourse.SelectedIndex;
+            GridViewRow row = grvCourse.Rows[rowId];
+            XmlDocument doc = new XmlDocument();
+            int id = Convert.ToInt32(row.Cells[2].Text);
+            List<int> list = new List<int>();
+            list.Add(id);
+            doc.LoadXml(MoodleCourse.GetCourses(list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\course_detail_" + row.Cells[3].Text + ".xml");
+            XmlNode xmlNode = doc.ChildNodes[1];
+            treeDetail.Nodes.Clear();
+            treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            TreeNode treeNode;
+            treeNode = treeDetail.Nodes[0];
+            MoodleUtilites.AddNode(xmlNode, treeNode);
+            treeDetail.ExpandAll();
+
+            doc.LoadXml(MoodleCourse.GetCourseContents(id, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\course_contents_" + row.Cells[3].Text + ".xml");
+            xmlNode = doc.ChildNodes[1];
+            treeContent.Nodes.Clear();
+            treeContent.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            treeNode = treeContent.Nodes[0];
+            MoodleUtilites.AddNode(xmlNode, treeNode);
+            treeContent.ExpandAll();
         }
     }
 }

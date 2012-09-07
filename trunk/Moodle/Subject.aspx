@@ -105,10 +105,10 @@
                                 <FooterStyle Wrap="False" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
                                 </asp:CommandField>
-                                <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" 
+                                <asp:BoundField DataField="Id" HeaderText="Moodle ID" ReadOnly="True" 
                                     SortExpression="Id">
-                                <HeaderStyle HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="60px" 
+                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" 
                                     Wrap="False" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="MaHP" HeaderText="Mã học phần" InsertVisible="False" 

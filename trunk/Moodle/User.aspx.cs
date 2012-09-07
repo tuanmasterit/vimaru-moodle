@@ -22,22 +22,24 @@ namespace Moodle
                 Response.Redirect("~/Login.aspx");
             }
             if (!IsPostBack)
-                grvTaiKhoan.DataBind();
+                grvUser.DataBind();
         }
 
         protected void cboPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            grvTaiKhoan.PageSize = Convert.ToInt16(cboPageSize.SelectedValue);
+            grvUser.PageSize = Convert.ToInt16(cboPageSize.SelectedValue);
         }
 
-        protected void LinqDataSourceTaiKhoan_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        protected void LinqDataSourceUser_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             DCVimaruDataContext dc = new DCVimaruDataContext();
             var rs = from dk in dc.DangKies
-                     where dk.MaHP + dk.MaNH == cboAcountFilter.SelectedValue
+                     where dk.MaTKB.ToString() == cboFilterCourse.SelectedValue
                      select new UserResult
                          {
+                             STT = dk.STT,
                              Id = dk.SinhVien.Id,
+                             GhiDanh = dk.GhiDanh,
                              MaSV = dk.MaSV,
                              Ho = dk.SinhVien.Ho,
                              Ten = dk.SinhVien.Ten,
@@ -47,31 +49,37 @@ namespace Moodle
             cboPageSize_SelectedIndexChanged(sender, e);
         }
 
-        protected void grvTaiKhoan_PreRender(object sender, EventArgs e)
+        protected void grvUser_PreRender(object sender, EventArgs e)
         {
-            grvTaiKhoan.DataBind();
+            grvUser.DataBind();
             PopulateCheckedValues();
         }
 
-        protected void grvTaiKhoan_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void grvUser_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.Footer)
             {
-                e.Row.Cells[0].Text = grvTaiKhoan.Rows.Count.ToString();
-                e.Row.Cells[1].Text = "Trang " + (grvTaiKhoan.PageIndex + 1) + "/" + grvTaiKhoan.PageCount;
+                e.Row.Cells[0].Text = grvUser.Rows.Count.ToString();
+                e.Row.Cells[1].Text = "Trang " + (grvUser.PageIndex + 1) + "/" + grvUser.PageCount;
             }
         }
 
-        protected void LinqDataSourceHocPhan_Selecting(object sender, LinqDataSourceSelectEventArgs e)
+        protected void LinqDataSourceCourse_Selecting(object sender, LinqDataSourceSelectEventArgs e)
         {
             DCVimaruDataContext dc = new DCVimaruDataContext();
             var rs = from tkb in dc.ThoiKhoaBieus
+                     where tkb.MaHP == cboFilterSubject.SelectedValue && tkb.Id != 0
                      select new HocPhanResult
                      {
-                         MaHP = tkb.MaHP + tkb.MaNH,
-                         TenHP = tkb.HocPhan.TenHP + " (N" + tkb.MaNH + ")",
+                         Id = tkb.Id,
+                         STT = tkb.STT,
+                         MaHP = tkb.MaHP,
+                         TenHP = "N" + tkb.MaNH + " (" + tkb.NgayBD.Day
+                         + "-" + tkb.NgayBD.Month + "-" + tkb.NgayBD.Year + ")",
+                         MaNH = tkb.MaNH,
+                         NgayBD = tkb.NgayBD
                      };
-            e.Result = rs.OrderBy(t=>t.TenHP);
+            e.Result = rs.OrderBy(t => t.Id);
         }
 
         protected void SaveCheckedValues()
@@ -83,11 +91,11 @@ namespace Moodle
                 string MaSV = "0";
                 CheckBox chk;
 
-                foreach (GridViewRow rowItem in grvTaiKhoan.Rows)
+                foreach (GridViewRow rowItem in grvUser.Rows)
                 {
 
                     chk = (CheckBox)(rowItem.FindControl("chk"));
-                    MaSV = grvTaiKhoan.DataKeys[rowItem.RowIndex]["MaSV"].ToString();
+                    MaSV = grvUser.DataKeys[rowItem.RowIndex]["MaSV"].ToString();
                     if (chk.Checked)
                     {
                         if (!arrIDs.Contains(MaSV))
@@ -122,10 +130,10 @@ namespace Moodle
 
                 CheckBox chk;
 
-                foreach (GridViewRow rowItem in grvTaiKhoan.Rows)
+                foreach (GridViewRow rowItem in grvUser.Rows)
                 {
                     chk = (CheckBox)(rowItem.Cells[0].FindControl("chk"));
-                    MaSV = grvTaiKhoan.DataKeys[rowItem.RowIndex]["MaSV"].ToString();
+                    MaSV = grvUser.DataKeys[rowItem.RowIndex]["MaSV"].ToString();
                     if (arrIDs.Contains(MaSV))
                     {
                         chk.Checked = true;
@@ -145,7 +153,7 @@ namespace Moodle
            
         }
 
-        protected void grvTaiKhoan_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void grvUser_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             SaveCheckedValues();
         }
@@ -168,35 +176,36 @@ namespace Moodle
             return arrIDs;
         }
 
-        protected void grvTaiKhoan_SelectedIndexChanged(object sender, EventArgs e)
+        protected void grvUser_SelectedIndexChanged(object sender, EventArgs e)
         {
             //lblErrorMessage.Text = txtUsername.Text;
-            int rowId = grvTaiKhoan.SelectedIndex;
-            txtId.Text = grvTaiKhoan.Rows[rowId].Cells[2].Text.ToString();
-            txtNewUsername.Text = grvTaiKhoan.Rows[rowId].Cells[3].Text.ToString();
-            txtNewPassword.Text = grvTaiKhoan.Rows[rowId].Cells[3].Text.ToString();
-            txtFirstName.Text = HttpUtility.HtmlDecode(grvTaiKhoan.Rows[rowId].Cells[4].Text.ToString());
-            txtLastName.Text = HttpUtility.HtmlDecode(grvTaiKhoan.Rows[rowId].Cells[5].Text.ToString());
-            txtEmail.Text = grvTaiKhoan.Rows[rowId].Cells[6].Text.ToString();
+            int rowId = grvUser.SelectedIndex;
+            txtId.Text = grvUser.Rows[rowId].Cells[3].Text.ToString();
+            txtNewUsername.Text = grvUser.Rows[rowId].Cells[5].Text.ToString();
+            txtNewPassword.Text = grvUser.Rows[rowId].Cells[5].Text.ToString();
+            txtFirstName.Text = HttpUtility.HtmlDecode(grvUser.Rows[rowId].Cells[6].Text.ToString());
+            txtLastName.Text = HttpUtility.HtmlDecode(grvUser.Rows[rowId].Cells[7].Text.ToString());
+            txtEmail.Text = grvUser.Rows[rowId].Cells[8].Text.ToString();
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        protected void btnCreate_Click(object sender, EventArgs e)
         {
             SaveCheckedValues();
 
-            grvTaiKhoan.AllowPaging = false;
-            grvTaiKhoan.DataBind();
+            grvUser.AllowPaging = false;
+            grvUser.DataBind();
 
             MoodleUser user;
             XmlDocument doc = new XmlDocument();
             ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
             string MaSV="0";
 
-            foreach (GridViewRow row in grvTaiKhoan.Rows)
+            foreach (GridViewRow row in grvUser.Rows)
             {
-                MaSV = grvTaiKhoan.DataKeys[row.RowIndex]["MaSV"].ToString();
+                MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
                 if (arrIDs.Contains(MaSV))
                 {
+                    if (row.Cells[2].Text != "0") continue;
                     user = new MoodleUser
                         {
                             Username = row.Cells[3].Text,
@@ -212,10 +221,10 @@ namespace Moodle
                     List<MoodleUser> lstUser = new List<MoodleUser>();
                     lstUser.Add(user);
                     doc.LoadXml(MoodleUser.CreateUsers(lstUser, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\" + user.Username + ".xml");
+                    doc.Save("E:\\Z-TMP\\user_create_" + user.Username + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
-                        long? userId = (long?)Convert.ToUInt64(doc.DocumentElement.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText);
+                        long userId = (long)Convert.ToUInt64(doc.DocumentElement.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText);
                         DCVimaruDataContext dc = new DCVimaruDataContext();
                         SinhVien sv = dc.SinhViens.Single(t => t.MaSV == user.Username);
                         sv.Id = userId;
@@ -224,10 +233,10 @@ namespace Moodle
                 }
             }
             
-            grvTaiKhoan.AllowPaging = true;
+            grvUser.AllowPaging = true;
         }
 
-        protected void btnUpdateUser_Click(object sender, EventArgs e)
+        protected void btnUpdate_Click(object sender, EventArgs e)
         {
             if(txtId.Text == "" || txtId.Text=="0")
             {
@@ -252,23 +261,23 @@ namespace Moodle
             List<MoodleUser> lstUser = new List<MoodleUser>();
             lstUser.Add(user);
             doc.LoadXml(MoodleUser.UpdateUsers(lstUser, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
+            doc.Save("E:\\Z-TMP\\user_update_" + txtId.Text + ".xml");
         }
 
-        protected void btnDeleteUser_Click(object sender, EventArgs e)
+        protected void btnDelete_Click(object sender, EventArgs e)
         {
             SaveCheckedValues();
-            grvTaiKhoan.AllowPaging = false;
-            grvTaiKhoan.DataBind();
+            grvUser.AllowPaging = false;
+            grvUser.DataBind();
 
             MoodleUser user = new MoodleUser();
             XmlDocument doc = new XmlDocument();
             ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
             string MaSV = "0";
 
-            foreach (GridViewRow row in grvTaiKhoan.Rows)
+            foreach (GridViewRow row in grvUser.Rows)
             {
-                MaSV = grvTaiKhoan.DataKeys[row.RowIndex]["MaSV"].ToString();
+                MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
                 if (arrIDs.Contains(MaSV))
                 {
                     double userId = Convert.ToDouble(row.Cells[2].Text);
@@ -283,7 +292,7 @@ namespace Moodle
                     List<MoodleUser> lstUser = new List<MoodleUser>();
                     lstUser.Add(user);
                     doc.LoadXml(MoodleUser.DeleteUsers(lstUser, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\" + user.Id + ".xml");
+                    doc.Save("E:\\Z-TMP\\user_delete_" + user.Id + ".xml");
                     if (userId > 0)
                     {
                         DCVimaruDataContext dc = new DCVimaruDataContext();
@@ -294,7 +303,7 @@ namespace Moodle
                 }
             }
 
-            grvTaiKhoan.AllowPaging = true;
+            grvUser.AllowPaging = true;
         }
 
         private void AddNode(XmlNode inXmlNode, TreeNode inTreeNode)
@@ -328,7 +337,7 @@ namespace Moodle
             }
         }
 
-        protected void btnGetUser_Click(object sender, EventArgs e)
+        protected void btnGetDetail_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "" || txtId.Text == "0")
             {
@@ -337,23 +346,13 @@ namespace Moodle
                 return;
             }
 
-            MoodleUser user;
             XmlDocument doc = new XmlDocument();
 
-            user = new MoodleUser
-            {
-                Id = Convert.ToDouble(txtId.Text),
-                Username = txtNewUsername.Text,
-                Password = txtNewPassword.Text,
-                Firstname = HttpUtility.HtmlDecode(txtFirstName.Text),
-                Lastname = HttpUtility.HtmlDecode(txtLastName.Text),
-                Email = txtEmail.Text
-            };
+            List<int> list = new List<int>();
+            list.Add(Convert.ToInt32(txtId.Text));
+            doc.LoadXml(MoodleUser.GetUsersById(list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\user_profile_" + txtId.Text + ".xml");
 
-            List<MoodleUser> lstUser = new List<MoodleUser>();
-            lstUser.Add(user);
-            doc.LoadXml(MoodleUser.GetUsersById(lstUser, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\" + user.Id + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeUserDetail.Nodes.Clear();
             treeUserDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
@@ -363,6 +362,127 @@ namespace Moodle
             treeUserDetail.ExpandAll();
         }
 
-        
+        protected void cboFilterDepartment_DataBound(object sender, EventArgs e)
+        {
+            cboFilterSubject.DataBind();
+        }
+
+        protected void cboFilterSubject_DataBound(object sender, EventArgs e)
+        {
+            cboFilterCourse.DataBind();
+        }
+
+        protected void btnGetEnrolledUsers_Click(object sender, EventArgs e)
+        {
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get courseId
+            ThoiKhoaBieu tkb = dc.ThoiKhoaBieus.Single(t => t.STT == Convert.ToInt32(cboFilterCourse.SelectedValue));
+
+            int courseId = Convert.ToInt32(tkb.Id);
+
+            //create options to get 4 fields of user is id, username, fullname, email
+            List<KeyValuePair<string, string> > list = new List<KeyValuePair<string, string>>();
+
+            list.Add(new KeyValuePair<string, string>("userfields", "id"));
+            list.Add(new KeyValuePair<string, string>("userfields", "username"));
+            list.Add(new KeyValuePair<string, string>("userfields", "fullname"));
+            list.Add(new KeyValuePair<string, string>("userfields", "email"));
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(MoodleEnrol.GetEnrolledUsers(courseId, list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\enrolled_users_" + courseId + ".xml");
+
+            XmlNode xmlnode = doc.ChildNodes[1];
+            treeUserDetail.Nodes.Clear();
+            treeUserDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            TreeNode tNode;
+            tNode = treeUserDetail.Nodes[0];
+            AddNode(xmlnode, tNode);
+            treeUserDetail.ExpandAll();
+        }
+
+        private void EnrolUsers(int suspend)
+        {
+            SaveCheckedValues();
+            grvUser.AllowPaging = false;
+            grvUser.DataBind();
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get courseId
+            ThoiKhoaBieu tkb = dc.ThoiKhoaBieus.Single(t => t.STT == Convert.ToInt32(cboFilterCourse.SelectedValue));
+            int courseId = Convert.ToInt32(tkb.Id);
+            //role: Học viên
+            int roleId = 5;
+
+            MoodleEnrol enrol;
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
+            string MaSV = "0";
+
+            foreach (GridViewRow row in grvUser.Rows)
+            {
+                MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
+                if (arrIDs.Contains(MaSV))
+                {
+                    CheckBox chk = row.Cells[4].Controls[0] as CheckBox;
+                    if (row.Cells[3].Text == "0" || (suspend == 0 && chk.Checked) || (suspend == 1 && !chk.Checked)) continue;
+                    enrol = new MoodleEnrol
+                    {
+                        RoleId = roleId,
+                        UserId = Convert.ToInt32(row.Cells[3].Text),
+                        CourseId = courseId,
+                        TimeStart = 0,
+                        TimeEnd = 0,
+                        Suspend = suspend
+                    };
+
+                    List<MoodleEnrol> list = new List<MoodleEnrol>();
+                    list.Add(enrol);
+                    doc.LoadXml(MoodleEnrol.EnrolUsers(list, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\enrol_" + enrol.UserId + ".xml");
+                    if (doc.DocumentElement.Name == "RESPONSE")
+                    {
+                        DangKy dk = dc.DangKies.Single(t => t.STT == Convert.ToInt64(row.Cells[2].Text));
+                        dk.GhiDanh = !chk.Checked;
+                        dc.SubmitChanges();
+                    }
+                }
+            }
+
+            grvUser.AllowPaging = true;
+        }
+        protected void btnEnrolUsers_Click(object sender, EventArgs e)
+        {
+            EnrolUsers(0);
+        }
+
+
+        protected void btnSuspendUsers_Click(object sender, EventArgs e)
+        {
+            EnrolUsers(1);
+        }
+
+        protected void btnGetCourses_Click(object sender, EventArgs e)
+        {
+            if (txtId.Text == "" || txtId.Text == "0")
+            {
+                lblUpdateUserMessage.Text = "Vui lòng nhập một ID người dùng > 0";
+                txtId.Focus();
+                return;
+            }
+
+            XmlDocument doc = new XmlDocument();
+
+            doc.LoadXml(MoodleEnrol.GetUsersCourses(Convert.ToInt32(txtId.Text), (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\user_courses_" + txtId.Text + ".xml");
+
+            XmlNode xmlnode = doc.ChildNodes[1];
+            treeUserDetail.Nodes.Clear();
+            treeUserDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            TreeNode tNode;
+            tNode = treeUserDetail.Nodes[0];
+            AddNode(xmlnode, tNode);
+            treeUserDetail.ExpandAll();
+        }
     }
 }

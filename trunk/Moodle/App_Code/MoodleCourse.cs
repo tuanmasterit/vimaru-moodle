@@ -205,48 +205,48 @@ namespace Moodle
             strForceTheme = forcetheme;
         }
 
-        public static string CreateCourses(List<MoodleCourse> lst, string token)
+        public static string CreateCourses(List<MoodleCourse> list, string token)
         {
             string postData = "?wstoken=" + token + "&wsfunction=core_course_create_courses";
 
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                postData += "&courses[" + i + "][fullname]=" + HttpUtility.UrlEncode(lst[i].FullName);
-                postData += "&courses[" + i + "][shortname]=" + HttpUtility.UrlEncode(lst[i].ShortName);
-                postData += "&courses[" + i + "][categoryid]=" + lst[i].CategoryId;
-                postData += "&courses[" + i + "][idnumber]=" + HttpUtility.UrlEncode(lst[i].IdNumber);
-                postData += "&courses[" + i + "][summary]=" + HttpUtility.UrlEncode(lst[i].Summary);
-                postData += "&courses[" + i + "][summaryformat]=" + lst[i].SummaryFormat;
-                postData += "&courses[" + i + "][format]=" + HttpUtility.UrlEncode(lst[i].Format);
-                postData += "&courses[" + i + "][showgrades]=" + lst[i].ShowGrades;
-                postData += "&courses[" + i + "][newsitems]=" + lst[i].NewsItems;
-                postData += "&courses[" + i + "][startdate]=" + lst[i].StartDate;
-                postData += "&courses[" + i + "][numsections]=" + lst[i].NumSections;
-                postData += "&courses[" + i + "][maxbytes]=" + lst[i].MaxBytes;
-                postData += "&courses[" + i + "][showreports]=" + lst[i].ShowReports;
-                postData += "&courses[" + i + "][visible]=" + lst[i].Visible;
-                postData += "&courses[" + i + "][hiddensections]=" + lst[i].HiddenSections;
-                postData += "&courses[" + i + "][groupmode]=" + lst[i].GroupMode;
-                postData += "&courses[" + i + "][groupmodeforce]=" + lst[i].GroupModeForce;
-                postData += "&courses[" + i + "][defaultgroupingid]=" + lst[i].DefaultGroupingId;
-                postData += "&courses[" + i + "][enablecompletion]=" + lst[i].EnableCompletion;
-                postData += "&courses[" + i + "][completionstartonenrol]=" + lst[i].CompletionStartOnEnrol;
-                postData += "&courses[" + i + "][completionnotify]=" + lst[i].CompletionNotify;
-                postData += "&courses[" + i + "][lang]=" + HttpUtility.UrlEncode(lst[i].Lang);
-                postData += "&courses[" + i + "][forcetheme]=" + HttpUtility.UrlEncode(lst[i].ForceTheme);
+                postData += "&courses[" + i + "][fullname]=" + HttpUtility.UrlEncode(list[i].FullName);
+                postData += "&courses[" + i + "][shortname]=" + HttpUtility.UrlEncode(list[i].ShortName);
+                postData += "&courses[" + i + "][categoryid]=" + list[i].CategoryId;
+                postData += "&courses[" + i + "][idnumber]=" + HttpUtility.UrlEncode(list[i].IdNumber);
+                postData += "&courses[" + i + "][summary]=" + HttpUtility.UrlEncode(list[i].Summary);
+                postData += "&courses[" + i + "][summaryformat]=" + list[i].SummaryFormat;
+                postData += "&courses[" + i + "][format]=" + HttpUtility.UrlEncode(list[i].Format);
+                postData += "&courses[" + i + "][showgrades]=" + list[i].ShowGrades;
+                postData += "&courses[" + i + "][newsitems]=" + list[i].NewsItems;
+                postData += "&courses[" + i + "][startdate]=" + list[i].StartDate;
+                postData += "&courses[" + i + "][numsections]=" + list[i].NumSections;
+                postData += "&courses[" + i + "][maxbytes]=" + list[i].MaxBytes;
+                postData += "&courses[" + i + "][showreports]=" + list[i].ShowReports;
+                postData += "&courses[" + i + "][visible]=" + list[i].Visible;
+                postData += "&courses[" + i + "][hiddensections]=" + list[i].HiddenSections;
+                postData += "&courses[" + i + "][groupmode]=" + list[i].GroupMode;
+                postData += "&courses[" + i + "][groupmodeforce]=" + list[i].GroupModeForce;
+                postData += "&courses[" + i + "][defaultgroupingid]=" + list[i].DefaultGroupingId;
+                postData += "&courses[" + i + "][enablecompletion]=" + list[i].EnableCompletion;
+                postData += "&courses[" + i + "][completionstartonenrol]=" + list[i].CompletionStartOnEnrol;
+                postData += "&courses[" + i + "][completionnotify]=" + list[i].CompletionNotify;
+                postData += "&courses[" + i + "][lang]=" + HttpUtility.UrlEncode(list[i].Lang);
+                postData += "&courses[" + i + "][forcetheme]=" + HttpUtility.UrlEncode(list[i].ForceTheme);
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);
             return web.GetResponse();
         }
 
-        public static string DeleteCourses(List<int> lst, string token)
+        public static string DeleteCourses(List<int> list, string token)
         {
             string postData = "?wstoken=" + token + "&wsfunction=core_course_delete_courses";
 
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                postData += "&courseids[" + i + "]=" + lst[i];
+                postData += "&courseids[" + i + "]=" + list[i];
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);
@@ -262,13 +262,13 @@ namespace Moodle
             return web.GetResponse();
         }
 
-        public static string GetCourses(List<int> lst, string token)
+        public static string GetCourses(List<int> list, string token)
         {
             string postData = "?wstoken=" + token + "&wsfunction=core_course_get_courses";
 
-            for (int i = 0; i < lst.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                postData += "&options[ids][" + i + "]=" + lst[i];
+                postData += "&options[ids][" + i + "]=" + list[i];
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);

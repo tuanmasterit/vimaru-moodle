@@ -24,14 +24,45 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
-    <asp:LinqDataSource ID="LinqDataSourceTaiKhoan" runat="server" 
+    <asp:LinqDataSource ID="LinqDataSourceUser" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
         EnableUpdate="True" EntityTypeName="" 
-        onselecting="LinqDataSourceTaiKhoan_Selecting" TableName="DangKies">
+        onselecting="LinqDataSourceUser_Selecting" TableName="DangKies">
     </asp:LinqDataSource>
-    <asp:LinqDataSource ID="LinqDataSourceHocPhan" runat="server" 
+    <asp:LinqDataSource ID="LinqDataSourceFaculty" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" 
-        TableName="HocPhans" onselecting="LinqDataSourceHocPhan_Selecting">
+        TableName="Khoas" Where="Id != @Id" Select="new (MaKhoa, TenKhoa)">
+        <WhereParameters>
+            <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
+        </WhereParameters>
+    </asp:LinqDataSource>
+    <asp:LinqDataSource ID="LinqDataSourceDepartment" runat="server" 
+        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="BoMons" 
+        Where="MaKhoa == @MaKhoa &amp;&amp; Id != @Id" 
+        Select="new (MaBoMon, TenBoMon)">
+        <WhereParameters>
+            <asp:ControlParameter ControlID="cboFilterFaculty" Name="MaKhoa" 
+                PropertyName="SelectedValue" Type="String" />
+            <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
+        </WhereParameters>
+    </asp:LinqDataSource>
+    <asp:LinqDataSource ID="LinqDataSourceSubject" runat="server" 
+        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="HocPhans" 
+        Where="Id != @Id &amp;&amp; MaBoMon == @MaBoMon" 
+        Select="new (MaHP, TenHP)">
+        <WhereParameters>
+            <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
+            <asp:ControlParameter ControlID="cboFilterDepartment" DefaultValue="0" 
+                Name="MaBoMon" PropertyName="SelectedValue" Type="Int32" />
+        </WhereParameters>
+    </asp:LinqDataSource>
+    <asp:LinqDataSource ID="LinqDataSourceCourse" runat="server" 
+        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="ThoiKhoaBieus" 
+        Where="MaHP == @MaHP" onselecting="LinqDataSourceCourse_Selecting">
+        <WhereParameters>
+            <asp:ControlParameter ControlID="cboFilterSubject" Name="MaHP" 
+                PropertyName="SelectedValue" Type="String" />
+        </WhereParameters>
     </asp:LinqDataSource>
     <asp:TextBox ID="txtMaSV" runat="server" Visible="False" Wrap="False"></asp:TextBox>
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
@@ -46,28 +77,47 @@
         <ContentTemplate>
             <table cellpadding="4" class="table" cellspacing="0">
                 <tr>
-                    <td class="tableHeader">Tạo tài khoản người dùng</td>
+                    <td class="tableHeader">Tạo, xóa và ghi danh học viên</td>
                 </tr>
                 <tr>
                     <td class="tableCell">
-                        Lớp học phần:&nbsp;
-                        <asp:DropDownList ID="cboAcountFilter" runat="server" AutoPostBack="True" 
-                            DataSourceID="LinqDataSourceHocPhan" DataTextField="TenHP" 
-                            DataValueField="MaHP" 
+                        Khoa:
+                        <asp:DropDownList ID="cboFilterFaculty" runat="server" AutoPostBack="True" 
+                            CssClass="dropDownList" DataSourceID="LinqDataSourceFaculty" 
+                            DataTextField="TenKhoa" DataValueField="MaKhoa" style="margin-left: 0px">
+                        </asp:DropDownList>
+                        &nbsp;Bộ môn:
+                        <asp:DropDownList ID="cboFilterDepartment" runat="server" AutoPostBack="True" 
+                            CssClass="dropDownList" DataSourceID="LinqDataSourceDepartment" 
+                            DataTextField="TenBoMon" DataValueField="MaBoMon" 
+                            ondatabound="cboFilterDepartment_DataBound" style="margin-left: 0px">
+                        </asp:DropDownList>
+                        &nbsp;Môn học:
+                        <asp:DropDownList ID="cboFilterSubject" runat="server" AutoPostBack="True" 
+                            CssClass="dropDownList" DataSourceID="LinqDataSourceSubject" 
+                            DataTextField="TenHP" DataValueField="MaHP" 
+                            ondatabound="cboFilterSubject_DataBound" style="margin-left: 0px">
+                        </asp:DropDownList>
+                        &nbsp;Khóa học:&nbsp;
+                        <asp:DropDownList ID="cboFilterCourse" runat="server" AutoPostBack="True" 
+                            DataSourceID="LinqDataSourceCourse" DataTextField="TenHP" 
+                            DataValueField="STT" 
                             style="margin-left: 0px" CssClass="dropDownList">
                         </asp:DropDownList>
-                        &nbsp;</td>
+                        &nbsp;<asp:Button ID="btnGetEnrolledUsers" runat="server" 
+                            onclick="btnGetEnrolledUsers_Click" Text="Xem thành viên" />
+                    </td>
                 </tr>
                 <tr>
                     <td class="tableRow">
-                        <asp:GridView ID="grvTaiKhoan" runat="server" AllowPaging="True" 
+                        <asp:GridView ID="grvUser" runat="server" AllowPaging="True" 
                             AllowSorting="True" AutoGenerateColumns="False" CellPadding="6" 
                             CssClass="DDGridView" DataKeyNames="MaSV" 
-                            DataSourceID="LinqDataSourceTaiKhoan" EnableModelValidation="False" 
-                            onprerender="grvTaiKhoan_PreRender" onrowdatabound="grvTaiKhoan_RowDataBound" 
+                            DataSourceID="LinqDataSourceUser" EnableModelValidation="False" 
+                            onprerender="grvUser_PreRender" onrowdatabound="grvUser_RowDataBound" 
                             ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%" 
-                            onpageindexchanging="grvTaiKhoan_PageIndexChanging" 
-                            onselectedindexchanged="grvTaiKhoan_SelectedIndexChanged">
+                            onpageindexchanging="grvUser_PageIndexChanging" 
+                            onselectedindexchanged="grvUser_SelectedIndexChanged">
                             <Columns>
                                 <asp:TemplateField> 
                                     <HeaderTemplate >
@@ -84,12 +134,22 @@
                                 <FooterStyle Wrap="False" />
                                 <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
                                 </asp:CommandField>
-                                <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" 
+                                <asp:BoundField DataField="STT" HeaderText="Mã ĐK" InsertVisible="False" 
+                                    ReadOnly="True" SortExpression="STT">
+                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Center" Width="40px" Wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Id" HeaderText="Moodle ID" ReadOnly="True" 
                                     SortExpression="Id">
-                                <HeaderStyle HorizontalAlign="Center" />
-                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="60px" 
+                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" 
                                     Wrap="False" />
                                 </asp:BoundField>
+                                <asp:CheckBoxField DataField="GhiDanh" HeaderText="Ghi Danh" 
+                                    SortExpression="GhiDanh">
+                                <HeaderStyle HorizontalAlign="Center" Wrap="False" />
+                                <ItemStyle HorizontalAlign="Center" Width="50px" Wrap="False" />
+                                </asp:CheckBoxField>
                                 <asp:BoundField DataField="MaSV" HeaderText="Mã sinh viên" ReadOnly="True" 
                                     SortExpression="MaSV">
                                 <FooterStyle Wrap="False" />
@@ -136,18 +196,21 @@
                             <asp:ListItem>80</asp:ListItem>
                             <asp:ListItem>100</asp:ListItem>
                         </asp:DropDownList>
-                        <asp:Button ID="btnCreateUser" runat="server" onclick="btnSubmit_Click" 
+                        <asp:Button ID="btnCreate" runat="server" onclick="btnCreate_Click" 
                             Text="Tạo" />
-                        <asp:Button ID="btnDeleteUser" runat="server" onclick="btnDeleteUser_Click" 
+                        <asp:Button ID="btnDelete" runat="server" onclick="btnDelete_Click" 
                             Text="Xóa" />
-                        &nbsp;&nbsp;</td>
+                        <asp:Button ID="btnEnrolUsers" runat="server" onclick="btnEnrolUsers_Click" 
+                            Text="Ghi danh" />
+                        <asp:Button ID="btnSuspendUsers" runat="server" onclick="btnSuspendUsers_Click" 
+                            Text="Hủy ghi danh" />
+                    </td>
                 </tr>
             </table>
             <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
                     <td class="tableHeader" 
-                        style="border: 2px solid #dbddff;" 
-                        colspan="2">Cập nhật hồ sơ người dùng</td>
+                        colspan="2">Cập nhật và xem hồ sơ học viên</td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
@@ -207,9 +270,11 @@
                         &nbsp;</td>
                     <td>
                         <asp:Button ID="btnUpdateUser" runat="server" Text="Cập nhật" 
-                            onclick="btnUpdateUser_Click" />
-                        &nbsp;<asp:Button ID="btnGetUser" runat="server" Text="Chi tiết" 
-                            onclick="btnGetUser_Click" />
+                            onclick="btnUpdate_Click" />
+                        &nbsp;<asp:Button ID="btnGetDetail" runat="server" Text="Xem hồ sơ" 
+                            onclick="btnGetDetail_Click" />
+                        <asp:Button ID="btnGetCourses" runat="server" onclick="btnGetCourses_Click" 
+                            Text="Xem các khóa học" />
                     </td>
                 </tr>
                 <tr>

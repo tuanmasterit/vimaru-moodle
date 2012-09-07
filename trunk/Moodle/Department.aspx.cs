@@ -159,6 +159,7 @@ namespace Moodle
 
             foreach (GridViewRow row in grvDepartment.Rows)
             {
+                if (row.Cells[2].Text != "0") continue;
                 idnum = grvDepartment.DataKeys[row.RowIndex]["MaBoMon"].ToString();
                 if (arrIDs.Contains(idnum))
                 {

@@ -22,22 +22,49 @@ namespace Moodle {
         protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
         
         /// <summary>
-        /// LinqDataSourceTaiKhoan control.
+        /// LinqDataSourceUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceTaiKhoan;
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceUser;
         
         /// <summary>
-        /// LinqDataSourceHocPhan control.
+        /// LinqDataSourceFaculty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceHocPhan;
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceFaculty;
+        
+        /// <summary>
+        /// LinqDataSourceDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceDepartment;
+        
+        /// <summary>
+        /// LinqDataSourceSubject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceSubject;
+        
+        /// <summary>
+        /// LinqDataSourceCourse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceCourse;
         
         /// <summary>
         /// txtMaSV control.
@@ -67,22 +94,58 @@ namespace Moodle {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// cboAcountFilter control.
+        /// cboFilterFaculty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cboAcountFilter;
+        protected global::System.Web.UI.WebControls.DropDownList cboFilterFaculty;
         
         /// <summary>
-        /// grvTaiKhoan control.
+        /// cboFilterDepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvTaiKhoan;
+        protected global::System.Web.UI.WebControls.DropDownList cboFilterDepartment;
+        
+        /// <summary>
+        /// cboFilterSubject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cboFilterSubject;
+        
+        /// <summary>
+        /// cboFilterCourse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cboFilterCourse;
+        
+        /// <summary>
+        /// btnGetEnrolledUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetEnrolledUsers;
+        
+        /// <summary>
+        /// grvUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grvUser;
         
         /// <summary>
         /// cboPageSize control.
@@ -94,22 +157,40 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.DropDownList cboPageSize;
         
         /// <summary>
-        /// btnCreateUser control.
+        /// btnCreate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCreateUser;
+        protected global::System.Web.UI.WebControls.Button btnCreate;
         
         /// <summary>
-        /// btnDeleteUser control.
+        /// btnDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDeleteUser;
+        protected global::System.Web.UI.WebControls.Button btnDelete;
+        
+        /// <summary>
+        /// btnEnrolUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEnrolUsers;
+        
+        /// <summary>
+        /// btnSuspendUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSuspendUsers;
         
         /// <summary>
         /// txtId control.
@@ -193,13 +274,22 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.Button btnUpdateUser;
         
         /// <summary>
-        /// btnGetUser control.
+        /// btnGetDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGetUser;
+        protected global::System.Web.UI.WebControls.Button btnGetDetail;
+        
+        /// <summary>
+        /// btnGetCourses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGetCourses;
         
         /// <summary>
         /// treeUserDetail control.

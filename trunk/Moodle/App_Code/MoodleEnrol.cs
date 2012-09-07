@@ -72,15 +72,18 @@ namespace Moodle
                 postData += "&enrolments[" + i + "][userid]=" + lst[i].UserId;
                 postData += "&enrolments[" + i + "][courseid]=" + lst[i].CourseId;
                 postData += "&enrolments[" + i + "][timestart]=" + lst[i].TimeStart;
-                postData += "&enrolmentss[" + i + "][timeend]=" + lst[i].TimeEnd;
+                postData += "&enrolments[" + i + "][timeend]=" + lst[i].TimeEnd;
                 postData += "&enrolments[" + i + "][suspend]=" + lst[i].Suspend;
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);
+            
+
+            
             return web.GetResponse();
         }
 
-        public static string GetEnrolledUsers(int courseId, List<KeyValuePair<int, int>> options, string token)
+        public static string GetEnrolledUsers(int courseId, List<KeyValuePair<string, string>> options, string token)
         {
             string postData = "?wstoken=" + token + "&wsfunction=core_enrol_get_enrolled_users";
             postData += "&courseid=" + courseId;
@@ -96,9 +99,9 @@ namespace Moodle
             return web.GetResponse();
         }
 
-        public static string GetEnrolledUsers(int userId, string token)
+        public static string GetUsersCourses(int userId, string token)
         {
-            string postData = "?wstoken=" + token + "&wsfunction=core_enrol_get_user_courses";
+            string postData = "?wstoken=" + token + "&wsfunction=core_enrol_get_users_courses";
             postData += "&userid=" + userId;
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);
 

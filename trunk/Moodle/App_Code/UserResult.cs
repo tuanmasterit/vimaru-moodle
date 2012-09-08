@@ -10,11 +10,13 @@ namespace Moodle
         private long lngSTT;
         private long lngId;
         private bool blnGhiDanh;
+        private long? lngIdNhom;
         private string strMaSV;
         private string strHo;
         private string strTen;
         private string strEmail;
-
+        private string strTenLop;
+        private string strTenNhom;
 
         public long STT
         {
@@ -32,6 +34,12 @@ namespace Moodle
         {
             get { return blnGhiDanh; }
             set { blnGhiDanh = value; }
+        }
+
+        public long? IdNhom
+        {
+            get { return lngIdNhom; }
+            set { lngIdNhom = value; }
         }
 
         public string MaSV
@@ -55,6 +63,18 @@ namespace Moodle
         {
             get { return strEmail; }
             set { strEmail = "st" + value + "@st.vimaru.edu.vn"; }
+        }
+
+        public string TenLop
+        {
+            get { return strTenLop; }
+            set { strTenLop = value; }
+        }
+
+        public string TenNhom
+        {
+            get { return strTenNhom; }
+            set { strTenNhom = value; }
         }
     }
 }

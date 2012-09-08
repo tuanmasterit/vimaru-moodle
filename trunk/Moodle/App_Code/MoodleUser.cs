@@ -179,14 +179,14 @@ namespace Moodle
             return web.GetResponse();
         }
 
-        public static string DeleteUsers(List<MoodleUser> list, string token)
+        public static string DeleteUsers(List<int> list, string token)
         {
             string postData = "?wstoken=" + token + "&wsfunction=core_user_delete_users";
 
             //Duyệt các người dùng trong danh sách lấy id
             for (int i = 0; i < list.Count; i++)
             {
-                postData += "&userids[" + i + "]=" + list[i].Id;
+                postData += "&userids[" + i + "]=" + list[i];
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);

@@ -25,7 +25,8 @@
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
     <asp:LinqDataSource ID="LinqDataSourceFaculty" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
-        EnableUpdate="True" EntityTypeName="" TableName="Khoas" Where="Id != @Id">
+        EnableUpdate="True" EntityTypeName="" TableName="Khoas" Where="Id != @Id" 
+        OrderBy="TenKhoa">
         <WhereParameters>
             <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
         </WhereParameters>
@@ -33,7 +34,7 @@
     <asp:LinqDataSource ID="LinqDataSourceDepartment" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
         EnableUpdate="True" EntityTypeName="" TableName="BoMons" 
-        Where="MaKhoa == @MaKhoa &amp;&amp; Id != @Id">
+        Where="MaKhoa == @MaKhoa &amp;&amp; Id != @Id" OrderBy="TenBoMon">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilter" Name="MaKhoa" 
                 PropertyName="SelectedValue" Type="String" />
@@ -43,7 +44,8 @@
     <asp:LinqDataSource ID="LinqDataSourceSubject" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
         EnableUpdate="True" EntityTypeName="" TableName="HocPhans" 
-        Where="MaBoMon == @MaBoMon" onselecting="LinqDataSourceSubject_Selecting">
+        Where="MaBoMon == @MaBoMon" onselecting="LinqDataSourceSubject_Selecting" 
+        OrderBy="TenHP">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilterDepartment" Name="MaBoMon" 
                 PropertyName="SelectedValue" Type="Int32" DefaultValue="0" />
@@ -77,6 +79,8 @@
                             CssClass="dropDownList" DataSourceID="LinqDataSourceDepartment" 
                             DataTextField="TenBoMon" DataValueField="MaBoMon" style="margin-left: 0px">
                         </asp:DropDownList>
+                        <asp:LinkButton ID="btnRedirect" runat="server" Font-Underline="False" 
+                            PostBackUrl="~/Course.aspx">Tới danh mục khóa học</asp:LinkButton>
                     </td>
                 </tr>
                 <tr>
@@ -152,6 +156,7 @@
                     </td>
                 </tr>
             </table>
+            <asp:Panel ID="Panel1" runat="server" DefaultButton="btnGetDetail">
             <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
                     <td class="tableHeader" 
@@ -229,6 +234,7 @@
                     </td>
                 </tr>
             </table>
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

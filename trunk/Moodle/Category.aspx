@@ -163,12 +163,13 @@
                     </td>
                 </tr>
             </table>
-
+            <asp:Panel ID="Panel2" runat="server" DefaultButton="btnDelete">
             <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
                     <td colspan="2" class="tableHeader">Xóa mục<asp:Label ID="lblDeleteCategoryMessage" 
                             runat="server" style="margin-left: 0px" CssClass="statusLabel"></asp:Label>
-                        </strong></td>
+                        </strong>
+                    </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
@@ -230,6 +231,7 @@
                         &nbsp;</td>
                 </tr>
             </table>
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 

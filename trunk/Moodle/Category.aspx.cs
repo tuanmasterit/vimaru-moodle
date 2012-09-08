@@ -68,10 +68,10 @@ namespace Moodle
 
             XmlDocument doc = new XmlDocument();
 
-            List<MoodleCategory> lst = new List<MoodleCategory>();
-            lst.Add(category);
-            doc.LoadXml(MoodleCategory.CreateCategories(lst, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\" + txtIdnumber.Text + ".xml");
+            List<MoodleCategory> list = new List<MoodleCategory>();
+            list.Add(category);
+            doc.LoadXml(MoodleCategory.CreateCategories(list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\Category_" + txtIdnumber.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));

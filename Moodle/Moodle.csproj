@@ -108,6 +108,7 @@
     <Compile Include="Faculty.aspx.designer.cs">
       <DependentUpon>Faculty.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\NhomResult.cs" />
     <Compile Include="Subject.aspx.cs">
       <DependentUpon>Subject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

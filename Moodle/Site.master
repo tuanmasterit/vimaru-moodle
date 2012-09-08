@@ -25,7 +25,7 @@
             CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
         <ajaxToolkit:TextBoxWatermarkExtender ID="txtUsername_TextBoxWatermarkExtender" 
             runat="server" Enabled="True" TargetControlID="txtUsername" 
-            WatermarkText="Username">
+            WatermarkText="Username" WatermarkCssClass="waterMark">
         </ajaxToolkit:TextBoxWatermarkExtender>
         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" 
             CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>

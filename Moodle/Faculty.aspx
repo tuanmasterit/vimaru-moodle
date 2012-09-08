@@ -114,9 +114,12 @@
                         </asp:DropDownList>
                         <asp:Button ID="btnCreate" runat="server" onclick="btnCreate_Click" 
                             Text="Tạo" />
+                        <asp:LinkButton ID="btnRedirect" runat="server" Font-Underline="False" 
+                            PostBackUrl="~/Department.aspx">Tới danh mục bộ môn</asp:LinkButton>
                         </td>
                 </tr>
             </table>
+            <asp:Panel ID="Panel1" runat="server" DefaultButton="btnGetDetail">
             <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
                     <td class="tableHeader" 
@@ -192,6 +195,7 @@
                     </td>
                 </tr>
             </table>
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

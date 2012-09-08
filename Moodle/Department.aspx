@@ -24,16 +24,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
     <asp:LinqDataSource ID="LinqDataSourceFaculty" runat="server" 
-        ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
-        EnableUpdate="True" EntityTypeName="" TableName="Khoas" Where="Id != @Id">
+        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" 
+        TableName="Khoas" Where="Id != @Id" OrderBy="TenKhoa" 
+        Select="new (MaKhoa, TenKhoa, Id)">
         <WhereParameters>
             <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
         </WhereParameters>
     </asp:LinqDataSource>
     <asp:LinqDataSource ID="LinqDataSourceDepartment" runat="server" 
-        ContextTypeName="Moodle.DCVimaruDataContext" EnableDelete="True" 
-        EnableUpdate="True" EntityTypeName="" TableName="BoMons" 
-        Where="MaKhoa == @MaKhoa" onselecting="LinqDataSourceDepartment_Selecting">
+        ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="BoMons" 
+        Where="MaKhoa == @MaKhoa" onselecting="LinqDataSourceDepartment_Selecting" 
+        OrderBy="TenBoMon">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilter" Name="MaKhoa" 
                 PropertyName="SelectedValue" Type="String" />
@@ -62,6 +63,8 @@
                             CssClass="dropDownList" DataSourceID="LinqDataSourceFaculty" 
                             DataTextField="TenKhoa" DataValueField="MaKhoa" style="margin-left: 0px">
                         </asp:DropDownList>
+                        <asp:LinkButton ID="btnRedirect" runat="server" Font-Underline="False" 
+                            PostBackUrl="~/Subject.aspx">Tới danh mục môn học</asp:LinkButton>
                     </td>
                 </tr>
                 <tr>
@@ -135,6 +138,7 @@
                     </td>
                 </tr>
             </table>
+            <asp:Panel ID="Panel1" runat="server" DefaultButton="btnGetDetail">
             <table cellpadding="4" cellspacing="0" class="table">
                 <tr>
                     <td class="tableHeader" 
@@ -211,6 +215,7 @@
                     </td>
                 </tr>
             </table>
+            </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

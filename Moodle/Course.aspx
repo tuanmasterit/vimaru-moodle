@@ -26,7 +26,8 @@
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
     <asp:LinqDataSource ID="LinqDataSourceFaculty" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" 
-        TableName="Khoas" Where="Id != @Id" Select="new (MaKhoa, TenKhoa)">
+        TableName="Khoas" Where="Id != @Id" Select="new (MaKhoa, TenKhoa, Id)" 
+        OrderBy="TenKhoa">
         <WhereParameters>
             <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
         </WhereParameters>
@@ -34,7 +35,7 @@
     <asp:LinqDataSource ID="LinqDataSourceDepartment" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="BoMons" 
         Where="MaKhoa == @MaKhoa &amp;&amp; Id != @Id" 
-        Select="new (MaBoMon, TenBoMon)">
+        Select="new (MaBoMon, TenBoMon, Id, MaKhoa)" OrderBy="TenBoMon">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilterFaculty" Name="MaKhoa" 
                 PropertyName="SelectedValue" Type="String" />
@@ -44,7 +45,7 @@
     <asp:LinqDataSource ID="LinqDataSourceSubject" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="HocPhans" 
         Where="Id != @Id &amp;&amp; MaBoMon == @MaBoMon" 
-        Select="new (MaHP, TenHP)">
+        Select="new (MaHP, TenHP, Id, MaBoMon)" OrderBy="TenHP">
         <WhereParameters>
             <asp:Parameter DefaultValue="0" Name="Id" Type="Int64" />
             <asp:ControlParameter ControlID="cboFilterDepartment" DefaultValue="0" 
@@ -53,7 +54,8 @@
     </asp:LinqDataSource>
     <asp:LinqDataSource ID="LinqDataSourceCourse" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" TableName="ThoiKhoaBieus" 
-        Where="MaHP == @MaHP" onselecting="LinqDataSourceCourse_Selecting">
+        Where="MaHP == @MaHP" onselecting="LinqDataSourceCourse_Selecting" 
+        OrderBy="STT">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilterSubject" Name="MaHP" 
                 PropertyName="SelectedValue" Type="String" />

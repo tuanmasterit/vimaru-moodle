@@ -43,8 +43,53 @@ namespace Moodle
                              MaSV = dk.MaSV,
                              Ho = dk.SinhVien.Ho,
                              Ten = dk.SinhVien.Ten,
-                             Email = dk.SinhVien.MaSV
+                             Email = dk.SinhVien.MaSV,
+                             TenLop = dk.SinhVien.Lop.TenLop,
+                             IdNhom = dk.ID_Nhom,
+                             TenNhom = dk.Nhom.TenNhom
                          };
+            
+            switch(cboFilter.SelectedIndex)
+            {
+                case 1: 
+                    rs = rs.Where(c => c.Id != 0);
+                    break;
+                case 2:
+                    rs = rs.Where(c => c.Id == 0);
+                    break;
+                case 3:
+                    rs = rs.Where(c => c.GhiDanh);
+                    break;
+                case 4:
+                    rs = rs.Where(c => !c.GhiDanh);
+                    break;
+                case 5:
+                    rs = rs.Where(c => c.IdNhom != null);
+                    break;
+                case 6:
+                    rs = rs.Where(c =>c.IdNhom == null);
+                    break;
+                default:
+                    break;
+            }
+           
+            switch (cboField.SelectedIndex)
+            {
+                case 0:
+                    rs = rs.Where(c => c.Ten.Contains(txtKeyword.Text));
+                    break;
+                case 1:
+                    rs = rs.Where(c => c.Ho.Contains(txtKeyword.Text));
+                    break;
+                case 2:
+                    rs = rs.Where(c => c.TenLop.Contains(txtKeyword.Text));
+                    break;
+                case 3:
+                    if (txtKeyword.Text != "")
+                        rs = rs.Where(c => c.TenNhom.Contains(txtKeyword.Text));
+                    break;
+            }
+
             e.Result = rs.OrderBy(u => u.Ten);
             cboPageSize_SelectedIndexChanged(sender, e);
         }
@@ -205,14 +250,14 @@ namespace Moodle
                 MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
                 if (arrIDs.Contains(MaSV))
                 {
-                    if (row.Cells[2].Text != "0") continue;
+                    if (row.Cells[3].Text != "0") continue;
                     user = new MoodleUser
                         {
-                            Username = row.Cells[3].Text,
-                            Password = row.Cells[3].Text,
-                            Firstname = HttpUtility.HtmlDecode(row.Cells[4].Text),
-                            Lastname =  HttpUtility.HtmlDecode(row.Cells[5].Text),
-                            Email = row.Cells[6].Text,
+                            Username = row.Cells[5].Text,
+                            Password = row.Cells[5].Text,
+                            Firstname = HttpUtility.HtmlDecode(row.Cells[6].Text),
+                            Lastname =  HttpUtility.HtmlDecode(row.Cells[7].Text),
+                            Email = row.Cells[8].Text,
                             Timezone =  "7.0",
                             City = "Hai Phong",
                             Country = "VN"
@@ -267,10 +312,10 @@ namespace Moodle
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             SaveCheckedValues();
+
             grvUser.AllowPaging = false;
             grvUser.DataBind();
 
-            MoodleUser user = new MoodleUser();
             XmlDocument doc = new XmlDocument();
             ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
             string MaSV = "0";
@@ -280,24 +325,24 @@ namespace Moodle
                 MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
                 if (arrIDs.Contains(MaSV))
                 {
-                    double userId = Convert.ToDouble(row.Cells[2].Text);
-                    if(userId != 0)
-                        user = new MoodleUser
-                        {
-                            Id = userId
-                        };
-                    else
+                    int userId = Convert.ToInt32(row.Cells[3].Text);
+
+                    if (userId == 0)
                         continue;
 
-                    List<MoodleUser> lstUser = new List<MoodleUser>();
-                    lstUser.Add(user);
-                    doc.LoadXml(MoodleUser.DeleteUsers(lstUser, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\user_delete_" + user.Id + ".xml");
-                    if (userId > 0)
+                    List<int> list = new List<int>();
+                    list.Add(userId);
+
+                    doc.LoadXml(MoodleUser.DeleteUsers(list, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\user_delete_" + row.Cells[5].Text + ".xml");
+
+                    if(doc.DocumentElement.Name == "RESPONSE")
                     {
                         DCVimaruDataContext dc = new DCVimaruDataContext();
                         SinhVien sv = dc.SinhViens.Single(t => t.MaSV == MaSV);
                         sv.Id = 0;
+
+                        dc.ExecuteCommand("UPDATE DangKy SET GhiDanh = 0, ID_Nhom = null WHERE MaSV = {0}", MaSV);
                         dc.SubmitChanges();
                     }
                 }
@@ -483,6 +528,172 @@ namespace Moodle
             tNode = treeUserDetail.Nodes[0];
             AddNode(xmlnode, tNode);
             treeUserDetail.ExpandAll();
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            grvUser.DataBind();
+        }
+
+        protected void btnCreateGroup_Click(object sender, EventArgs e)
+        {
+            if (cboFilterCourse.Items.Count == 0) return;
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get courseId
+            ThoiKhoaBieu tkb = dc.ThoiKhoaBieus.Single(t => t.STT == Convert.ToInt32(cboFilterCourse.SelectedValue));
+            int courseId = Convert.ToInt32(tkb.Id);
+
+            XmlDocument doc = new XmlDocument();
+            List<MoodleGroup> list = new List<MoodleGroup>();
+
+            MoodleGroup group = new MoodleGroup
+                {
+                    CourseId = courseId,
+                    Name = txtGroupName.Text,
+                    Description = txtDescription.Text,
+                    DescriptionFormat = 1,
+                    EnrolmentKey = null
+                };
+
+            list.Add(group);
+
+            doc.LoadXml(MoodleGroup.CreateGroups(list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\Group_Create_" + txtGroupName.Text + ".xml");
+
+            if (doc.DocumentElement.Name == "RESPONSE")
+            {
+                 long idnhom = (long)Convert.ToUInt64(doc.DocumentElement.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText);
+
+                Nhom nhom = new Nhom();
+                nhom.ID_Nhom = idnhom;
+                nhom.TenNhom = txtGroupName.Text;
+                nhom.MoTa = txtDescription.Text;
+                nhom.MaTKB = (long)Convert.ToUInt64(cboFilterCourse.SelectedValue);
+
+                dc.Nhoms.InsertOnSubmit(nhom);
+                dc.SubmitChanges();
+
+                cboGroup.DataBind();
+            }
+        }
+
+        protected void btnDeleteGroup_Click(object sender, EventArgs e)
+        {
+            if (cboGroup.Items.Count == 0) return;
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+
+            XmlDocument doc = new XmlDocument();
+            List<int> list = new List<int>();
+
+            int id = Convert.ToInt32(cboGroup.SelectedValue);
+            list.Add(id);
+
+            doc.LoadXml(MoodleGroup.DeleteGroups(list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\Group_Delete_" + cboGroup.SelectedItem.Text + ".xml");
+
+            if (doc.DocumentElement.Name == "RESPONSE")
+            {
+                Nhom nhom = dc.Nhoms.Single(t=> t.ID_Nhom == id);
+                dc.Nhoms.DeleteOnSubmit(nhom);
+                dc.ExecuteCommand("UPDATE DangKy SET ID_Nhom = null WHERE ID_Nhom = {0}", id);
+                dc.SubmitChanges();
+
+                cboGroup.DataBind();
+            }
+        }
+
+        protected void btnGetDetailGroup_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void cboFilterCourse_DataBound(object sender, EventArgs e)
+        {
+            cboGroup.DataBind();
+        }
+
+        protected void btnAddGroupMember_Click(object sender, EventArgs e)
+        {
+            SaveCheckedValues();
+            grvUser.AllowPaging = false;
+            grvUser.DataBind();
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get group Id
+            int groupId = Convert.ToInt32(cboGroup.SelectedValue);
+            //get user list
+
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
+            string MaSV = "0";
+
+            foreach (GridViewRow row in grvUser.Rows)
+            {
+                MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
+                if (arrIDs.Contains(MaSV))
+                {
+                    CheckBox chk = row.Cells[4].Controls[0] as CheckBox;
+
+                    if (row.Cells[3].Text == "0" || !chk.Checked || row.Cells[10].Text != "&nbsp;")continue;
+
+                    List<KeyValuePair<int, int>> list = new List<KeyValuePair<int, int>>();
+                    list.Add(new KeyValuePair<int, int>(groupId, Convert.ToInt32(row.Cells[3].Text)));
+
+                    doc.LoadXml(MoodleGroup.AddGroupMembers(list, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\Group_Add_Member_" + cboGroup.Text + ".xml");
+
+                    if (doc.DocumentElement.Name == "RESPONSE")
+                    {
+                        DangKy dk = dc.DangKies.Single(t => t.STT == Convert.ToInt64(row.Cells[2].Text));
+                        dk.ID_Nhom = (long?)groupId;
+                        dc.SubmitChanges();
+                    }
+                }
+            }
+
+            grvUser.AllowPaging = true;
+        }
+
+        protected void btnDeleteGroupMember_Click(object sender, EventArgs e)
+        {
+            SaveCheckedValues();
+            grvUser.AllowPaging = false;
+            grvUser.DataBind();
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get group Id
+            int groupId = Convert.ToInt32(cboGroup.SelectedValue);
+            //get user list
+
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
+            string MaSV = "0";
+
+            foreach (GridViewRow row in grvUser.Rows)
+            {
+                MaSV = grvUser.DataKeys[row.RowIndex]["MaSV"].ToString();
+                if (arrIDs.Contains(MaSV))
+                {
+                    CheckBox chk = row.Cells[4].Controls[0] as CheckBox;
+                    if (HttpUtility.HtmlDecode(row.Cells[10].Text) != cboGroup.SelectedItem.Text) continue;
+                    List<KeyValuePair<int, int>> list = new List<KeyValuePair<int, int>>();
+
+                    list.Add(new KeyValuePair<int, int>(groupId, Convert.ToInt32(row.Cells[3].Text)));
+                    doc.LoadXml(MoodleGroup.DeleteGroupMembers(list, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\Group_Delete_Member_" + cboGroup.Text + ".xml");
+
+                    if (doc.DocumentElement.Name == "RESPONSE")
+                    {
+                        DangKy dk = dc.DangKies.Single(t => t.STT == Convert.ToInt64(row.Cells[2].Text));
+                        dk.ID_Nhom = null;
+                        dc.SubmitChanges();
+                    }
+                }
+            }
+
+            grvUser.AllowPaging = true;
         }
     }
 }

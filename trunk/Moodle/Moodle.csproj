@@ -109,6 +109,13 @@
       <DependentUpon>Faculty.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\NhomResult.cs" />
+    <Compile Include="Grouping.aspx.cs">
+      <DependentUpon>Grouping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Grouping.aspx.designer.cs">
+      <DependentUpon>Grouping.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Subject.aspx.cs">
       <DependentUpon>Subject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,6 +169,7 @@
     </Compile>
     <Content Include="Department.aspx" />
     <Content Include="Faculty.aspx" />
+    <Content Include="Grouping.aspx" />
     <Content Include="Subject.aspx" />
     <Content Include="Token.aspx" />
     <Content Include="Global.asax" />

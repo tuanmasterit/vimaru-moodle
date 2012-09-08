@@ -120,9 +120,7 @@ namespace Moodle
                          STT = tkb.STT,
                          MaHP = tkb.MaHP,
                          TenHP = "N" + tkb.MaNH + " (" + tkb.NgayBD.Day
-                         + "-" + tkb.NgayBD.Month + "-" + tkb.NgayBD.Year + ")",
-                         MaNH = tkb.MaNH,
-                         NgayBD = tkb.NgayBD
+                         + "-" + tkb.NgayBD.Month + "-" + tkb.NgayBD.Year + ")"
                      };
             e.Result = rs.OrderBy(t => t.Id);
         }

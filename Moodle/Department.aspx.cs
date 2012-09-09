@@ -223,37 +223,6 @@ namespace Moodle
             doc.Save("E:\\Z-TMP\\department_" + txtId.Text + ".xml");
         }
 
-        private void AddNode(XmlNode inXmlNode, TreeNode inTreeNode)
-        {
-            XmlNode xNode;
-            TreeNode tNode;
-            XmlNodeList nodeList;
-            int i = 0;
-            if (inXmlNode.HasChildNodes)
-            {
-                nodeList = inXmlNode.ChildNodes;
-                for (i = 0; i <= nodeList.Count - 1; i++)
-                {
-                    xNode = inXmlNode.ChildNodes[i];
-                    try
-                    {
-                        inTreeNode.ChildNodes.Add(new TreeNode(xNode.Attributes["name"].Value.ToString()));
-                    }
-                    catch //(System.Exception ex)
-                    {
-                        inTreeNode.ChildNodes.Add(new TreeNode(xNode.Name));
-                    }
-
-                    tNode = inTreeNode.ChildNodes[i];
-                    AddNode(xNode, tNode);
-                }
-            }
-            else
-            {
-                inTreeNode.Text = inXmlNode.InnerText.ToString();
-            }
-        }
-
         protected void btnGetDetail_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "" || txtId.Text == "0")
@@ -288,8 +257,9 @@ namespace Moodle
             treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
             tNode = treeDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
+            MoodleUtilites.AddNode(xmlnode, tNode);
             treeDetail.ExpandAll();
+            treeDetail.Focus();
         }
 
         protected void LinqDataSourceDepartment_Selecting(object sender, LinqDataSourceSelectEventArgs e)

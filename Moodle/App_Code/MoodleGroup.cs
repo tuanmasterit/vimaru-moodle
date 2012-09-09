@@ -168,14 +168,14 @@ namespace Moodle
             return web.GetResponse();
         }
 
-        public static string AssignGroupings(List<KeyValuePair<int, int>> list, string token)
+        public static string AssignGrouping(List<KeyValuePair<int, int>> list, string token)
         {
-            string postData = "?wstoken=" + token + "&wsfunction=core_group_assign_groupings";
+            string postData = "?wstoken=" + token + "&wsfunction=core_group_assign_grouping";
 
             for (int i = 0; i < list.Count; i++)
             {
                 postData += "&assignments[" + i + "][groupingid]=" + list[i].Key;
-                postData += "&assignments[" + i + "]groupid]=" + list[i].Value;
+                postData += "&assignments[" + i + "][groupid]=" + list[i].Value;
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);
@@ -183,14 +183,14 @@ namespace Moodle
             return web.GetResponse();
         }
 
-        public static string UnassignGroupings(List<KeyValuePair<int, int>> list, string token)
+        public static string UnassignGrouping(List<KeyValuePair<int, int>> list, string token)
         {
-            string postData = "?wstoken=" + token + "&wsfunction=core_group_unassign_groupings";
+            string postData = "?wstoken=" + token + "&wsfunction=core_group_unassign_grouping";
 
             for (int i = 0; i < list.Count; i++)
             {
                 postData += "&unassignments[" + i + "][groupingid]=" + list[i].Key;
-                postData += "&unassignments[" + i + "]groupid]=" + list[i].Value;
+                postData += "&unassignments[" + i + "][groupid]=" + list[i].Value;
             }
 
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.RestUrl + postData);

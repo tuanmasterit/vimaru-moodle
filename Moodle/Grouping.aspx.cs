@@ -78,7 +78,7 @@ namespace Moodle
         {
             try
             {
-                ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
+                ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
 
                 string MaNhom = "0";
                 CheckBox chk;
@@ -104,7 +104,7 @@ namespace Moodle
                     }
                 }
                 string[] hiddenIDs = (string[])arrIDs.ToArray(typeof(String));
-                txtMaSV.Text = string.Join("|", hiddenIDs);
+                txtListId.Text = string.Join("|", hiddenIDs);
             }
             catch// (System.Exception ex)
             {
@@ -118,7 +118,7 @@ namespace Moodle
             try
             {
                 string MaNhom = string.Empty;
-                ArrayList arrIDs = ConvertToArrayList(txtMaSV.Text);
+                ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
 
                 CheckBox chk;
 
@@ -289,6 +289,111 @@ namespace Moodle
 
                 cboGrouping.DataBind();
             }
+        }
+
+        protected void btnAssignGroup_Click(object sender, EventArgs e)
+        {
+            SaveCheckedValues();
+            grvGroup.AllowPaging = false;
+            grvGroup.DataBind();
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get grouping Id
+            int groupingId = Convert.ToInt32(cboGrouping.SelectedValue);
+            //get group list
+
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
+            string idnhom = "0";
+
+            foreach (GridViewRow row in grvGroup.Rows)
+            {
+                idnhom = grvGroup.DataKeys[row.RowIndex]["ID_Nhom"].ToString();
+                if (arrIDs.Contains(idnhom))
+                {
+                    if (row.Cells[5].Text != "&nbsp;") continue;
+
+                    List<KeyValuePair<int, int>> list = new List<KeyValuePair<int, int>>();
+                    list.Add(new KeyValuePair<int, int>(groupingId, Convert.ToInt32(row.Cells[2].Text)));
+
+                    doc.LoadXml(MoodleGroup.AssignGrouping(list, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\Grouping_Assign_Group_" + cboGrouping.Text + ".xml");
+
+                    if (doc.DocumentElement.Name == "RESPONSE")
+                    {
+                        Nhom nhom = dc.Nhoms.Single(t => t.ID_Nhom == Convert.ToInt64(row.Cells[2].Text));
+                        nhom.ID_To = (long?)groupingId;
+                        dc.SubmitChanges();
+                    }
+                }
+            }
+
+            grvGroup.AllowPaging = true;
+        }
+
+        protected void btnUnsignGrouping_Click(object sender, EventArgs e)
+        {
+            SaveCheckedValues();
+            grvGroup.AllowPaging = false;
+            grvGroup.DataBind();
+
+            DCVimaruDataContext dc = new DCVimaruDataContext();
+            //get grouping Id
+            int groupingId = Convert.ToInt32(cboGrouping.SelectedValue);
+            //get group list
+
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
+            string idnhom = "0";
+
+            foreach (GridViewRow row in grvGroup.Rows)
+            {
+                idnhom = grvGroup.DataKeys[row.RowIndex]["ID_Nhom"].ToString();
+                if (arrIDs.Contains(idnhom))
+                {
+                    if (HttpUtility.HtmlDecode(row.Cells[5].Text) != cboGrouping.SelectedItem.Text) continue;
+
+                    List<KeyValuePair<int, int>> list = new List<KeyValuePair<int, int>>();
+                    list.Add(new KeyValuePair<int, int>(groupingId, Convert.ToInt32(row.Cells[2].Text)));
+
+                    doc.LoadXml(MoodleGroup.UnassignGrouping(list, (string)Session["token"]));
+                    doc.Save("E:\\Z-TMP\\Grouping_Unassign_Group_" + cboGrouping.Text + ".xml");
+
+                    if (doc.DocumentElement.Name == "RESPONSE")
+                    {
+                        Nhom nhom = dc.Nhoms.Single(t => t.ID_Nhom == Convert.ToInt64(row.Cells[2].Text));
+                        nhom.ID_To = null;
+                        dc.SubmitChanges();
+                    }
+                }
+            }
+
+            grvGroup.AllowPaging = true;
+        }
+
+        protected void grvGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SaveCheckedValues();
+            int rowId = grvGroup.SelectedIndex;
+            int groupId = Convert.ToInt32(grvGroup.Rows[rowId].Cells[2].Text.ToString());
+
+            XmlDocument doc = new XmlDocument();
+            ArrayList arrIDs = ConvertToArrayList(txtListId.Text);
+
+            List<int> list = new List<int>();
+            list.Add(groupId);
+
+            doc.LoadXml(MoodleGroup.GetGroupMembers(list, (string)Session["token"]));
+            doc.Save("E:\\Z-TMP\\Grouping_Get_Members_" + cboGrouping.Text + ".xml");
+
+            XmlNode xmlnode = doc.ChildNodes[1];
+            treeDetail.Nodes.Clear();
+            treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            TreeNode tNode;
+            tNode = treeDetail.Nodes[0];
+            MoodleUtilites.AddNode(xmlnode, tNode);
+            treeDetail.ExpandAll();
+            treeDetail.Focus();
         }
     }
 }

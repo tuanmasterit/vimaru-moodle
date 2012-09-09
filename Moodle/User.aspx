@@ -369,7 +369,7 @@
                     <td align="right" class="style11" style="font-weight: bold">
                         &nbsp;</td>
                     <td>
-                        <asp:TreeView ID="treeUserDetail" runat="server" ShowLines="True" 
+                        <asp:TreeView ID="treeDetail" runat="server" ShowLines="True" 
                             style="text-align: left" Width="100%">
                         </asp:TreeView>
                     </td>

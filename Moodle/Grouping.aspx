@@ -1,5 +1,25 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Grouping.aspx.cs" Inherits="Moodle.Grouping" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+ <script language="javascript" type="text/javascript">
+     function CheckUncheckAll() {
+         var i; CheckBoxs = document.getElementsByTagName("input");
+
+         for (i = 0; i < CheckBoxs.length; i++) {
+             if (CheckBoxs[i].type == "checkbox") {
+                 CheckBoxs[i].checked = document.getElementById("chkAll").checked;
+                 HighlightRow(CheckBoxs[i]);
+             }
+         }
+     }
+     function HighlightRow(chkB) {
+         var IsChecked = chkB.checked;
+         if (IsChecked) {
+             chkB.parentElement.parentElement.style.backgroundColor = '#fdffb8';
+         } else {
+             chkB.parentElement.parentElement.style.backgroundColor = chkB.parentElement.style.backgroundColor;
+         }
+     }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
@@ -53,7 +73,7 @@
                 PropertyName="SelectedValue" Type="Int64" />
         </WhereParameters>
     </asp:LinqDataSource>
-    <asp:TextBox ID="txtMaSV" runat="server" Visible="False" Wrap="False"></asp:TextBox>
+    <asp:TextBox ID="txtListId" runat="server" Visible="False" Wrap="False"></asp:TextBox>
     <asp:UpdateProgress ID="UpdateProgress1" runat="server" 
         AssociatedUpdatePanelID="UpdatePanel1">
         <ProgressTemplate>
@@ -134,7 +154,8 @@
                             DataSourceID="LinqDataSourceGroup" EnableModelValidation="False" 
                             onprerender="grvGroup_PreRender" onrowdatabound="grvGroup_RowDataBound" 
                             ShowFooter="True" ShowHeaderWhenEmpty="True" Width="100%" 
-                            onpageindexchanging="grvGroup_PageIndexChanging">
+                            onpageindexchanging="grvGroup_PageIndexChanging" 
+                            onselectedindexchanged="grvGroup_SelectedIndexChanged">
                             <Columns>
                                 <asp:TemplateField>
                                     <HeaderTemplate >
@@ -147,9 +168,10 @@
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle Width="20px" HorizontalAlign="Center" Wrap="False" />
                                 </asp:TemplateField>
-                                <asp:CommandField SelectText="Sửa" ShowSelectButton="True">
+                                <asp:CommandField SelectText="Thành viên" ShowSelectButton="True">
                                 <FooterStyle Wrap="False" />
-                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="50px" />
+                                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="70px" 
+                                    Wrap="False" />
                                 </asp:CommandField>
                                 <asp:BoundField DataField="ID_Nhom" HeaderText="Mã nhóm" 
                                     ReadOnly="True" SortExpression="ID_Nhom">
@@ -161,7 +183,7 @@
                                     SortExpression="TenNhom">
                                 <FooterStyle Wrap="False" />
                                 <HeaderStyle Wrap="False" />
-                                <ItemStyle Width="100px" 
+                                <ItemStyle Width="150px" 
                                     Wrap="False" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="MoTa" HeaderText="Mô tả" ReadOnly="True" 
@@ -202,8 +224,10 @@
                             <asp:ListItem>80</asp:ListItem>
                             <asp:ListItem>100</asp:ListItem>
                         </asp:DropDownList>
-                        <asp:Button ID="btnAssignGroup" runat="server" Text="Thêm nhóm vào tổ" />
-                        <asp:Button ID="btnUnsignGrouping" runat="server" Text="Bớt nhóm khỏi tổ" />
+                        <asp:Button ID="btnAssignGroup" runat="server" Text="Thêm nhóm vào tổ" 
+                            onclick="btnAssignGroup_Click" />
+                        <asp:Button ID="btnUnsignGrouping" runat="server" Text="Bớt nhóm khỏi tổ" 
+                            onclick="btnUnsignGrouping_Click" />
                     </td>
                 </tr>
             </table>
@@ -218,7 +242,7 @@
                         <td align="right" class="style11" style="font-weight: bold">
                         &nbsp;</td>
                         <td>
-                            <asp:TreeView ID="treeUserDetail" runat="server" ShowLines="True" 
+                            <asp:TreeView ID="treeDetail" runat="server" ShowLines="True" 
                             style="text-align: left" Width="100%">
                             </asp:TreeView>
                         </td>

@@ -76,13 +76,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.LinqDataSource LinqDataSourceGrouping;
         
         /// <summary>
-        /// txtMaSV control.
+        /// txtListId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMaSV;
+        protected global::System.Web.UI.WebControls.TextBox txtListId;
         
         /// <summary>
         /// UpdateProgress1 control.
@@ -265,12 +265,12 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// treeUserDetail control.
+        /// treeDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView treeUserDetail;
+        protected global::System.Web.UI.WebControls.TreeView treeDetail;
     }
 }

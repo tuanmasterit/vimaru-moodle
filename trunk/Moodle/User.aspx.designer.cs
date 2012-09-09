@@ -463,12 +463,12 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.Button btnGetCourses;
         
         /// <summary>
-        /// treeUserDetail control.
+        /// treeDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView treeUserDetail;
+        protected global::System.Web.UI.WebControls.TreeView treeDetail;
     }
 }

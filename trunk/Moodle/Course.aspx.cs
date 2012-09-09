@@ -255,8 +255,10 @@ namespace Moodle
             int id = Convert.ToInt32(row.Cells[2].Text);
             List<int> list = new List<int>();
             list.Add(id);
+
             doc.LoadXml(MoodleCourse.GetCourses(list, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\course_detail_" + row.Cells[3].Text + ".xml");
+
             XmlNode xmlNode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
             treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
@@ -267,12 +269,15 @@ namespace Moodle
 
             doc.LoadXml(MoodleCourse.GetCourseContents(id, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\course_contents_" + row.Cells[3].Text + ".xml");
+
             xmlNode = doc.ChildNodes[1];
             treeContent.Nodes.Clear();
             treeContent.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             treeNode = treeContent.Nodes[0];
             MoodleUtilites.AddNode(xmlNode, treeNode);
             treeContent.ExpandAll();
+
+            treeDetail.Focus();
         }
     }
 }

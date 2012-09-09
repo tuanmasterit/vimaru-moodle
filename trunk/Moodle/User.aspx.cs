@@ -221,7 +221,6 @@ namespace Moodle
 
         protected void grvUser_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //lblErrorMessage.Text = txtUsername.Text;
             int rowId = grvUser.SelectedIndex;
             txtId.Text = grvUser.Rows[rowId].Cells[3].Text.ToString();
             txtNewUsername.Text = grvUser.Rows[rowId].Cells[5].Text.ToString();
@@ -349,37 +348,6 @@ namespace Moodle
             grvUser.AllowPaging = true;
         }
 
-        private void AddNode(XmlNode inXmlNode, TreeNode inTreeNode)
-        {
-            XmlNode xNode;
-            TreeNode tNode;
-            XmlNodeList nodeList;
-            int i = 0;
-            if (inXmlNode.HasChildNodes)
-            {
-                nodeList = inXmlNode.ChildNodes;
-                for (i = 0; i <= nodeList.Count - 1; i++)
-                {
-                    xNode = inXmlNode.ChildNodes[i];
-                    try
-                    {
-                        inTreeNode.ChildNodes.Add(new TreeNode(xNode.Attributes["name"].Value.ToString()));
-                    }
-                    catch //(System.Exception ex)
-                    {
-                        inTreeNode.ChildNodes.Add(new TreeNode(xNode.Name));
-                    }
-
-                    tNode = inTreeNode.ChildNodes[i];
-                    AddNode(xNode, tNode);
-                }
-            }
-            else
-            {
-                inTreeNode.Text = inXmlNode.InnerText.ToString();
-            }
-        }
-
         protected void btnGetDetail_Click(object sender, EventArgs e)
         {
             if (txtId.Text == "" || txtId.Text == "0")
@@ -397,12 +365,13 @@ namespace Moodle
             doc.Save("E:\\Z-TMP\\user_profile_" + txtId.Text + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
-            treeUserDetail.Nodes.Clear();
-            treeUserDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            treeDetail.Nodes.Clear();
+            treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
-            tNode = treeUserDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
-            treeUserDetail.ExpandAll();
+            tNode = treeDetail.Nodes[0];
+            MoodleUtilites.AddNode(xmlnode, tNode);
+            treeDetail.ExpandAll();
+            treeDetail.Focus();
         }
 
         protected void cboFilterDepartment_DataBound(object sender, EventArgs e)
@@ -436,12 +405,12 @@ namespace Moodle
             doc.Save("E:\\Z-TMP\\enrolled_users_" + courseId + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
-            treeUserDetail.Nodes.Clear();
-            treeUserDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            treeDetail.Nodes.Clear();
+            treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
-            tNode = treeUserDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
-            treeUserDetail.ExpandAll();
+            tNode = treeDetail.Nodes[0];
+            MoodleUtilites.AddNode(xmlnode, tNode);
+            treeDetail.ExpandAll();
         }
 
         private void EnrolUsers(int suspend)
@@ -520,12 +489,12 @@ namespace Moodle
             doc.Save("E:\\Z-TMP\\user_courses_" + txtId.Text + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
-            treeUserDetail.Nodes.Clear();
-            treeUserDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
+            treeDetail.Nodes.Clear();
+            treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
-            tNode = treeUserDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
-            treeUserDetail.ExpandAll();
+            tNode = treeDetail.Nodes[0];
+            MoodleUtilites.AddNode(xmlnode, tNode);
+            treeDetail.ExpandAll();
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)

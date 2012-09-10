@@ -17,6 +17,7 @@ namespace Moodle
             {
                 Session["refUrl"] = "~/Grouping.aspx";
                 Response.Redirect("~/Login.aspx");
+                return;
             }
             if (!IsPostBack)
                 grvGroup.DataBind();

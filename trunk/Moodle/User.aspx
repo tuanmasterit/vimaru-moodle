@@ -115,7 +115,8 @@
                             ondatabound="cboFilterCourse_DataBound">
                         </asp:DropDownList>
                         <asp:Button ID="btnGetEnrolledUsers" runat="server" 
-                            onclick="btnGetEnrolledUsers_Click" Text="Xem thành viên" />
+                            onclick="btnGetEnrolledUsers_Click" Text="Xem thành viên" 
+                            Visible="False" />
                     </td>
                 </tr>
                 <tr>
@@ -302,55 +303,52 @@
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
-                        Id</td>
+                        Moodle Id</td>
                     <td>
-                        <asp:TextBox ID="txtId" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" CssClass="textBox"></asp:TextBox>
-                        <ajaxToolkit:MaskedEditExtender ID="txtId_MaskedEditExtender" runat="server" 
-                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
-                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
-                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
-                            InputDirection="RightToLeft" Mask="99999" MaskType="Number" 
-                            TargetControlID="txtId">
-                        </ajaxToolkit:MaskedEditExtender>
+                        <asp:TextBox ID="txtId" runat="server" ValidationGroup="update" 
+                            Width="110px" CssClass="textBox" MaxLength="10"></asp:TextBox>
+                        <ajaxToolkit:NumericUpDownExtender ID="txtId_NumericUpDownExtender" 
+                            runat="server" Enabled="True" Maximum="1.7976931348623157E+308" Minimum="1" 
+                            RefValues="" ServiceDownMethod="" ServiceDownPath="" ServiceUpMethod="" 
+                            Tag="" TargetButtonDownID="" TargetButtonUpID="" 
+                            TargetControlID="txtId" Width="110">
+                        </ajaxToolkit:NumericUpDownExtender>
                         <asp:TextBox ID="txtNewUsername" runat="server" ValidationGroup="updateuser" 
                             Visible="False" Width="50px"></asp:TextBox>
-                        <strong>
                         <asp:Label ID="lblUpdateUserMessage" runat="server" Font-Bold="False" 
                             ForeColor="Red" style="margin-left: 0px"></asp:Label>
-                        </strong>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         &nbsp; Mật khẩu mới</td>
                     <td>
-                        <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" Width="250px" 
-                            ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtNewPassword" runat="server" TextMode="Password" Width="200px" 
+                            ValidationGroup="update" CssClass="textBox"></asp:TextBox>
             &nbsp;</td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         &nbsp;Họ</td>
                     <td align="left">
-                        <asp:TextBox ID="txtFirstName" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtFirstName" runat="server" ValidationGroup="update" 
+                            Width="200px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         &nbsp; Tên</td>
                     <td>
-                        <asp:TextBox ID="txtLastName" runat="server" Width="250px" 
-                            ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtLastName" runat="server" Width="200px" 
+                            ValidationGroup="update" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         Email</td>
                     <td>
-                        <asp:TextBox ID="txtEmail" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" runat="server" ValidationGroup="update" 
+                            Width="200px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -358,11 +356,11 @@
                         &nbsp;</td>
                     <td>
                         <asp:Button ID="btnUpdateUser" runat="server" Text="Cập nhật" 
-                            onclick="btnUpdate_Click" />
+                            onclick="btnUpdate_Click" ValidationGroup="update" />
                         &nbsp;<asp:Button ID="btnGetDetail" runat="server" Text="Xem hồ sơ" 
-                            onclick="btnGetDetail_Click" />
+                            onclick="btnGetDetail_Click" ValidationGroup="update" />
                         <asp:Button ID="btnGetCourses" runat="server" onclick="btnGetCourses_Click" 
-                            Text="Xem các khóa học" />
+                            Text="Xem các khóa học" ValidationGroup="update" />
                     </td>
                 </tr>
                 <tr>

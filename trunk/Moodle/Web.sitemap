@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Moodle Site Administration"  description="Quản trị Moodle Site thông qua web service">
+        <siteMapNode url="~/" title="Dịch vụ"  description="" />
+        <siteMapNode url="~/Category.aspx" title="Danh mục"  description="" >
+            <siteMapNode url="~/Faculty.aspx" title="Khoa"  description="" />
+            <siteMapNode url="~/Department.aspx" title="Bộ môn"  description="" />
+            <siteMapNode url="~/Subject.aspx" title="Môn học"  description="c" />
+        </siteMapNode>
+        <siteMapNode url="~/Course.aspx" title="Khóa học"  description="" />
+        <siteMapNode url="~/User.aspx" title="Học viên"  description="" />
+        <siteMapNode url="~/Grouping.aspx" title="Tổ nhóm"  description="" />
+    </siteMapNode>
+</siteMap>

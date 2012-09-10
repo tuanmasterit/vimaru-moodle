@@ -17,6 +17,7 @@ namespace Moodle
             {
                 Session["refUrl"] = "~/Course.aspx";
                 Response.Redirect("~/Login.aspx");
+                return;
             }
             if (!IsPostBack)
                 grvCourse.DataBind();
@@ -38,7 +39,7 @@ namespace Moodle
                          STT = tkb.STT,
                          MaHP = tkb.MaHP,
                          TenHP = tkb.HocPhan.TenHP,
-                         MaNH = tkb.MaNH,
+                         MaNH = "N" + tkb.MaNH,
                          NgayBD = tkb.NgayBD
                      };
             e.Result = rs.OrderByDescending(t=>t.Id);
@@ -180,7 +181,7 @@ namespace Moodle
                 if (arrIDs.Contains(idnum))
                 {
                     if (row.Cells[2].Text != "0") continue;
-                    string fullname = HttpUtility.HtmlDecode(row.Cells[4].Text + " N" + row.Cells[5].Text + "-" + row.Cells[6].Text);
+                    string fullname = HttpUtility.HtmlDecode(row.Cells[4].Text + " " + row.Cells[5].Text + "-" + row.Cells[6].Text);
 
                     course = new MoodleCourse(
                         fullname,
@@ -191,9 +192,9 @@ namespace Moodle
                         MoodleUtilites.ConvertToTimestamp(row.Cells[6].Text)
                         );
 
-                    List<MoodleCourse> lst = new List<MoodleCourse>();
-                    lst.Add(course);
-                    doc.LoadXml(MoodleCourse.CreateCourses(lst, (string)Session["token"]));
+                    List<MoodleCourse> list = new List<MoodleCourse>();
+                    list.Add(course);
+                    doc.LoadXml(MoodleCourse.CreateCourses(list, (string)Session["token"]));
                     doc.Save("E:\\Z-TMP\\course_create_" + row.Cells[3].Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
@@ -228,17 +229,31 @@ namespace Moodle
                 if (arrIDs.Contains(idnum))
                 {
                     int id = Convert.ToInt32(row.Cells[2].Text);
-                    List<int> lst = new List<int>();
+                    List<int> list = new List<int>();
+
                     if(id!=0)
-                        lst.Add(id);
+                        list.Add(id);
                     else continue;
-                    doc.LoadXml(MoodleCourse.DeleteCourses(lst, (string)Session["token"]));
+
+                    doc.LoadXml(MoodleCourse.DeleteCourses(list, (string)Session["token"]));
                     doc.Save("E:\\Z-TMP\\course_delete_" + row.Cells[3].Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
-                        ThoiKhoaBieu tkb = dc.ThoiKhoaBieus.Single(t => t.STT == Convert.ToInt32(row.Cells[3].Text));
+                        int maTKB = Convert.ToInt32(row.Cells[3].Text);
+                        // Reset Moodle Id of Thoi khoa bieu to 0
+                        ThoiKhoaBieu tkb = dc.ThoiKhoaBieus.Single(t => t.STT == maTKB);
                         tkb.Id = 0;
+
+                        // Reset GhiDanh of Dang ky to false and ID_Nhom to null
+                        dc.ExecuteCommand("UPDATE [dbo].[DangKy] SET GhiDanh = 0 , ID_Nhom = null WHERE MaTKB = {0}", maTKB);
+
+                        // Delete group
+                        dc.ExecuteCommand("DELETE FROM [dbo].[Nhom] WHERE MaTKB = {0}", maTKB);
+
+                        // Delete grouping
+                        dc.ExecuteCommand("DELETE FROM [dbo].[To] WHERE MaTKB = {0}", maTKB);
+
                         dc.SubmitChanges();
                     }
                 }
@@ -249,6 +264,8 @@ namespace Moodle
 
         protected void grvCourse_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SaveCheckedValues();
+
             int rowId = grvCourse.SelectedIndex;
             GridViewRow row = grvCourse.Rows[rowId];
             XmlDocument doc = new XmlDocument();

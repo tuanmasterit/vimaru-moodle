@@ -16,7 +16,7 @@ namespace Moodle
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);
                 else
-                    Response.Redirect("~/Token.aspx");
+                    Response.Redirect("~/");
             }
             txtUsername.Focus();
         }
@@ -32,7 +32,7 @@ namespace Moodle
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);
                 else
-                    Response.Redirect("~/Token.aspx");
+                    Response.Redirect("~/");
             }
         }
     }

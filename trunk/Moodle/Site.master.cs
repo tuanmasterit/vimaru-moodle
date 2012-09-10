@@ -13,11 +13,13 @@ namespace Moodle
             {
                 palLogin.Visible = false;
                 palUser.Visible = true;
+                MainMenu.Visible = true;
             }
             else
             {
                 palLogin.Visible = true;
                 palUser.Visible = false;
+                MainMenu.Visible = false;
             }
         }
 
@@ -32,14 +34,14 @@ namespace Moodle
                 if (Session["refUrl"] != null)
                     Response.Redirect((string)Session["refUrl"]);
                 else
-                    Response.Redirect("~/Token.aspx");
+                    Response.Redirect("~/");
             }
         }
 
         protected void btnLogout_Click(object sender, System.EventArgs e)
         {
             Session["token"] = null;
-            Response.Redirect("~/Login.aspx");
+            Response.Redirect("~/");
         }
     }
 }

@@ -66,7 +66,7 @@
     </asp:LinqDataSource>
     <asp:LinqDataSource ID="LinqDataSourceGrouping" runat="server" 
         ContextTypeName="Moodle.DCVimaruDataContext" EntityTypeName="" 
-        TableName="Tos" OrderBy="ID_To" Select="new (ID_To, TenTo, MaTKB)" 
+        TableName="Tos" OrderBy="ID_To desc" Select="new (ID_To, TenTo, MaTKB)" 
         Where="MaTKB == @MaTKB">
         <WhereParameters>
             <asp:ControlParameter ControlID="cboFilterCourse" DefaultValue="0" Name="MaTKB" 
@@ -87,7 +87,7 @@
             <table cellpadding="4" class="table" cellspacing="0">
                 <tr>
                     <td class="tableHeader">
-                        Tạo, xóa, cập nhật và phân tổ nhóm học viên</td>
+                        Tạo, xóa, cập nhật tổ và phân nhóm vào tổ</td>
                 </tr>
                 <tr>
                     <td class="tableCell">

@@ -34,7 +34,7 @@ namespace Moodle
             // route definition, and comment out the route definitions in the combined-page mode section that follows.
             routes.Add(new DynamicDataRoute("{table}/{action}.aspx")
             {
-                Constraints = new RouteValueDictionary(new { action = "List|Details|Edit|Insert" }),
+                Constraints = new RouteValueDictionary(new { action = "List|Details" }),
                 Model = DefaultModel
             });
 

@@ -16,6 +16,7 @@ namespace Moodle
             {
                 Session["refUrl"] = "~/Category.aspx";
                 Response.Redirect("~/Login.aspx");
+                return;
             }
         }
 
@@ -180,35 +181,35 @@ namespace Moodle
 
         protected void btnDetail_Click(object sender, EventArgs e)
         {
-            List<MoodleGetCategory> lst = new List<MoodleGetCategory>();
+            List<KeyValuePair<string, string> > lst = new List<KeyValuePair<string, string> >();
             int id = ddlCriteria.SelectedIndex;
             if (id == 0)
             {
-                lst.Add(new MoodleGetCategory("id",txtId.Text));
-                lst.Add(new MoodleGetCategory("name", HttpUtility.HtmlDecode(txtName.Text)));
-                lst.Add(new MoodleGetCategory("parent", txtParent.Text));
-                lst.Add(new MoodleGetCategory("idnumber", txtIdnumber.Text));
+                lst.Add(new KeyValuePair<string, string> ("id",txtId.Text));
+                lst.Add(new KeyValuePair<string, string> ("name", HttpUtility.HtmlDecode(txtName.Text)));
+                lst.Add(new KeyValuePair<string, string> ("parent", txtParent.Text));
+                lst.Add(new KeyValuePair<string, string> ("idnumber", txtIdnumber.Text));
             }
             else if (id == 1)
             {
-                lst.Add(new MoodleGetCategory("id", txtId.Text));
+                lst.Add(new KeyValuePair<string, string> ("id", txtId.Text));
             }
             else if (id == 2)
             {
-                lst.Add(new MoodleGetCategory("name", HttpUtility.HtmlDecode(txtName.Text)));
+                lst.Add(new KeyValuePair<string, string> ("name", HttpUtility.HtmlDecode(txtName.Text)));
             }
             else if(id==3)
             {
-                lst.Add(new MoodleGetCategory("parent", txtParent.Text));
+                lst.Add(new KeyValuePair<string, string> ("parent", txtParent.Text));
             }
             else
             {
-                lst.Add(new MoodleGetCategory("idnumber", txtIdnumber.Text));
+                lst.Add(new KeyValuePair<string, string> ("idnumber", txtIdnumber.Text));
             }
 
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml(MoodleGetCategory.GetCategories(lst, chkSubCategory.Checked, (string)Session["token"]));
+            doc.LoadXml(MoodleCategory.GetCategories(lst, chkSubCategory.Checked, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
@@ -228,12 +229,12 @@ namespace Moodle
                 Recursive = rdbDeleteAllChildren.Checked == true?1:0
             };
 
-            List<MoodleDeleteCategory> lst = new List<MoodleDeleteCategory>();
-            lst.Add(category);
+            List<MoodleDeleteCategory> list = new List<MoodleDeleteCategory>();
+            list.Add(category);
 
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml(MoodleDeleteCategory.DeleteCategories(lst, (string)Session["token"]));
+            doc.LoadXml(MoodleDeleteCategory.DeleteCategories(list, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\" + category.Id + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();

@@ -124,12 +124,12 @@
       <DependentUpon>Subject.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\ThoiKhoaBieuResult.cs" />
-    <Compile Include="Token.aspx.cs">
-      <DependentUpon>Token.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Token.aspx.designer.cs">
-      <DependentUpon>Token.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -137,13 +137,6 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\UserResult.cs" />
     <Compile Include="User.aspx.cs">
@@ -159,19 +152,19 @@
     <Content Include="App_Images\tcatBG.gif" />
     <Content Include="Category.aspx" />
     <Content Include="Course.aspx" />
-    <Content Include="Default.aspx" />
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Content Include="Default1.aspx" />
+    <Compile Include="Default1.aspx.cs">
+      <DependentUpon>Default1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Default1.aspx.designer.cs">
+      <DependentUpon>Default1.aspx</DependentUpon>
     </Compile>
     <Content Include="Department.aspx" />
     <Content Include="Faculty.aspx" />
     <Content Include="Grouping.aspx" />
     <Content Include="Subject.aspx" />
-    <Content Include="Token.aspx" />
+    <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -443,7 +436,6 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Test.aspx" />
     <Content Include="User.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -461,6 +453,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Web.sitemap" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -481,7 +474,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>14572</DevelopmentServerPort>
+          <DevelopmentServerPort>6723</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -221,6 +221,7 @@ namespace Moodle
 
         protected void grvUser_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SaveCheckedValues();
             int rowId = grvUser.SelectedIndex;
             txtId.Text = grvUser.Rows[rowId].Cells[3].Text.ToString();
             txtNewUsername.Text = grvUser.Rows[rowId].Cells[5].Text.ToString();
@@ -260,9 +261,9 @@ namespace Moodle
                             Country = "VN"
                         };
 
-                    List<MoodleUser> lstUser = new List<MoodleUser>();
-                    lstUser.Add(user);
-                    doc.LoadXml(MoodleUser.CreateUsers(lstUser, (string)Session["token"]));
+                    List<MoodleUser> list = new List<MoodleUser>();
+                    list.Add(user);
+                    doc.LoadXml(MoodleUser.CreateUsers(list, (string)Session["token"]));
                     doc.Save("E:\\Z-TMP\\user_create_" + user.Username + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -280,7 +281,7 @@ namespace Moodle
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(txtId.Text == "" || txtId.Text=="0")
+            if(txtId.Text == "" || Convert.ToInt32(txtId.Text) < 1)
             {
                 lblUpdateUserMessage.Text = "Vui lòng nhập một ID người dùng > 0";
                 txtId.Focus();
@@ -300,9 +301,9 @@ namespace Moodle
                 Email = txtEmail.Text
             };
 
-            List<MoodleUser> lstUser = new List<MoodleUser>();
-            lstUser.Add(user);
-            doc.LoadXml(MoodleUser.UpdateUsers(lstUser, (string)Session["token"]));
+            List<MoodleUser> list = new List<MoodleUser>();
+            list.Add(user);
+            doc.LoadXml(MoodleUser.UpdateUsers(list, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\user_update_" + txtId.Text + ".xml");
         }
 
@@ -350,7 +351,7 @@ namespace Moodle
 
         protected void btnGetDetail_Click(object sender, EventArgs e)
         {
-            if (txtId.Text == "" || txtId.Text == "0")
+            if (txtId.Text == "" || Convert.ToInt32(txtId.Text) < 1)
             {
                 lblUpdateUserMessage.Text = "Vui lòng nhập một ID người dùng > 0";
                 txtId.Focus();
@@ -476,7 +477,7 @@ namespace Moodle
 
         protected void btnGetCourses_Click(object sender, EventArgs e)
         {
-            if (txtId.Text == "" || txtId.Text == "0")
+            if (txtId.Text == "" || Convert.ToInt32(txtId.Text) < 1)
             {
                 lblUpdateUserMessage.Text = "Vui lòng nhập một ID người dùng > 0";
                 txtId.Focus();
@@ -569,11 +570,6 @@ namespace Moodle
 
                 cboGroup.DataBind();
             }
-        }
-
-        protected void btnGetDetailGroup_Click(object sender, EventArgs e)
-        {
-
         }
 
         protected void cboFilterCourse_DataBound(object sender, EventArgs e)

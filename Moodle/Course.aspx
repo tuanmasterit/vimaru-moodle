@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Course.aspx.cs" Inherits="Moodle.Course" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<script language="javascript" type="text/javascript">
+    <script language="javascript" type="text/javascript">
     function CheckUncheckAll() {
         var i; CheckBoxs = document.getElementsByTagName("input");
 
@@ -75,7 +75,7 @@
             <table cellpadding="4" class="table" cellspacing="0">
                 <tr>
                     <td class="tableHeader">
-                        Tạo khóa học</td>
+                        Tạo, xóa và xem thông tin chi tiết khóa học</td>
                 </tr>
                 <tr>
                     <td class="tableCell">

@@ -373,13 +373,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.TextBox txtId;
         
         /// <summary>
-        /// txtId_MaskedEditExtender control.
+        /// txtId_NumericUpDownExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender txtId_MaskedEditExtender;
+        protected global::AjaxControlToolkit.NumericUpDownExtender txtId_NumericUpDownExtender;
         
         /// <summary>
         /// txtNewUsername control.

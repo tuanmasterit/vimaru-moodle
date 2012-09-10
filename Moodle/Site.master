@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <title>Moodle Site</title>
+    <title>Moodle Site Administration</title>
     <link href="~/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -13,7 +13,7 @@
 <body class="body">
     <form id="form1" runat="server">
     <div class="header">
-    <div class="logo">Moodle Site</div>
+    <div class="logo">Site administration</div>
     <asp:Panel runat="server" ID="palUser" CssClass="loginBoxDiv" Height="30px">
         <asp:LinkButton ID="btnUserProfile" runat="server"
              ToolTip="Chào mừng" CssClass="linkButton">Welcome!</asp:LinkButton>
@@ -42,8 +42,28 @@
             onclick="btnLogin_Click">Login</asp:LinkButton>
     </asp:Panel>
     </div>
-    <div style="clear: both; display: block;" class="main">
+    <div class="main" style="clear: both; display: block;">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
+        <asp:SiteMapDataSource ID="MoodleSiteMapDataSource" runat="server" 
+            ShowStartingNode="False" />
+        <div style="border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #DBDDFF">
+            <asp:Menu ID="MainMenu" runat="server" 
+                DataSourceID="MoodleSiteMapDataSource" Orientation="Horizontal" 
+                PathSeparator="\">
+                <DynamicHoverStyle BackColor="White" Font-Bold="True" ForeColor="#993333" Font-Size="14px"/>
+                <DynamicMenuItemStyle BackColor="White" ForeColor="Black" 
+                    HorizontalPadding="5px" Font-Overline="False"
+                    Font-Underline="False" Font-Size="13px" />
+                <DynamicMenuStyle BackColor="White" BorderColor="Green" BorderStyle="Solid" 
+                    BorderWidth="1px" HorizontalPadding="2px" Width="120px" 
+                    VerticalPadding="2px" />
+                <StaticHoverStyle BorderColor="Green" Font-Bold="True" ForeColor="#993333" 
+                    Font-Size="15px" />
+                <StaticMenuItemStyle ForeColor="Black" 
+                    HorizontalPadding="5px" />
+                <StaticMenuStyle HorizontalPadding="4px" VerticalPadding="4px" />
+            </asp:Menu>
+        </div>
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>

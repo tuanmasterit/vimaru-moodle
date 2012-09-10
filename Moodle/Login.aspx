@@ -17,7 +17,7 @@
             <td class="cellHeaderRight">
                 Username:</td>
             <td>
-                <asp:TextBox ID="txtUsername" runat="server" Width="200px" 
+                <asp:TextBox ID="txtUsername" runat="server" Width="170px" 
                     ValidationGroup="token" CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
     &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                     ControlToValidate="txtUsername" ErrorMessage="*" 
@@ -28,7 +28,7 @@
             <td align="left" class="cellHeaderRight" style="font-weight: bold">
                 Password:</td>
             <td>
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="200px" 
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="170px" 
                     ValidationGroup="token" CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>
     &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                     ControlToValidate="txtPassword" ErrorMessage="*" 

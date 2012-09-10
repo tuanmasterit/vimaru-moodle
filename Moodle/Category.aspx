@@ -45,38 +45,35 @@
                     <td class="cellHeaderRight">
                         Id</td>
                     <td>
-                        <asp:TextBox ID="txtId" runat="server" ValidationGroup="updateuser" 
-                            Width="100px" CssClass="textBox"></asp:TextBox>
-                        <ajaxToolkit:MaskedEditExtender ID="txtId_MaskedEditExtender" runat="server" 
-                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
-                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
-                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
-                            InputDirection="RightToLeft" Mask="99999" MaskType="Number" 
-                            TargetControlID="txtId">
-                        </ajaxToolkit:MaskedEditExtender>
+                        <asp:TextBox ID="txtId" runat="server" CssClass="textBox" MaxLength="10" 
+                            ValidationGroup="update" Width="110px"></asp:TextBox>
+                        <ajaxToolkit:NumericUpDownExtender ID="txtId_NumericUpDownExtender" 
+                            runat="server" Enabled="True" Maximum="1.7976931348623157E+308" Minimum="1" 
+                            RefValues="" ServiceDownMethod="" ServiceDownPath="" ServiceUpMethod="" Tag="" 
+                            TargetButtonDownID="" TargetButtonUpID="" TargetControlID="txtId" Width="110">
+                        </ajaxToolkit:NumericUpDownExtender>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         Tên mục</td>
                     <td align="left">
-                        <asp:TextBox ID="txtName" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" ValidationGroup="update" 
+                            Width="200px" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         &nbsp; Id mục cấp trên</td>
                     <td>
-                        <asp:TextBox ID="txtParent" runat="server" ValidationGroup="updateuser" 
-                            Width="100px" CssClass="textBox"></asp:TextBox>
-                        <ajaxToolkit:MaskedEditExtender ID="txtParent_MaskedEditExtender" 
-                            runat="server" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
-                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
-                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
-                            InputDirection="RightToLeft" Mask="99999" MaskType="Number" 
-                            TargetControlID="txtParent">
-                        </ajaxToolkit:MaskedEditExtender>
+                        <asp:TextBox ID="txtParent" runat="server" ValidationGroup="update" 
+                            Width="110px" CssClass="textBox" MaxLength="10"></asp:TextBox>
+                        <ajaxToolkit:NumericUpDownExtender ID="txtParent_NumericUpDownExtender" 
+                            runat="server" Enabled="True" Maximum="1.7976931348623157E+308" Minimum="1" 
+                            RefValues="" ServiceDownMethod="" ServiceDownPath="" ServiceUpMethod="" Tag="" 
+                            TargetButtonDownID="" TargetButtonUpID="" TargetControlID="txtParent" 
+                            Width="110">
+                        </ajaxToolkit:NumericUpDownExtender>
                     </td>
                 </tr>
                 <tr>
@@ -101,26 +98,23 @@
                         Định dạng mô tả</td>
                     <td>
                         <asp:TextBox ID="txtDescriptionFormat" runat="server" 
-                            ValidationGroup="updateuser" Width="50px" 
-                            
-                            ToolTip="Default to &quot;1&quot; //description format (1 = HTML, 0 = MOODLE, 2 = PLAIN or 4 = MARKDOWN" 
-                            CssClass="textBox"></asp:TextBox>
-                        <ajaxToolkit:MaskedEditExtender ID="txtDescriptionFormat_MaskedEditExtender" 
-                            runat="server" CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
-                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
-                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
-                            InputDirection="RightToLeft" Mask="9" MaskType="Number" 
-                            TargetControlID="txtDescriptionFormat">
-                        </ajaxToolkit:MaskedEditExtender>
+                            ValidationGroup="update" Width="50px" 
+                            CssClass="textBox" MaxLength="2">1</asp:TextBox>
+                        <ajaxToolkit:NumericUpDownExtender ID="txtDescriptionFormat_NumericUpDownExtender" 
+                            runat="server" Enabled="True" Maximum="99" Minimum="0" RefValues="" 
+                            ServiceDownMethod="" ServiceDownPath="" ServiceUpMethod="" Tag="" 
+                            TargetButtonDownID="" TargetButtonUpID="" 
+                            TargetControlID="txtDescriptionFormat" Width="50">
+                        </ajaxToolkit:NumericUpDownExtender>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         Theme</td>
                     <td>
-                        <asp:TextBox ID="txtTheme" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" 
-                            ToolTip="the new category theme. This option must be enabled on moodle" 
+                        <asp:TextBox ID="txtTheme" runat="server" ValidationGroup="update" 
+                            Width="200px" 
+                            ToolTip="The new category theme. This option must be enabled on moodle" 
                             CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
@@ -129,17 +123,16 @@
                         &nbsp;</td>
                     <td valign="middle">
                         <asp:Button ID="btnCreate" runat="server" onclick="btnCreateCategory_Click" 
-                            Text="Tạo" Width="65px" />
+                            Text="Tạo" Width="65px" ValidationGroup="update" />
                         &nbsp;<asp:Button ID="btnUpdate" runat="server" onclick="btnUpdate_Click" 
-                            Text="Cập nhật" Width="65px" />
+                            Text="Cập nhật" Width="65px" ValidationGroup="update" />
                         &nbsp;&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         Điều kiện tìm kiếm</td>
                     <td>
-                        <asp:DropDownList ID="ddlCriteria" runat="server" CssClass="dropDownList" 
-                            Width="180px">
+                        <asp:DropDownList ID="ddlCriteria" runat="server" CssClass="dropDownList">
                             <asp:ListItem Value="All">Tất cả</asp:ListItem>
                             <asp:ListItem Selected="True" Value="id">Tìm theo Id</asp:ListItem>
                             <asp:ListItem Value="name">Tìm theo tên</asp:ListItem>

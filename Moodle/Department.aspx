@@ -149,16 +149,15 @@
                     <td class="cellHeaderRight">
                         Id</td>
                     <td>
-                        <asp:TextBox ID="txtId" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" CssClass="textBox"></asp:TextBox>
-                        <ajaxToolkit:MaskedEditExtender ID="txtId_MaskedEditExtender" runat="server" 
-                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
-                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
-                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
-                            InputDirection="RightToLeft" Mask="99999" MaskType="Number" 
-                            TargetControlID="txtId">
-                        </ajaxToolkit:MaskedEditExtender>
                         <strong>
+                        <asp:TextBox ID="txtId" runat="server" CssClass="textBox" MaxLength="10" 
+                            ValidationGroup="updateuser" Width="110px"></asp:TextBox>
+                        <ajaxToolkit:NumericUpDownExtender ID="txtId_NumericUpDownExtender" 
+                            runat="server" Enabled="True" Maximum="1.7976931348623157E+308" Minimum="1" 
+                            RefValues="" ServiceDownMethod="" ServiceDownPath="" ServiceUpMethod="" Tag="" 
+                            TargetButtonDownID="" TargetButtonUpID="" TargetControlID="txtId" 
+                            Width="110">
+                        </ajaxToolkit:NumericUpDownExtender>
                         <asp:Label ID="lblUpdateMessage" runat="server" Font-Bold="False" 
                             ForeColor="Red" style="margin-left: 0px"></asp:Label>
                         </strong>
@@ -168,7 +167,7 @@
                     <td class="cellHeaderRight">
                         Mã bộ môn</td>
                     <td align="left">
-                        <asp:TextBox ID="txtIdnumber" runat="server" Width="250px" 
+                        <asp:TextBox ID="txtIdnumber" runat="server" Width="200px" 
                             ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
@@ -176,7 +175,7 @@
                     <td class="cellHeaderRight">
                         &nbsp; Tên bộ môn</td>
                     <td>
-                        <asp:TextBox ID="txtName" runat="server" Width="250px" 
+                        <asp:TextBox ID="txtName" runat="server" Width="200px" 
                             ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
@@ -185,7 +184,7 @@
                         &nbsp;</td>
                     <td>
                         <asp:Button ID="btnUpdate" runat="server" onclick="btnUpdate_Click" 
-                            Text="Cập nhật" />
+                            Text="Cập nhật" ValidationGroup="update" />
                     </td>
                 </tr>
                 <tr>
@@ -195,14 +194,14 @@
                         <asp:DropDownList ID="ddlCriteria" runat="server" CssClass="dropDownList" 
                             Width="180px">
                             <asp:ListItem Selected="True" Value="id">Tìm theo Id</asp:ListItem>
-                            <asp:ListItem Value="idnumber">Tìm theo mã khoa</asp:ListItem>
-                            <asp:ListItem Value="name">Tìm theo tên khoa</asp:ListItem>
+                            <asp:ListItem Value="idnumber">Tìm theo mã bộ môn</asp:ListItem>
+                            <asp:ListItem Value="name">Tìm theo tên bộ môn</asp:ListItem>
                         </asp:DropDownList>
                         <asp:CheckBox ID="chkSubCategory" runat="server" Checked="True" 
                             Text="Xem cả các mục con" 
                             ToolTip="Hiển thị thông tin đầy đủ các mục con bên trong mục cần xem thông tin" />
                         <asp:Button ID="btnGetDetail" runat="server" onclick="btnGetDetail_Click" 
-                            Text="Chi tiết" />
+                            Text="Chi tiết" ValidationGroup="update" />
                     </td>
                 </tr>
                 <tr>

@@ -129,35 +129,32 @@
                     <td class="cellHeaderRight">
                         Id</td>
                     <td>
-                        <asp:TextBox ID="txtId" runat="server" ValidationGroup="updateuser" 
-                            Width="250px" CssClass="textBox"></asp:TextBox>
-                        <ajaxToolkit:MaskedEditExtender ID="txtId_MaskedEditExtender" runat="server" 
-                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" 
-                            CultureDateFormat="" CultureDatePlaceholder="" CultureDecimalPlaceholder="" 
-                            CultureThousandsPlaceholder="" CultureTimePlaceholder="" Enabled="True" 
-                            InputDirection="RightToLeft" Mask="99999" MaskType="Number" 
-                            TargetControlID="txtId">
-                        </ajaxToolkit:MaskedEditExtender>
-                        <strong>
+                        <asp:TextBox ID="txtId" runat="server" CssClass="textBox" MaxLength="10" 
+                            ValidationGroup="update" Width="110px"></asp:TextBox>
+                        <ajaxToolkit:NumericUpDownExtender ID="txtId_NumericUpDownExtender" 
+                            runat="server" Enabled="True" Maximum="1.7976931348623157E+308" Minimum="1" 
+                            RefValues="" ServiceDownMethod="" ServiceDownPath="" ServiceUpMethod="" Tag="" 
+                            TargetButtonDownID="" TargetButtonUpID="" TargetControlID="txtId" 
+                            Width="110">
+                        </ajaxToolkit:NumericUpDownExtender>
                         <asp:Label ID="lblUpdateMessage" runat="server" Font-Bold="False" 
                             ForeColor="Red" style="margin-left: 0px"></asp:Label>
-                        </strong>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         Mã khoa</td>
                     <td align="left">
-                        <asp:TextBox ID="txtIdnumber" runat="server" Width="250px" 
-                            ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtIdnumber" runat="server" Width="200px" 
+                            ValidationGroup="update" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
                     <td class="cellHeaderRight">
                         &nbsp; Tên khoa</td>
                     <td>
-                        <asp:TextBox ID="txtName" runat="server" Width="250px" 
-                            ValidationGroup="updateuser" CssClass="textBox"></asp:TextBox>
+                        <asp:TextBox ID="txtName" runat="server" Width="200px" 
+                            ValidationGroup="update" CssClass="textBox"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
@@ -165,7 +162,7 @@
                         &nbsp;</td>
                     <td>
                         <asp:Button ID="btnUpdate" runat="server" onclick="btnUpdate_Click" 
-                            Text="Cập nhật" />
+                            Text="Cập nhật" ValidationGroup="update" />
                     </td>
                 </tr>
                 <tr>
@@ -182,7 +179,7 @@
                             Text="Xem cả các mục con" 
                             ToolTip="Hiển thị thông tin đầy đủ các mục con bên trong mục cần xem thông tin" />
                         <asp:Button ID="btnGetDetail" runat="server" onclick="btnGetDetail_Click" 
-                            Text="Chi tiết" />
+                            Text="Chi tiết" ValidationGroup="update" />
                     </td>
                 </tr>
                 <tr>

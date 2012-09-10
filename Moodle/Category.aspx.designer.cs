@@ -58,13 +58,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.TextBox txtId;
         
         /// <summary>
-        /// txtId_MaskedEditExtender control.
+        /// txtId_NumericUpDownExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender txtId_MaskedEditExtender;
+        protected global::AjaxControlToolkit.NumericUpDownExtender txtId_NumericUpDownExtender;
         
         /// <summary>
         /// txtName control.
@@ -85,13 +85,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.TextBox txtParent;
         
         /// <summary>
-        /// txtParent_MaskedEditExtender control.
+        /// txtParent_NumericUpDownExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender txtParent_MaskedEditExtender;
+        protected global::AjaxControlToolkit.NumericUpDownExtender txtParent_NumericUpDownExtender;
         
         /// <summary>
         /// txtIdnumber control.
@@ -121,13 +121,13 @@ namespace Moodle {
         protected global::System.Web.UI.WebControls.TextBox txtDescriptionFormat;
         
         /// <summary>
-        /// txtDescriptionFormat_MaskedEditExtender control.
+        /// txtDescriptionFormat_NumericUpDownExtender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.MaskedEditExtender txtDescriptionFormat_MaskedEditExtender;
+        protected global::AjaxControlToolkit.NumericUpDownExtender txtDescriptionFormat_NumericUpDownExtender;
         
         /// <summary>
         /// txtTheme control.

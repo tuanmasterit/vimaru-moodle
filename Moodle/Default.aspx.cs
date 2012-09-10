@@ -1,21 +1,33 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Web.DynamicData;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Moodle
 {
-    public partial class _Default : System.Web.UI.Page
+    public partial class Token : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            System.Collections.IList visibleTables = Global.DefaultModel.VisibleTables;
-            if (visibleTables.Count == 0)
-            {
-                throw new InvalidOperationException("There are no accessible tables. Make sure that at least one data model is registered in Global.asax and scaffolding is enabled or implement custom pages.");
-            }
-            Menu1.DataSource = visibleTables;
-            Menu1.DataBind();
+
         }
 
+        protected void btnGetToken_Click(object sender, EventArgs e)
+        {
+            MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
+            txtToken.Text = u.GetToken(txtServiceShortName.Text);
+        }
+
+        protected void btnGetFunctionList_Click(object sender, EventArgs e)
+        {
+            ListItemCollection ls = MoodleWebService.GetServiceList(txtToken.Text);
+            txtFunctions.Text = "";
+            foreach (ListItem item in ls)
+            {
+                txtFunctions.Text += item.Text + "\n";
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Moodle
             {
                 Session["refUrl"] = "~/Faculty.aspx";
                 Response.Redirect("~/Login.aspx");
+                return;
             }
             if (!IsPostBack)
                 grvFaculty.DataBind();
@@ -137,6 +138,7 @@ namespace Moodle
 
         protected void grvFaculty_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SaveCheckedValues();
             int rowId = grvFaculty.SelectedIndex;
             txtId.Text = grvFaculty.Rows[rowId].Cells[2].Text.ToString();
             txtIdnumber.Text = grvFaculty.Rows[rowId].Cells[3].Text.ToString();
@@ -191,7 +193,7 @@ namespace Moodle
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (txtId.Text == "" || txtId.Text == "0")
+            if (txtId.Text == "" || Convert.ToInt32(txtId.Text) < 1)
             {
                 lblUpdateMessage.Text = "Vui lòng nhập một ID khoa > 0";
                 txtId.Focus();
@@ -220,32 +222,32 @@ namespace Moodle
 
         protected void btnGetDetail_Click(object sender, EventArgs e)
         {
-            if (txtId.Text == "" || txtId.Text == "0")
+            if (txtId.Text == "" || Convert.ToInt32(txtId.Text) < 1)
             {
                 lblUpdateMessage.Text = "Vui lòng nhập một ID khoa> 0";
                 txtId.Focus();
                 return;
             }
 
-            List<MoodleGetCategory> lst = new List<MoodleGetCategory>();
+            List<KeyValuePair<string, string> > list = new List<KeyValuePair<string, string> >();
             int id = ddlCriteria.SelectedIndex;
 
             if (id == 0)
             {
-                lst.Add(new MoodleGetCategory("id", txtId.Text));
+                list.Add(new KeyValuePair<string, string> ("id", txtId.Text));
             }
             else if (id == 1)
             {
-                lst.Add(new MoodleGetCategory("idnumber", txtIdnumber.Text));
+                list.Add(new KeyValuePair<string, string> ("idnumber", txtIdnumber.Text));
             }
             else
             {
-                lst.Add(new MoodleGetCategory("name", HttpUtility.HtmlDecode(txtName.Text)));
+                list.Add(new KeyValuePair<string, string> ("name", HttpUtility.HtmlDecode(txtName.Text)));
             }
 
             XmlDocument doc = new XmlDocument();
 
-            doc.LoadXml(MoodleGetCategory.GetCategories(lst, chkSubCategory.Checked, (string)Session["token"]));
+            doc.LoadXml(MoodleCategory.GetCategories(list, chkSubCategory.Checked, (string)Session["token"]));
             doc.Save("E:\\Z-TMP\\faculty_" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();

@@ -18,14 +18,22 @@ namespace Moodle
                 else
                     Response.Redirect("~/");
             }
-            txtUsername.Focus();
+            else
+            {
+                txtUsername.Focus();
+                if (!IsPostBack)
+                {
+                    cboService.DataSource = MoodleUtilites.GetServiceTable(Server.MapPath("~") + "./App_Data/ServiceList.txt");
+                    cboService.DataBind();
+                }
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             if (txtUsername.Text == "" || txtPassword.Text == "") return;
             MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
-            string s = u.GetToken(ddlService.SelectedItem.Value);
+            string s = u.GetToken(cboService.SelectedValue);
             Session["token"] = s;
             if (s != "")
             {

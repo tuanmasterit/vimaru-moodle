@@ -22,15 +22,5 @@ namespace Moodle.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/moodle/webservice/soap/server.php?wsdl=1&wstoken=ca974d80cc" +
-            "5200de58cefed98a479fe4")]
-        public string Moodle_WRMoodle_webservices_virtual_class_000000Service {
-            get {
-                return ((string)(this["Moodle_WRMoodle_webservices_virtual_class_000000Service"]));
-            }
-        }
     }
 }

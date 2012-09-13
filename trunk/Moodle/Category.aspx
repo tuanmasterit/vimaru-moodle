@@ -147,7 +147,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tableCell">
+                    <td class="tableCell" valign="top">
                         &nbsp;</td>
                     <td class="tableCell">
                         <asp:TreeView ID="treeCategoryDetail" runat="server" ShowLines="True" 

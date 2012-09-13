@@ -113,13 +113,14 @@ namespace Moodle
             MoodleWebRequest web = new MoodleWebRequest(MoodleUrl.LoginUrl, "POST", "username=" + strUsername +                    "&password=" + strPassword + "&service=" + service);
 
             // Chuỗi có dạng {"token":"d75f2169ec6320a689c67fb5869360e1"}
-            string[] s = web.GetResponse().Split(new char[]{'"'});
-
+            string s = web.GetResponse();
+            string[] rs = s.Split(new char[]{'"'});
+            MoodleUtilites.WriteTextToFile("E:\\Z-TMP\\token.txt", s);
             // Sau khi tách s[5] = {"","token",":","d75f2169ec6320a689c67fb5869360e1",""}
-            if (s.Count() != 5)
+            if (rs.Count() != 5)
                 return "";
 
-            return s[3].Trim();
+            return rs[3].Trim();
         }
 
         public static string GetToken(string username, string password, string service)

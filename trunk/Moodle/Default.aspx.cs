@@ -11,13 +11,19 @@ namespace Moodle
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            btnRedirectLogin.Visible = (Session["token"] == null || (string)Session["token"] == "");
+            if (!IsPostBack)
+            {
+                cboService.DataSource = MoodleUtilites.GetServiceTable(Server.MapPath("~") + "./App_Data/ServiceList.txt");
+                cboService.DataBind();
+            }
         }
 
         protected void btnGetToken_Click(object sender, EventArgs e)
         {
             MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
-            txtToken.Text = u.GetToken(txtServiceShortName.Text);
+            txtToken.Text = u.GetToken(cboService.SelectedItem.Value);
+            txtFunctions.Text = cboService.SelectedItem.Value;
         }
 
         protected void btnGetFunctionList_Click(object sender, EventArgs e)

@@ -1,11 +1,5 @@
 ﻿<%@ Page EnableEventValidation="False" Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Moodle.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style type="text/css">
-        .style3
-        {
-            width: 105px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <table cellpadding="4" cellspacing="0" class="table">
@@ -17,7 +11,7 @@
             <td class="cellHeaderRight">
                 Username:</td>
             <td>
-                <asp:TextBox ID="txtUsername" runat="server" Width="170px" 
+                <asp:TextBox ID="txtUsername" runat="server" Width="180px" 
                     ValidationGroup="token" CssClass="textBox" ToolTip="Tên đăng nhập"></asp:TextBox>
     &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
                     ControlToValidate="txtUsername" ErrorMessage="*" 
@@ -28,7 +22,7 @@
             <td align="left" class="cellHeaderRight" style="font-weight: bold">
                 Password:</td>
             <td>
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="170px" 
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" Width="180px" 
                     ValidationGroup="token" CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>
     &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
                     ControlToValidate="txtPassword" ErrorMessage="*" 
@@ -37,18 +31,14 @@
         </tr>
         <tr>
             <td align="left" class="cellHeaderRight" style="font-weight: bold">Service Name:</td>
-            <td align="left">
-                <asp:DropDownList ID="ddlService" runat="server" CssClass="dropDownList" 
-                    ToolTip="Loại dịch vụ">
-                    <asp:ListItem Selected="True" Value="all_service">All Service</asp:ListItem>
-                    <asp:ListItem Value="course">Course Manager</asp:ListItem>
-                    <asp:ListItem Value="enrol">Enrol Manager</asp:ListItem>
-                    <asp:ListItem Value="group">Group Manager</asp:ListItem>
-                    <asp:ListItem Value="role">Role Manager</asp:ListItem>
-                    <asp:ListItem Value="user">User Manager</asp:ListItem>
-                </asp:DropDownList>
+            <td align="left" class="style1" valign="bottom">
+        <asp:DropDownList ID="cboService" runat="server" CssClass="dropDownList" 
+                    DataTextField="FullName" DataValueField="ShortName" Width="188px">
+        </asp:DropDownList>
                 <asp:Button ID="btnLogin" runat="server" onclick="btnLogin_Click" Text="Login" 
-                    ToolTip="Lấy chuỗi token" ValidationGroup="token" />
+                    ToolTip="Lấy chuỗi token" ValidationGroup="token" Width="60px" />
+                        <asp:LinkButton ID="btnRedirectDefault" runat="server" Font-Underline="False" 
+                            PostBackUrl="~/Default.aspx">Redirect Default</asp:LinkButton>
             </td>
         </tr>
         <tr>

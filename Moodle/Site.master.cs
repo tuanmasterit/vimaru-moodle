@@ -20,6 +20,11 @@ namespace Moodle
                 palLogin.Visible = true;
                 palUser.Visible = false;
                 MainMenu.Visible = false;
+                if (!IsPostBack)
+                {
+                    cboService.DataSource = MoodleUtilites.GetServiceTable(Server.MapPath("~") + "./App_Data/ServiceList.txt");
+                    cboService.DataBind();
+                }
             }
         }
 
@@ -27,7 +32,7 @@ namespace Moodle
         {
             if (txtUsername.Text == "" || txtPassword.Text == "") return;
             MoodleUser u = new MoodleUser(txtUsername.Text, txtPassword.Text);
-            string s = u.GetToken(ddlService.SelectedItem.Value);
+            string s = u.GetToken(cboService.SelectedValue);
             Session["token"] = s;
             if (s != "")
             {
@@ -41,6 +46,7 @@ namespace Moodle
         protected void btnLogout_Click(object sender, System.EventArgs e)
         {
             Session["token"] = null;
+            Session["refUrl"] = Request.Url.ToString();
             Response.Redirect("~/");
         }
     }

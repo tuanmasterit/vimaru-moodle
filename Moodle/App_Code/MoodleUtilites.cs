@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using System.Xml;
 using System.Web.UI.WebControls;
+using System.IO;
+using System.Data;
 
 namespace Moodle
 {
@@ -16,15 +18,58 @@ namespace Moodle
         /// <summary>
         /// Write text to a file
         /// </summary>
-        /// <param name="fileName">file name with ful path</param>
+        /// <param name="filePath">file path</param>
         /// <param name="text">text to write</param>
-        public static void WriteTextToFile(string fileName, string text)
+        public static void WriteTextToFile(string filePath, string text)
         {
-            System.IO.StreamWriter file = new System.IO.StreamWriter(fileName);
+            StreamWriter file = new StreamWriter(filePath);
             file.WriteLine(text);
             file.Close();
         }
+        /// <summary>
+        /// Read text from file
+        /// </summary>
+        /// <param name="filePath">file path</param>
+        /// <returns>List line of file</returns>
+        public static List<string> ReadTextFile(string filePath)
+        {
+            List<string> list = new List<string>();
+            StreamReader file = new StreamReader(filePath);
 
+            while (!file.EndOfStream)
+            {
+                list.Add(file.ReadLine());
+            }
+
+            file.Close();
+
+            return list;
+        }
+        /// <summary>
+        /// Get Service Table
+        /// </summary>
+        /// <param name="filePath">file path</param>
+        /// <returns>DataTable</returns>
+        public static DataTable GetServiceTable(string filePath)
+        {
+            DataTable rs = new DataTable();
+            rs.Columns.Add("FullName");
+            rs.Columns.Add("ShortName");
+            StreamReader file = new StreamReader(filePath);
+            
+            while (!file.EndOfStream)
+            {
+                string[] s = file.ReadLine().Split(new char[] { '-' });
+                DataRow row = rs.NewRow();
+                row["FullName"] = s[0];
+                row["ShortName"] = s[1];
+                rs.Rows.Add(row);
+            }
+
+            file.Close();
+
+            return rs;
+        }
         /// <summary>
         /// Method for transform all XmlNode from XmlDocument to a TreeView
         /// </summary>

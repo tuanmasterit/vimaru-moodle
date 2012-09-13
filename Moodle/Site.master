@@ -29,14 +29,8 @@
         </ajaxToolkit:TextBoxWatermarkExtender>
         <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" 
             CssClass="textBox" ToolTip="Mật khẩu"></asp:TextBox>
-        <asp:DropDownList ID="ddlService" runat="server" CssClass="dropDownList" 
-            ToolTip="Loại dịch vụ">
-            <asp:ListItem Selected="True" Value="all_service">All Service</asp:ListItem>
-            <asp:ListItem Value="course">Course Manager</asp:ListItem>
-            <asp:ListItem Value="enrol">Enrol Manager</asp:ListItem>
-            <asp:ListItem Value="group">Group Manager</asp:ListItem>
-            <asp:ListItem Value="role">Role Manager</asp:ListItem>
-            <asp:ListItem Value="user">User Manager</asp:ListItem>
+        <asp:DropDownList ID="cboService" runat="server" CssClass="dropDownList" 
+            DataTextField="FullName" DataValueField="ShortName" ToolTip="Tên dịch vụ">
         </asp:DropDownList>
         <asp:LinkButton ID="btnLogin" runat="server" CssClass="linkButton" 
             onclick="btnLogin_Click">Login</asp:LinkButton>

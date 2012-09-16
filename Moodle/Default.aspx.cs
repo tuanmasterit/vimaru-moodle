@@ -14,7 +14,7 @@ namespace Moodle
             btnRedirectLogin.Visible = (Session["token"] == null || (string)Session["token"] == "");
             if (!IsPostBack)
             {
-                cboService.DataSource = MoodleUtilites.GetServiceTable(Server.MapPath("~") + "./App_Data/ServiceList.txt");
+                cboService.DataSource = MoodleUtilites.GetServiceTable();
                 cboService.DataBind();
             }
         }

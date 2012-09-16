@@ -23,7 +23,7 @@ namespace Moodle
                 txtUsername.Focus();
                 if (!IsPostBack)
                 {
-                    cboService.DataSource = MoodleUtilites.GetServiceTable(Server.MapPath("~") + "./App_Data/ServiceList.txt");
+                    cboService.DataSource = MoodleUtilites.GetServiceTable();
                     cboService.DataBind();
                 }
             }

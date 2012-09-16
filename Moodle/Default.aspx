@@ -50,7 +50,8 @@
                     <td class="style1">Service Name</td>
                     <td align="left">
                         <asp:DropDownList ID="cboService" runat="server" CssClass="dropDownList" 
-                            DataTextField="FullName" DataValueField="ShortName" Width="203px">
+                            DataTextField="FullName" DataValueField="ShortName" Width="203px" 
+                            ToolTip="Tên dịch vụ">
                         </asp:DropDownList>
                     </td>
                 </tr>

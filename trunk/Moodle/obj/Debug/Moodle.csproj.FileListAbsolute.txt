@@ -28,5 +28,3 @@ D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\ru\AjaxControlToolkit.resource
 D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\tr-TR\AjaxControlToolkit.resources.dll
 D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\zh-CHS\AjaxControlToolkit.resources.dll
 D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\zh-CHT\AjaxControlToolkit.resources.dll
-D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\obout_ComboBox.xml
-D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\obout_Interface.xml

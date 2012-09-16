@@ -33,7 +33,8 @@
             <td align="left" class="cellHeaderRight" style="font-weight: bold">Service Name:</td>
             <td align="left" class="style1" valign="bottom">
         <asp:DropDownList ID="cboService" runat="server" CssClass="dropDownList" 
-                    DataTextField="FullName" DataValueField="ShortName" Width="188px">
+                    DataTextField="FullName" DataValueField="ShortName" Width="188px" 
+                    ToolTip="Tên dịch vụ">
         </asp:DropDownList>
                 <asp:Button ID="btnLogin" runat="server" onclick="btnLogin_Click" Text="Login" 
                     ToolTip="Lấy chuỗi token" ValidationGroup="token" Width="60px" />

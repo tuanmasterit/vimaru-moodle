@@ -45,30 +45,52 @@ namespace Moodle
 
             return list;
         }
+
         /// <summary>
-        /// Get Service Table
+        /// Get data table from file
         /// </summary>
         /// <param name="filePath">file path</param>
+        /// <param name="separator">separator char array </param>
         /// <returns>DataTable</returns>
-        public static DataTable GetServiceTable(string filePath)
+        public static DataTable GetTable(string filePath, char[] separator, string[] columnNames)
         {
             DataTable rs = new DataTable();
-            rs.Columns.Add("FullName");
-            rs.Columns.Add("ShortName");
+            int len = columnNames.Length;
+
+            for (int i = 0; i < len; i++ )
+                rs.Columns.Add(columnNames[i]);
+
             StreamReader file = new StreamReader(filePath);
-            
+
             while (!file.EndOfStream)
             {
-                string[] s = file.ReadLine().Split(new char[] { '-' });
+                string[] s = file.ReadLine().Split(separator);
+                int lens = s.Length;
+                // Get min length
+                lens = lens < len ? lens : len;
                 DataRow row = rs.NewRow();
-                row["FullName"] = s[0];
-                row["ShortName"] = s[1];
+
+                for (int i = 0; i < lens; i++)
+                    row[columnNames[i]] = s[i];
+
                 rs.Rows.Add(row);
             }
 
             file.Close();
 
             return rs;
+        }
+        /// <summary>
+        /// Get Service Table
+        /// </summary>
+        /// <returns>Service DataTable</returns>
+        public static DataTable GetServiceTable()
+        {
+            return GetTable(
+                System.Web.HttpContext.Current.Server.MapPath("~") + "./App_Data/ServiceList.txt"
+                , new char[] { '-' }
+                , new string[] { "FullName", "ShortName" }
+                );
         }
         /// <summary>
         /// Method for transform all XmlNode from XmlDocument to a TreeView

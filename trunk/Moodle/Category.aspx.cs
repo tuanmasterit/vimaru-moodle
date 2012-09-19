@@ -78,39 +78,8 @@ namespace Moodle
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
             tNode = treeCategoryDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
+            MoodleUtilites.AddNode(xmlnode, tNode);
             treeCategoryDetail.ExpandAll();
-        }
-
-        private void AddNode(XmlNode inXmlNode, TreeNode inTreeNode)
-        {
-            XmlNode xNode;
-            TreeNode tNode;
-            XmlNodeList nodeList;
-            int i = 0;
-            if (inXmlNode.HasChildNodes)
-            {
-                nodeList = inXmlNode.ChildNodes;
-                for (i = 0; i <= nodeList.Count - 1; i++)
-                {
-                    xNode = inXmlNode.ChildNodes[i];
-                    try
-                    {
-                        inTreeNode.ChildNodes.Add(new TreeNode(xNode.Attributes["name"].Value.ToString()));
-                    }
-                    catch //(System.Exception ex)
-                    {
-                        inTreeNode.ChildNodes.Add(new TreeNode(xNode.Name));
-                    }
-
-                    tNode = inTreeNode.ChildNodes[i];
-                    AddNode(xNode, tNode);
-                }
-            }
-            else
-            {
-                inTreeNode.Text = inXmlNode.InnerText.ToString();
-            }
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
@@ -175,7 +144,7 @@ namespace Moodle
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
             tNode = treeCategoryDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
+            MoodleUtilites.AddNode(xmlnode, tNode);
             treeCategoryDetail.ExpandAll();
         }
 
@@ -216,7 +185,7 @@ namespace Moodle
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
             tNode = treeCategoryDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
+            MoodleUtilites.AddNode(xmlnode, tNode);
             treeCategoryDetail.ExpandAll();
         }
 
@@ -241,7 +210,7 @@ namespace Moodle
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
             TreeNode tNode;
             tNode = treeCategoryDetail.Nodes[0];
-            AddNode(xmlnode, tNode);
+            MoodleUtilites.AddNode(xmlnode, tNode);
             treeCategoryDetail.ExpandAll();
         }
     }

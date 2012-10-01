@@ -125,6 +125,7 @@
       <DependentUpon>Grouping.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\MoodleMessage.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Subject.aspx.cs">
       <DependentUpon>Subject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

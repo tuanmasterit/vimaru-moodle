@@ -180,7 +180,7 @@ namespace Moodle
                     List<MoodleCategory> lst = new List<MoodleCategory>();
                     lst.Add(category);
                     doc.LoadXml(MoodleCategory.CreateCategories(lst, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\department_" + category.IdNumber + ".xml");
+                    doc.Save("D:\\department_" + category.IdNumber + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
                         long id = (long)Convert.ToUInt32(doc.DocumentElement.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText);
@@ -224,7 +224,7 @@ namespace Moodle
             List<MoodleCategory> lst = new List<MoodleCategory>();
             lst.Add(category);
             doc.LoadXml(MoodleCategory.UpdateCategories(lst, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\department_" + txtId.Text + ".xml");
+            doc.Save("D:\\department_" + txtId.Text + ".xml");
         }
 
         protected void btnGetDetail_Click(object sender, EventArgs e)
@@ -255,7 +255,7 @@ namespace Moodle
             XmlDocument doc = new XmlDocument();
 
             doc.LoadXml(MoodleCategory.GetCategories(list, chkSubCategory.Checked, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\department_" + txtId.Text + ".xml");
+            doc.Save("D:\\department_" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
             treeDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));

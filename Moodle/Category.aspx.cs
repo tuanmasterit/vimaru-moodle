@@ -72,7 +72,7 @@ namespace Moodle
             List<MoodleCategory> list = new List<MoodleCategory>();
             list.Add(category);
             doc.LoadXml(MoodleCategory.CreateCategories(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Category_" + txtIdnumber.Text + ".xml");
+            doc.Save("D:\\Category_" + txtIdnumber.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
@@ -138,7 +138,7 @@ namespace Moodle
             List<MoodleCategory> lst = new List<MoodleCategory>();
             lst.Add(category);
             doc.LoadXml(MoodleCategory.UpdateCategories(lst, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
+            doc.Save("D:\\" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
@@ -179,7 +179,7 @@ namespace Moodle
             XmlDocument doc = new XmlDocument();
 
             doc.LoadXml(MoodleCategory.GetCategories(lst, chkSubCategory.Checked, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\" + txtId.Text + ".xml");
+            doc.Save("D:\\" + txtId.Text + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));
@@ -204,7 +204,7 @@ namespace Moodle
             XmlDocument doc = new XmlDocument();
 
             doc.LoadXml(MoodleDeleteCategory.DeleteCategories(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\" + category.Id + ".xml");
+            doc.Save("D:\\" + category.Id + ".xml");
             XmlNode xmlnode = doc.ChildNodes[1];
             treeCategoryDetail.Nodes.Clear();
             treeCategoryDetail.Nodes.Add(new TreeNode(doc.DocumentElement.Name));

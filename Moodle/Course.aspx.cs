@@ -195,7 +195,7 @@ namespace Moodle
                     List<MoodleCourse> list = new List<MoodleCourse>();
                     list.Add(course);
                     doc.LoadXml(MoodleCourse.CreateCourses(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\course_create_" + row.Cells[3].Text + ".xml");
+                    doc.Save("D:\\course_create_" + row.Cells[3].Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -236,7 +236,7 @@ namespace Moodle
                     else continue;
 
                     doc.LoadXml(MoodleCourse.DeleteCourses(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\course_delete_" + row.Cells[3].Text + ".xml");
+                    doc.Save("D:\\course_delete_" + row.Cells[3].Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -274,7 +274,7 @@ namespace Moodle
             list.Add(id);
 
             doc.LoadXml(MoodleCourse.GetCourses(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\course_detail_" + row.Cells[3].Text + ".xml");
+            doc.Save("D:\\course_detail_" + row.Cells[3].Text + ".xml");
 
             XmlNode xmlNode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
@@ -285,7 +285,7 @@ namespace Moodle
             treeDetail.ExpandAll();
 
             doc.LoadXml(MoodleCourse.GetCourseContents(id, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\course_contents_" + row.Cells[3].Text + ".xml");
+            doc.Save("D:\\course_contents_" + row.Cells[3].Text + ".xml");
 
             xmlNode = doc.ChildNodes[1];
             treeContent.Nodes.Clear();

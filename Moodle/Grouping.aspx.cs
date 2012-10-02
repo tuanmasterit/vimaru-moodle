@@ -207,7 +207,7 @@ namespace Moodle
             list.Add(grouping);
 
             doc.LoadXml(MoodleGroup.CreateGroupings(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Grouping_Create_" + txtGroupingName.Text + ".xml");
+            doc.Save("D:\\Grouping_Create_" + txtGroupingName.Text + ".xml");
 
             if (doc.DocumentElement.Name == "RESPONSE")
             {
@@ -250,7 +250,7 @@ namespace Moodle
             list.Add(grouping);
 
             doc.LoadXml(MoodleGroup.UpdateGroupings(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Grouping_Update_" + txtGroupingName.Text + ".xml");
+            doc.Save("D:\\Grouping_Update_" + txtGroupingName.Text + ".xml");
 
             if (doc.DocumentElement.Name == "RESPONSE")
             {
@@ -277,7 +277,7 @@ namespace Moodle
             list.Add(id);
 
             doc.LoadXml(MoodleGroup.DeleteGroupings(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Grouping_Delete_" + cboGrouping.SelectedItem.Text + ".xml");
+            doc.Save("D:\\Grouping_Delete_" + cboGrouping.SelectedItem.Text + ".xml");
 
             if (doc.DocumentElement.Name == "RESPONSE")
             {
@@ -318,7 +318,7 @@ namespace Moodle
                     list.Add(new KeyValuePair<int, int>(groupingId, Convert.ToInt32(row.Cells[2].Text)));
 
                     doc.LoadXml(MoodleGroup.AssignGrouping(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\Grouping_Assign_Group_" + cboGrouping.Text + ".xml");
+                    doc.Save("D:\\Grouping_Assign_Group_" + cboGrouping.Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -358,7 +358,7 @@ namespace Moodle
                     list.Add(new KeyValuePair<int, int>(groupingId, Convert.ToInt32(row.Cells[2].Text)));
 
                     doc.LoadXml(MoodleGroup.UnassignGrouping(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\Grouping_Unassign_Group_" + cboGrouping.Text + ".xml");
+                    doc.Save("D:\\Grouping_Unassign_Group_" + cboGrouping.Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -385,7 +385,7 @@ namespace Moodle
             list.Add(groupId);
 
             doc.LoadXml(MoodleGroup.GetGroupMembers(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Grouping_Get_Members_" + cboGrouping.Text + ".xml");
+            doc.Save("D:\\Grouping_Get_Members_" + cboGrouping.Text + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();

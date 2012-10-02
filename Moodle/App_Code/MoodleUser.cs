@@ -115,7 +115,7 @@ namespace Moodle
             // Chuỗi có dạng {"token":"d75f2169ec6320a689c67fb5869360e1"}
             string s = web.GetResponse();
             string[] rs = s.Split(new char[]{'"'});
-            MoodleUtilites.WriteTextToFile("E:\\Z-TMP\\token.txt", s);
+            MoodleUtilites.WriteTextToFile("D:\\token.txt", s);
             // Sau khi tách s[5] = {"","token",":","d75f2169ec6320a689c67fb5869360e1",""}
             if (rs.Count() != 5)
                 return "";

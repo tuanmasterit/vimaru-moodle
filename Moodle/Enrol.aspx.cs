@@ -264,7 +264,7 @@ namespace Moodle
                     List<MoodleUser> list = new List<MoodleUser>();
                     list.Add(user);
                     doc.LoadXml(MoodleUser.CreateUsers(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\user_create_" + user.Username + ".xml");
+                    doc.Save("D:\\user_create_" + user.Username + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
                         long userId = (long)Convert.ToUInt64(doc.DocumentElement.ChildNodes[0].ChildNodes[0].ChildNodes[0].ChildNodes[0].InnerText);
@@ -304,7 +304,7 @@ namespace Moodle
             List<MoodleUser> list = new List<MoodleUser>();
             list.Add(user);
             doc.LoadXml(MoodleUser.UpdateUsers(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\user_update_" + txtId.Text + ".xml");
+            doc.Save("D:\\user_update_" + txtId.Text + ".xml");
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
@@ -332,7 +332,7 @@ namespace Moodle
                     list.Add(userId);
 
                     doc.LoadXml(MoodleUser.DeleteUsers(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\user_delete_" + row.Cells[5].Text + ".xml");
+                    doc.Save("D:\\user_delete_" + row.Cells[5].Text + ".xml");
 
                     if(doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -363,7 +363,7 @@ namespace Moodle
             List<int> list = new List<int>();
             list.Add(Convert.ToInt32(txtId.Text));
             doc.LoadXml(MoodleUser.GetUsersById(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\user_profile_" + txtId.Text + ".xml");
+            doc.Save("D:\\user_profile_" + txtId.Text + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
@@ -403,7 +403,7 @@ namespace Moodle
 
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(MoodleEnrol.GetEnrolledUsers(courseId, list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\enrolled_users_" + courseId + ".xml");
+            doc.Save("D:\\enrolled_users_" + courseId + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
@@ -452,7 +452,7 @@ namespace Moodle
                     List<MoodleEnrol> list = new List<MoodleEnrol>();
                     list.Add(enrol);
                     doc.LoadXml(MoodleEnrol.EnrolUsers(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\enrol_" + enrol.UserId + ".xml");
+                    doc.Save("D:\\enrol_" + enrol.UserId + ".xml");
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
                         DangKy dk = dc.DangKies.Single(t => t.STT == Convert.ToInt64(row.Cells[2].Text));
@@ -487,7 +487,7 @@ namespace Moodle
             XmlDocument doc = new XmlDocument();
 
             doc.LoadXml(MoodleEnrol.GetUsersCourses(Convert.ToInt32(txtId.Text), (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\user_courses_" + txtId.Text + ".xml");
+            doc.Save("D:\\user_courses_" + txtId.Text + ".xml");
 
             XmlNode xmlnode = doc.ChildNodes[1];
             treeDetail.Nodes.Clear();
@@ -527,7 +527,7 @@ namespace Moodle
             list.Add(group);
 
             doc.LoadXml(MoodleGroup.CreateGroups(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Group_Create_" + txtGroupName.Text + ".xml");
+            doc.Save("D:\\Group_Create_" + txtGroupName.Text + ".xml");
 
             if (doc.DocumentElement.Name == "RESPONSE")
             {
@@ -559,7 +559,7 @@ namespace Moodle
             list.Add(id);
 
             doc.LoadXml(MoodleGroup.DeleteGroups(list, (string)Session["token"]));
-            doc.Save("E:\\Z-TMP\\Group_Delete_" + cboGroup.SelectedItem.Text + ".xml");
+            doc.Save("D:\\Group_Delete_" + cboGroup.SelectedItem.Text + ".xml");
 
             if (doc.DocumentElement.Name == "RESPONSE")
             {
@@ -605,7 +605,7 @@ namespace Moodle
                     list.Add(new KeyValuePair<int, int>(groupId, Convert.ToInt32(row.Cells[3].Text)));
 
                     doc.LoadXml(MoodleGroup.AddGroupMembers(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\Group_Add_Member_" + cboGroup.Text + ".xml");
+                    doc.Save("D:\\Group_Add_Member_" + cboGroup.Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {
@@ -645,7 +645,7 @@ namespace Moodle
 
                     list.Add(new KeyValuePair<int, int>(groupId, Convert.ToInt32(row.Cells[3].Text)));
                     doc.LoadXml(MoodleGroup.DeleteGroupMembers(list, (string)Session["token"]));
-                    doc.Save("E:\\Z-TMP\\Group_Delete_Member_" + cboGroup.Text + ".xml");
+                    doc.Save("D:\\Group_Delete_Member_" + cboGroup.Text + ".xml");
 
                     if (doc.DocumentElement.Name == "RESPONSE")
                     {

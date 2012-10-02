@@ -28,3 +28,28 @@ D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\ru\AjaxControlToolkit.resource
 D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\tr-TR\AjaxControlToolkit.resources.dll
 D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\zh-CHS\AjaxControlToolkit.resources.dll
 D:\Projects\My Projects\ASP.NET\Moodle\Moodle\bin\zh-CHT\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\obj\Debug\Moodle.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\obj\Debug\Moodle.pdb
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\Moodle.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\Moodle.pdb
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\AjaxControlToolkit.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\HtmlAgilityPack.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\SanitizerProviders.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\AjaxControlToolkit.pdb
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\ar\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\cs\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\de\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\es\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\fr\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\he\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\hi\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\it\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\ja\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\ko\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\nl\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\pt\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\ru\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\tr-TR\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\zh-CHS\AjaxControlToolkit.resources.dll
+C:\Users\CENTRE\Desktop\vimaru-moodle\Moodle\bin\zh-CHT\AjaxControlToolkit.resources.dll

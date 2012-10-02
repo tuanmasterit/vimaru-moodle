@@ -10,7 +10,7 @@
 namespace Moodle {
     
     
-    public partial class User {
+    public partial class Enrol {
         
         /// <summary>
         /// ScriptManagerProxy1 control.

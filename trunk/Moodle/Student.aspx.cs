@@ -9,13 +9,13 @@ using System.Xml;
 
 namespace Moodle
 {
-    public partial class NguoiDung : System.Web.UI.Page
+    public partial class Student : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["token"] == null || (string)Session["token"] == "")
             {
-                Session["refUrl"] = "~/NguoiDung.aspx";
+                Session["refUrl"] = "~/Student.aspx";
                 Response.Redirect("~/Login.aspx");
             }
             if (!IsPostBack)
@@ -31,7 +31,7 @@ namespace Moodle
         {
             DCVimaruDataContext dc = new DCVimaruDataContext();
             var rs = from user in dc.SinhViens
-                     //where user.MaTKB.ToString() == cboFilterCourse.SelectedValue
+                     where user.MaLop.ToString() == cboClass.SelectedValue
                      select new UserResult
                      {
                          Id = user.Id,
@@ -39,6 +39,7 @@ namespace Moodle
                          Ho = user.Ho,
                          Ten = user.Ten,
                          Email = user.MaSV,
+                         MaLop = user.MaLop
                      };
 
             switch (cboFilter.SelectedIndex)

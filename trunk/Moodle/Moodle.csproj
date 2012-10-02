@@ -125,12 +125,12 @@
       <DependentUpon>Grouping.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\MoodleMessage.cs" />
-    <Compile Include="NguoiDung.aspx.cs">
-      <DependentUpon>NguoiDung.aspx</DependentUpon>
+    <Compile Include="Student.aspx.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NguoiDung.aspx.designer.cs">
-      <DependentUpon>NguoiDung.aspx</DependentUpon>
+    <Compile Include="Student.aspx.designer.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Subject.aspx.cs">
@@ -156,12 +156,12 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\UserResult.cs" />
-    <Compile Include="User.aspx.cs">
-      <DependentUpon>User.aspx</DependentUpon>
+    <Compile Include="Enrol.aspx.cs">
+      <DependentUpon>Enrol.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="User.aspx.designer.cs">
-      <DependentUpon>User.aspx</DependentUpon>
+    <Compile Include="Enrol.aspx.designer.cs">
+      <DependentUpon>Enrol.aspx</DependentUpon>
     </Compile>
     <Content Include="App_Data\ServiceList.txt" />
     <Content Include="App_Images\form_bg.jpg" />
@@ -181,7 +181,7 @@
     <Content Include="Department.aspx" />
     <Content Include="Faculty.aspx" />
     <Content Include="Grouping.aspx" />
-    <Content Include="NguoiDung.aspx" />
+    <Content Include="Student.aspx" />
     <Content Include="Subject.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -455,7 +455,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="User.aspx" />
+    <Content Include="Enrol.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DynamicData\CustomPages\" />

@@ -15,6 +15,7 @@ namespace Moodle
         private string strHo;
         private string strTen;
         private string strEmail;
+        private int? intMaLop;
         private string strTenLop;
         private string strTenNhom;
 
@@ -28,6 +29,12 @@ namespace Moodle
         {
             get { return lngId; }
             set { lngId = value; }
+        }
+
+        public int? MaLop
+        {
+            get { return intMaLop; }
+            set { intMaLop = value; }
         }
 
         public bool GhiDanh

@@ -125,6 +125,13 @@
       <DependentUpon>Grouping.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\MoodleMessage.cs" />
+    <Compile Include="NguoiDung.aspx.cs">
+      <DependentUpon>NguoiDung.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NguoiDung.aspx.designer.cs">
+      <DependentUpon>NguoiDung.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Subject.aspx.cs">
       <DependentUpon>Subject.aspx</DependentUpon>
@@ -149,13 +156,6 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\UserResult.cs" />
-    <Compile Include="Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
     <Compile Include="User.aspx.cs">
       <DependentUpon>User.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -181,6 +181,7 @@
     <Content Include="Department.aspx" />
     <Content Include="Faculty.aspx" />
     <Content Include="Grouping.aspx" />
+    <Content Include="NguoiDung.aspx" />
     <Content Include="Subject.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -202,7 +203,6 @@
     <Compile Include="Site.master.designer.cs">
       <DependentUpon>Site.master</DependentUpon>
     </Compile>
-    <Content Include="Test.aspx" />
     <Content Include="web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

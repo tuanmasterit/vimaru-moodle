@@ -10,7 +10,7 @@
 namespace Moodle {
     
     
-    public partial class NguoiDung {
+    public partial class Student {
         
         /// <summary>
         /// ScriptManagerProxy1 control.

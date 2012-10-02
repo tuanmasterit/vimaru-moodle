@@ -12,13 +12,13 @@ using System.Text.RegularExpressions;
 
 namespace Moodle
 {
-    public partial class User : System.Web.UI.Page
+    public partial class Enrol : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["token"] == null || (string)Session["token"] == "")
             {
-                Session["refUrl"] = "~/User.aspx";
+                Session["refUrl"] = "~/Enrol.aspx";
                 Response.Redirect("~/Login.aspx");
             }
             if (!IsPostBack)
